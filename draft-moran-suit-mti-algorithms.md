@@ -1,7 +1,7 @@
 ---
 title: Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
-docname: draft-moran-suit-mti-00
+docname: draft-moran-suit-mti-01
 category: std
 
 area: Security
@@ -48,11 +48,17 @@ This document specifies algorithm profiles for SUIT manifest parsers and authors
 
 #  Introduction
 
-Mandatory algorithms may change over time due to an evolving threat landscape. As a result these are grouped into profiles that a device should use. 
+Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define three choices of MTI profile:
 
-the mandatory-to implement algorithms for SUIT are described in this draft in order to provide flexibility in the definition of algorithm profiles.
+* One Symmetric MTI profile
+* One "Current" Asymmetric MTI profile
+* One "Future" Asymmetric MTI profile
 
-An authentication algorithm is REQUIRED for ALL SUIT manifests. Encryption algorithms MAY be provided.
+Devices MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile.
+
+Devices MAY implement any number of other profiles.
+
+MTI algorithms must be FIPS qualified.
 
 # Algorithms
 
@@ -134,28 +140,44 @@ Key Exchange Algorithms are divided into two three groups: Symmetric, Classical 
 
 # Profiles
 
-The following profiles are defined by this draft:
+Recognized profiles are defined below.
 
-* suit-sha256-es256-hpke-a128gcm
-    * SHA-256
-    * ES256
-    * HPKE
-    * AES-128-GCM
-* suit-sha256-hmac-a128-ccm
-    * SHA-256
-    * HMAC-256
-    * A128W Key Wrap
-    * AES-CCM-16-128-128
+## Symmetric MTI profile: suit-sha256-hmac-a128-ccm
+
+This profile requires the following algorithms:
+
+* SHA-256
+* HMAC-256
+* A128W Key Wrap
+* AES-CCM-16-128-128
+
+## Current Asymmetric MTI Profile: suit-sha256-es256-hpke-a128gcm
+
+This profile requires the following algorithms:
+
+* SHA-256
+* ES256
+* HPKE
+* AES-128-GCM
+
+## Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm
+
+This profile requires the following algorithms:
+
+* SHA-256
+* HSS-LMS
+* HPKE
+* AES-128-GCM
+
+## Other Profiles:
+
+Optional classical and PQC profiles are defined below.
+
 * suit-sha256-eddsa-ecdh-es-chacha-poly
     * SHA-256
     * EdDSA
     * ECDH-ES + HKDF-256
     * ChaCha20 + Poly1305
-* suit-sha256-hsslms-hpke-a128gcm
-    * SHA-256
-    * HSS-LMS
-    * HPKE
-    * AES-128-GCM
 * suit-sha256-falcon512-hpke-a128gcm
     * SHA-256
     * HSS-LMS
@@ -174,3 +196,4 @@ TODO
 # IANA Considerations
 
 TODO
+

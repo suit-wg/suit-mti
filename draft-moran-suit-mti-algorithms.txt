@@ -4,13 +4,13 @@
 
 SUIT                                                            B. Moran
 Internet-Draft                                               Arm Limited
-Intended status: Standards Track                            11 July 2022
-Expires: 12 January 2023
+Intended status: Standards Track                            14 July 2022
+Expires: 15 January 2023
 
 
 Mandatory-to-Implement Algorithms for Creators and Consumers of Software
               Update for the Internet of Things manifests
-                        draft-moran-suit-mti-00
+                        draft-moran-suit-mti-01
 
 Abstract
 
@@ -32,7 +32,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 January 2023.
+   This Internet-Draft will expire on 15 January 2023.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Moran                    Expires 12 January 2023                [Page 1]
+Moran                    Expires 15 January 2023                [Page 1]
 
 Internet-Draft             MTI SUIT Algorithms                 July 2022
 
@@ -61,37 +61,58 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Algorithms  . . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Algorithms  . . . . . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Digest Algorithms . . . . . . . . . . . . . . . . . . . .   3
      2.2.  Authentication Algorithms . . . . . . . . . . . . . . . .   3
        2.2.1.  Symmetric Authentication Algorithm  . . . . . . . . .   3
        2.2.2.  Asymmetric Classical Authentication Algorithms  . . .   3
-       2.2.3.  Asymmetric Post-Quantum Authentication Algorithms . .   3
+       2.2.3.  Asymmetric Post-Quantum Authentication Algorithms . .   4
      2.3.  Key Exchange Algorithms . . . . . . . . . . . . . . . . .   4
        2.3.1.  Symmetric . . . . . . . . . . . . . . . . . . . . . .   4
        2.3.2.  Classical Asymmetric  . . . . . . . . . . . . . . . .   4
        2.3.3.  Post-Quantum Asymmetric . . . . . . . . . . . . . . .   4
      2.4.  Encryption Algorithms . . . . . . . . . . . . . . . . . .   4
    3.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     3.1.   Symmetric MTI profile: suit-sha256-hmac-a128-ccm . . . .   5
+     3.2.  Current Asymmetric MTI Profile:
+           suit-sha256-es256-hpke-a128gcm  . . . . . . . . . . . . .   5
+     3.3.  Future Asymmetric MTI Profile:
+           suit-sha256-hsslms-hpke-a128gcm . . . . . . . . . . . . .   5
+     3.4.  Other Profiles: . . . . . . . . . . . . . . . . . . . . .   6
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+     6.2.  Informative References  . . . . . . . . . . . . . . . . .   7
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
    Mandatory algorithms may change over time due to an evolving threat
-   landscape.  As a result these are grouped into profiles that a device
-   should use.
+   landscape.  Algorithms are grouped into algorithm profiles to account
+   for this.  Profiles may be deprecated over time.  SUIT will define
+   three choices of MTI profile:
 
-   the mandatory-to implement algorithms for SUIT are described in this
-   draft in order to provide flexibility in the definition of algorithm
-   profiles.
+   *  One Symmetric MTI profile
 
-   An authentication algorithm is REQUIRED for ALL SUIT manifests.
-   Encryption algorithms MAY be provided.
+   *  One "Current" Asymmetric MTI profile
+
+   *  One "Future" Asymmetric MTI profile
+
+   Devices MAY choose which MTI profile they wish to implement.  It is
+   RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile.
+
+   Devices MAY implement any number of other profiles.
+
+   MTI algorithms must be FIPS qualified.
+
+
+
+
+Moran                    Expires 15 January 2023                [Page 2]
+
+Internet-Draft             MTI SUIT Algorithms                 July 2022
+
 
 2.  Algorithms
 
@@ -105,14 +126,6 @@ Table of Contents
    *  Key Exchange Algorithms
 
    *  Encryption Algorithms
-
-
-
-
-Moran                    Expires 12 January 2023                [Page 2]
-
-Internet-Draft             MTI SUIT Algorithms                 July 2022
-
 
 2.1.  Digest Algorithms
 
@@ -148,6 +161,15 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
 
    *  ES512 (-36)
 
+
+
+
+
+Moran                    Expires 15 January 2023                [Page 3]
+
+Internet-Draft             MTI SUIT Algorithms                 July 2022
+
+
 2.2.3.  Asymmetric Post-Quantum Authentication Algorithms
 
    *  HSS-LMS (-46) [RFC8778]
@@ -159,16 +181,6 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
    *  SPHINCS+ (TBD)
 
    *  Crystals-Dilithium (TBD)
-
-
-
-
-
-
-Moran                    Expires 12 January 2023                [Page 3]
-
-Internet-Draft             MTI SUIT Algorithms                 July 2022
-
 
 2.3.  Key Exchange Algorithms
 
@@ -207,6 +219,13 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
 
    *  A192GCM (2)
 
+
+
+Moran                    Expires 15 January 2023                [Page 4]
+
+Internet-Draft             MTI SUIT Algorithms                 July 2022
+
+
    *  A256GCM (3)
 
    *  ChaCha20/Poly1305 (24)
@@ -219,40 +238,61 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
 
    *  AES-CCM-16-128-256 (31)
 
-
-
-Moran                    Expires 12 January 2023                [Page 4]
-
-Internet-Draft             MTI SUIT Algorithms                 July 2022
-
-
    *  AES-CCM-64-128-128 (32)
 
    *  AES-CCM-64-128-256 (33)
 
 3.  Profiles
 
-   The following profiles are defined by this draft:
+   Recognized profiles are defined below.
 
-   *  suit-sha256-es256-hpke-a128gcm
+3.1.   Symmetric MTI profile: suit-sha256-hmac-a128-ccm
 
-      -  SHA-256
+   This profile requires the following algorithms:
 
-      -  ES256
+   *  SHA-256
 
-      -  HPKE
+   *  HMAC-256
 
-      -  AES-128-GCM
+   *  A128W Key Wrap
 
-   *  suit-sha256-hmac-a128-ccm
+   *  AES-CCM-16-128-128
 
-      -  SHA-256
+3.2.  Current Asymmetric MTI Profile: suit-sha256-es256-hpke-a128gcm
 
-      -  HMAC-256
+   This profile requires the following algorithms:
 
-      -  A128W Key Wrap
+   *  SHA-256
 
-      -  AES-CCM-16-128-128
+   *  ES256
+
+   *  HPKE
+
+   *  AES-128-GCM
+
+3.3.  Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm
+
+   This profile requires the following algorithms:
+
+
+
+
+Moran                    Expires 15 January 2023                [Page 5]
+
+Internet-Draft             MTI SUIT Algorithms                 July 2022
+
+
+   *  SHA-256
+
+   *  HSS-LMS
+
+   *  HPKE
+
+   *  AES-128-GCM
+
+3.4.  Other Profiles:
+
+   Optional classical and PQC profiles are defined below.
 
    *  suit-sha256-eddsa-ecdh-es-chacha-poly
 
@@ -263,24 +303,6 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
       -  ECDH-ES + HKDF-256
 
       -  ChaCha20 + Poly1305
-
-   *  suit-sha256-hsslms-hpke-a128gcm
-
-      -  SHA-256
-
-      -  HSS-LMS
-
-      -  HPKE
-
-      -  AES-128-GCM
-
-
-
-
-Moran                    Expires 12 January 2023                [Page 5]
-
-Internet-Draft             MTI SUIT Algorithms                 July 2022
-
 
    *  suit-sha256-falcon512-hpke-a128gcm
 
@@ -306,6 +328,16 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
 
    TODO
 
+
+
+
+
+
+Moran                    Expires 15 January 2023                [Page 6]
+
+Internet-Draft             MTI SUIT Algorithms                 July 2022
+
+
 5.  IANA Considerations
 
    TODO
@@ -330,17 +362,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2022
               "A Concise Binary Object Representation (CBOR)-based
               Serialization Format for the Software Updates for Internet
               of Things (SUIT) Manifest", Work in Progress, Internet-
-
-
-
-Moran                    Expires 12 January 2023                [Page 6]
-
-Internet-Draft             MTI SUIT Algorithms                 July 2022
-
-
-              Draft, draft-ietf-suit-manifest-17, 28 April 2022,
+              Draft, draft-ietf-suit-manifest-18, 11 July 2022,
               <https://www.ietf.org/archive/id/draft-ietf-suit-manifest-
-              17.txt>.
+              18.txt>.
 
 Author's Address
 
@@ -365,28 +389,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Moran                    Expires 12 January 2023                [Page 7]
+Moran                    Expires 15 January 2023                [Page 7]

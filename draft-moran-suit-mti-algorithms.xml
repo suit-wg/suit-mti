@@ -17,7 +17,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-moran-suit-mti-00" category="std">
+<rfc ipr="trust200902" docName="draft-moran-suit-mti-01" category="std">
 
   <front>
     <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests</title>
@@ -29,7 +29,7 @@
       </address>
     </author>
 
-    <date year="2022" month="July" day="11"/>
+    <date year="2022" month="July" day="14"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -52,11 +52,19 @@
 
 <section anchor="introduction"><name>Introduction</name>
 
-<t>Mandatory algorithms may change over time due to an evolving threat landscape. As a result these are grouped into profiles that a device should use.</t>
+<t>Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define three choices of MTI profile:</t>
 
-<t>the mandatory-to implement algorithms for SUIT are described in this draft in order to provide flexibility in the definition of algorithm profiles.</t>
+<t><list style="symbols">
+  <t>One Symmetric MTI profile</t>
+  <t>One "Current" Asymmetric MTI profile</t>
+  <t>One "Future" Asymmetric MTI profile</t>
+</list></t>
 
-<t>An authentication algorithm is REQUIRED for ALL SUIT manifests. Encryption algorithms MAY be provided.</t>
+<t>Devices MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile.</t>
+
+<t>Devices MAY implement any number of other profiles.</t>
+
+<t>MTI algorithms must be FIPS qualified.</t>
 
 </section>
 <section anchor="algorithms"><name>Algorithms</name>
@@ -168,36 +176,55 @@
 </section>
 <section anchor="profiles"><name>Profiles</name>
 
-<t>The following profiles are defined by this draft:</t>
+<t>Recognized profiles are defined below.</t>
+
+<section anchor="symmetric-mti-profile-suit-sha256-hmac-a128-ccm"><name> Symmetric MTI profile: suit-sha256-hmac-a128-ccm</name>
+
+<t>This profile requires the following algorithms:</t>
 
 <t><list style="symbols">
-  <t>suit-sha256-es256-hpke-a128gcm
-  <list style="symbols">
-      <t>SHA-256</t>
-      <t>ES256</t>
-      <t>HPKE</t>
-      <t>AES-128-GCM</t>
-    </list></t>
-  <t>suit-sha256-hmac-a128-ccm
-  <list style="symbols">
-      <t>SHA-256</t>
-      <t>HMAC-256</t>
-      <t>A128W Key Wrap</t>
-      <t>AES-CCM-16-128-128</t>
-    </list></t>
+  <t>SHA-256</t>
+  <t>HMAC-256</t>
+  <t>A128W Key Wrap</t>
+  <t>AES-CCM-16-128-128</t>
+</list></t>
+
+</section>
+<section anchor="current-asymmetric-mti-profile-suit-sha256-es256-hpke-a128gcm"><name>Current Asymmetric MTI Profile: suit-sha256-es256-hpke-a128gcm</name>
+
+<t>This profile requires the following algorithms:</t>
+
+<t><list style="symbols">
+  <t>SHA-256</t>
+  <t>ES256</t>
+  <t>HPKE</t>
+  <t>AES-128-GCM</t>
+</list></t>
+
+</section>
+<section anchor="future-asymmetric-mti-profile-suit-sha256-hsslms-hpke-a128gcm"><name>Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm</name>
+
+<t>This profile requires the following algorithms:</t>
+
+<t><list style="symbols">
+  <t>SHA-256</t>
+  <t>HSS-LMS</t>
+  <t>HPKE</t>
+  <t>AES-128-GCM</t>
+</list></t>
+
+</section>
+<section anchor="other-profiles"><name>Other Profiles:</name>
+
+<t>Optional classical and PQC profiles are defined below.</t>
+
+<t><list style="symbols">
   <t>suit-sha256-eddsa-ecdh-es-chacha-poly
   <list style="symbols">
       <t>SHA-256</t>
       <t>EdDSA</t>
       <t>ECDH-ES + HKDF-256</t>
       <t>ChaCha20 + Poly1305</t>
-    </list></t>
-  <t>suit-sha256-hsslms-hpke-a128gcm
-  <list style="symbols">
-      <t>SHA-256</t>
-      <t>HSS-LMS</t>
-      <t>HPKE</t>
-      <t>AES-128-GCM</t>
     </list></t>
   <t>suit-sha256-falcon512-hpke-a128gcm
   <list style="symbols">
@@ -215,6 +242,7 @@
     </list></t>
 </list></t>
 
+</section>
 </section>
 <section anchor="security-considerations"><name>Security Considerations</name>
 
@@ -287,7 +315,7 @@
       <author fullname='Koen Zandberg'>
 	 <organization>Inria</organization>
       </author>
-      <date day='28' month='April' year='2022'/>
+      <date day='11' month='July' year='2022'/>
       <abstract>
 	 <t>   This specification describes the format of a manifest.  A manifest is
    a bundle of metadata about code/data obtained by a recipient (chiefly
@@ -301,8 +329,8 @@
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-17'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-17.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-18'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-18.txt' type='TXT'/>
 </reference>
 
 
@@ -315,38 +343,41 @@
   </back>
 
 <!-- ##markdown-source:
-H4sIACd/zGIAA61X227bOBB911cQyEvTLl1fYifx0yq2uzEct2mUotunBS1R
-NhFJFEjKqbbov+8MKSmSY3exwAZGoOEM53LmzMimlHpGmIRPyZplETNSldRI
-ukzzhKc8M8RPtlIJs0s1iaUiM8XRSBOwJjOZ6SLlIMmYBDI2z0xx8iUHP9xa
-mx0ny8xwlXGDNo87kW01SVkmYq6N9thmo/gegj8uSfBl+dgK50UyzFgKmUWK
-xYamUrGM6kLAoxG03/dCCAPW5ZRoE3kexGZTEvCwAAel9yzV01bJIp9az94T
-L+EomjYJ0Tn69TyRqykxqtBm2O9f94eeF0JdHErTU5JJz9MGiv2LJTKDZEqu
-vVxMPUJUHPJImzKpTgkxMmw9iiwCAOsDLZVRPNaNXKYd0SgRNsahTBH8Riuy
-RGQvYfh3QxOhDQUnG5mAGZVv34EGIEtZngPIrTz+Svieo9EFYFSYnVSQPQUd
-/okMFDc9skZ0qzOH+o3iQIiso5FqC637mxkhsynxVUruRCoMjyo9T5lImqs9
-e/V3ptIeFOR5mVQpXN1zRO/hw+xqMB7Wj5eXV1NoRRa3bZZ03hPcxFXXK9aA
-HaWUsA1gxkJoILBKY+mFJazOeShiwYGiNZdIrmQsEu4obHlWOyM5U5pXfHbo
-aACNYPuByxtugCyAEvyXOVdsIxIgV8+lkIooSrjnnREklZJRESIyntfM0ksO
-yPqShDuWbTmRe3BqRMpJVHAMBzjzvUz20DkYGpwxkoAPHbKc94gP6RHFdZEY
-HCnNCc6ZJTePMDn5UqHZwV1GIr4XISd6J4skIoUGL56H45i2xpyIZsxZd8wt
-Rhgk4jpUYmPDgG8EGqcGJRgmrMLG3osIJj7h34UDyFnj9VhkAkHB8X/dEADS
-zyzukIQILbFaZhDuYfH5y/JhMbdp+Xd33fbpHllkoSrz7kVN1v43aF6dWtTD
-JrV2C3CGt80tasg9gA4YYZcV5t/Aagtpo1DT7bATwM63ZC62yK1WwLfE7xbZ
-0a14SRbfK3J0NK3q2umfnR2JAebBrU+H4wl5QweTcyevFoPhFR5cVQd0dHUB
-8sWolseDIcoXzQXn4WJ8bgOdTtw7qXLcERZ7R1BkNSfVyobpnKLvMxKUsOlw
-950Mg2Xdrv2Zq2t8Xou2ikkj2iIuz51XXzduZwnTGpwmv6oDcA5c0ZfocBHN
-Ax8Ei9gicHiNxk5yaI0mr0PdS1jJnwuWmSL9dbTbIKB36wBBnpyTHz+qDfjz
-J+j+XAegeLyZY7gPLIGXkSuuOgrub5cfZ8G75mCmSnhDJZrOcfR2AoI7FTbv
-FLO8E4ojjXuum2dpDq+Lpme/tdHVL6e4S7tgNMqDriMYvuOnpaM/uLZctM+u
-I+MK6GOhLJb3q0WDxWI2v6WLgLwjt6v5h2oUhuMjKtfG4aSrwlxWX1Fxfai4
-HlrFqH+ggBhOMagSPVk5tOrhW/Do3wV09e1m8dBq04kxd+D8MVuTN4MaHisN
-a4CsZKGb7Rh8hv339zIpB6P+GKwcjouAwoQQ8PTeQu3wqI/BSXU8qY9nszXs
-Dwqn1GpczQcai+1o0NZMLlp3hkc07s4Iayb31Wp1uziWSSKf8fXXrFz3+nFr
-d1O2Xj52xdqvBBoKHk8o1/h/lz9xyiDMNkzt95FmHVaSnfHqGVlTPWKOmBxA
-eeB3l7LQeqThCZf1Yqpdge1XO3NfFctb/ruIHqYfRZpRHkY7qITCSMKH5tDF
-41XgcqqfX9G9UtRkAE1Nh8PatE5S/e+gVavqv8AW26UFA/a/e3/i6D+q9xx9
-KjdcvQ5g32A1Eq+2Y1dBV+ijGxWDAkPrnxL2dw4sRGVXORL20/wTGiz9j/5x
-5T9/hdF4WA0AAA==
+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
+38E2EcoDDwAA
 
 -->
 

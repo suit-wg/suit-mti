@@ -56,9 +56,9 @@ Mandatory algorithms may change over time due to an evolving threat landscape. A
 
 At least one MTI algorithm in each category MUST be FIPS qualified.
 
-Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrined manifest recipients, the requirements for Recipients and Authors are different.
+Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.
 
-Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.
+Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
@@ -162,7 +162,7 @@ Optional classical and PQC profiles are defined below.
     * ChaCha20 + Poly1305
 * suit-sha256-falcon512-hpke-a128gcm
     * SHA-256
-    * HSS-LMS
+    * Falcon-512
     * HPKE
     * AES-128-GCM
 * suit-shake256-dilithium-kyber-a128gcm

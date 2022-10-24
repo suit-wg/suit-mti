@@ -17,7 +17,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-moran-suit-mti-01" category="std">
+<rfc ipr="trust200902" docName="draft-moran-suit-mti-02" category="std">
 
   <front>
     <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests</title>
@@ -25,11 +25,11 @@
     <author initials="B." surname="Moran" fullname="Brendan Moran">
       <organization>Arm Limited</organization>
       <address>
-        <email>Brendan.Moran@arm.com</email>
+        <email>brendan.moran.ietf@gmail.com</email>
       </address>
     </author>
 
-    <date year="2022" month="July" day="14"/>
+    <date year="2022" month="October" day="24"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -38,7 +38,7 @@
     <abstract>
 
 
-<t>This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability.</t>
+<t>This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case.</t>
 
 
 
@@ -50,24 +50,28 @@
   <middle>
 
 
-<section anchor="introduction"><name>Introduction</name>
+<section anchor="introduction" title="Introduction">
 
-<t>Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define three choices of MTI profile:</t>
+<t>Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define four choices of MTI profile specifically for constrained node software update. These profiles are:</t>
 
 <t><list style="symbols">
   <t>One Symmetric MTI profile</t>
-  <t>One "Current" Asymmetric MTI profile</t>
-  <t>One "Future" Asymmetric MTI profile</t>
+  <t>Two “Current” Asymmetric MTI profiles</t>
+  <t>One “Future” Asymmetric MTI profile</t>
 </list></t>
 
-<t>Devices MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile.</t>
+<t>At least one MTI algorithm in each category MUST be FIPS qualified.</t>
 
-<t>Devices MAY implement any number of other profiles.</t>
+<t>Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrined manifest recipients, the requirements for Recipients and Authors are different.</t>
 
-<t>MTI algorithms must be FIPS qualified.</t>
+<t>Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the “Future” Asymmetric MTI profile. Recipients MAY implement any number of other profiles.</t>
+
+<t>Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.</t>
+
+<t>Other use-cases of SUIT MAY define their own MTI algorithms.</t>
 
 </section>
-<section anchor="algorithms"><name>Algorithms</name>
+<section anchor="algorithms" title="Algorithms">
 
 <t>The algorithms that form a part of the profiles defined in this document are grouped into:</t>
 
@@ -78,107 +82,73 @@
   <t>Encryption Algorithms</t>
 </list></t>
 
-<section anchor="digest-algorithms"><name>Digest Algorithms</name>
+<section anchor="digest-algorithms" title="Digest Algorithms">
 
 <t><list style="symbols">
   <t>SHA-256 (-16)</t>
-  <t>SHAKE128 (-18)</t>
-  <t>SHA-384 (-43)</t>
-  <t>SHA-512 (-44)</t>
-  <t>SHAKE256 (-45)</t>
 </list></t>
 
 </section>
-<section anchor="authentication-algorithms"><name>Authentication Algorithms</name>
+<section anchor="authentication-algorithms" title="Authentication Algorithms">
 
 <t>Authentication Algorithms are divided into three categories:</t>
 
-<section anchor="symmetric-authentication-algorithm"><name>Symmetric Authentication Algorithm</name>
+<section anchor="symmetric-authentication-algorithm" title="Symmetric Authentication Algorithm">
 
 <t><list style="symbols">
   <t>HMAC-256 (5)</t>
-  <t>HMAC-384 (6)</t>
-  <t>HMAC-512 (7)</t>
 </list></t>
 
 </section>
-<section anchor="asymmetric-classical-authentication-algorithms"><name>Asymmetric Classical Authentication Algorithms</name>
+<section anchor="asymmetric-classical-authentication-algorithms" title="Asymmetric Classical Authentication Algorithms">
 
 <t><list style="symbols">
   <t>ES256 (-7)</t>
   <t>EdDSA (-8)</t>
-  <t>ES384 (-35)</t>
-  <t>ES512 (-36)</t>
 </list></t>
 
 </section>
-<section anchor="asymmetric-post-quantum-authentication-algorithms"><name>Asymmetric Post-Quantum Authentication Algorithms</name>
+<section anchor="asymmetric-post-quantum-authentication-algorithms" title="Asymmetric Post-Quantum Authentication Algorithms">
 
 <t><list style="symbols">
   <t>HSS-LMS (-46) <xref target="RFC8778"/></t>
-  <t>XMSS (TBD)</t>
-  <t>Falcon-512 (TBD)</t>
-  <t>SPHINCS+ (TBD)</t>
-  <t>Crystals-Dilithium (TBD)</t>
 </list></t>
 
 </section>
 </section>
-<section anchor="key-exchange-algorithms"><name>Key Exchange Algorithms</name>
+<section anchor="key-exchange-algorithms" title="Key Exchange Algorithms">
 
 <t>Key Exchange Algorithms are divided into two three groups: Symmetric, Classical Asymmetric, and Post-Quantum Asymmetric</t>
 
-<section anchor="symmetric"><name>Symmetric</name>
+<section anchor="symmetric" title="Symmetric">
 
 <t><list style="symbols">
   <t>A128 (-3)</t>
-  <t>A192 (-4)</t>
-  <t>A256 (-5)</t>
 </list></t>
 
 </section>
-<section anchor="classical-asymmetric"><name>Classical Asymmetric</name>
+<section anchor="classical-asymmetric" title="Classical Asymmetric">
 
 <t><list style="symbols">
-  <t>HPKE (TBD)</t>
+  <t>COSE HPKE (TBD)</t>
   <t>ECDH-ES + HKDF-256 (-25)</t>
-  <t>ECDH-ES + HKDF-512 (-26)</t>
-  <t>ECDH-ES + A128KW (-29)</t>
-  <t>ECDH-ES + A192KW (-30)</t>
-  <t>ECDH-ES + A256KW (-31)</t>
-</list></t>
-
-</section>
-<section anchor="post-quantum-asymmetric"><name>Post-Quantum Asymmetric</name>
-
-<t><list style="symbols">
-  <t>CRYSTALS-KYBER (TBD)</t>
 </list></t>
 
 </section>
 </section>
-<section anchor="encryption-algorithms"><name>Encryption Algorithms</name>
+<section anchor="encryption-algorithms" title="Encryption Algorithms">
 
 <t><list style="symbols">
   <t>A128GCM (1)</t>
-  <t>A192GCM (2)</t>
-  <t>A256GCM (3)</t>
-  <t>ChaCha20/Poly1305 (24)</t>
-  <t>AES-MAC 128/128 (25)</t>
-  <t>AES-MAC 256/128 (26)</t>
-  <t>AES-CCM-16-128-128 (30)</t>
-  <t>AES-CCM-16-128-256 (31)</t>
-  <t>AES-CCM-64-128-128 (32)</t>
-  <t>AES-CCM-64-128-256 (33)</t>
 </list></t>
 
 </section>
 </section>
-<section anchor="profiles"><name>Profiles</name>
+<section anchor="profiles" title="Profiles">
 
 <t>Recognized profiles are defined below.</t>
 
-<section anchor="symmetric-mti-profile-suit-sha256-hmac-a128-ccm"><name> Symmetric MTI profile: suit-sha256-hmac-a128-ccm</name>
+<section anchor="symmetric-mti-profile-suit-sha256-hmac-a128-ccm" title=" Symmetric MTI profile: suit-sha256-hmac-a128-ccm">
 
 <t>This profile requires the following algorithms:</t>
 
@@ -190,7 +160,7 @@
 </list></t>
 
 </section>
-<section anchor="current-asymmetric-mti-profile-suit-sha256-es256-hpke-a128gcm"><name>Current Asymmetric MTI Profile: suit-sha256-es256-hpke-a128gcm</name>
+<section anchor="current-asymmetric-mti-profile-1-suit-sha256-es256-hpke-a128gcm" title="Current Asymmetric MTI Profile 1: suit-sha256-es256-hpke-a128gcm">
 
 <t>This profile requires the following algorithms:</t>
 
@@ -202,7 +172,19 @@
 </list></t>
 
 </section>
-<section anchor="future-asymmetric-mti-profile-suit-sha256-hsslms-hpke-a128gcm"><name>Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm</name>
+<section anchor="current-asymmetric-mti-profile-2-suit-sha256-ed256-hpke-a128gcm" title="Current Asymmetric MTI Profile 2: suit-sha256-ed256-hpke-a128gcm">
+
+<t>This profile requires the following algorithms:</t>
+
+<t><list style="symbols">
+  <t>SHA-256</t>
+  <t>EDDSA</t>
+  <t>HPKE</t>
+  <t>AES-128-GCM</t>
+</list></t>
+
+</section>
+<section anchor="future-asymmetric-mti-profile-suit-sha256-hsslms-hpke-a128gcm" title="Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm">
 
 <t>This profile requires the following algorithms:</t>
 
@@ -214,7 +196,7 @@
 </list></t>
 
 </section>
-<section anchor="other-profiles"><name>Other Profiles:</name>
+<section anchor="other-profiles" title="Other Profiles:">
 
 <t>Optional classical and PQC profiles are defined below.</t>
 
@@ -244,12 +226,12 @@
 
 </section>
 </section>
-<section anchor="security-considerations"><name>Security Considerations</name>
+<section anchor="security-considerations" title="Security Considerations">
 
 <t>TODO</t>
 
 </section>
-<section anchor="iana-considerations"><name>IANA Considerations</name>
+<section anchor="iana-considerations" title="IANA Considerations">
 
 <t>TODO</t>
 
@@ -303,19 +285,22 @@
 <reference anchor='I-D.ietf-suit-manifest'>
    <front>
       <title>A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest</title>
-      <author fullname='Brendan Moran'>
-	 <organization>Arm Limited</organization>
+      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
+         <organization>Arm Limited</organization>
       </author>
-      <author fullname='Hannes Tschofenig'>
-	 <organization>Arm Limited</organization>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         <organization>Arm Limited</organization>
       </author>
-      <author fullname='Henk Birkholz'>
-	 <organization>Fraunhofer SIT</organization>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
       </author>
-      <author fullname='Koen Zandberg'>
-	 <organization>Inria</organization>
+      <author fullname='Koen Zandberg' initials='K.' surname='Zandberg'>
+         <organization>Inria</organization>
       </author>
-      <date day='11' month='July' year='2022'/>
+      <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
+         <organization>Nordic Semiconductor</organization>
+      </author>
+      <date day='7' month='October' year='2022'/>
       <abstract>
 	 <t>   This specification describes the format of a manifest.  A manifest is
    a bundle of metadata about code/data obtained by a recipient (chiefly
@@ -329,8 +314,8 @@
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-18'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-18.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-20'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-20.txt' type='TXT'/>
 </reference>
 
 
@@ -343,41 +328,41 @@
   </back>
 
 <!-- ##markdown-source:
-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
-38E2EcoDDwAA
+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
 
 -->
 

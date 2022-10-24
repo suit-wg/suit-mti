@@ -1,7 +1,7 @@
 ---
 title: Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
-docname: draft-moran-suit-mti-01
+docname: draft-moran-suit-mti-02
 category: std
 
 area: Security
@@ -31,7 +31,7 @@ author:
       ins: B. Moran
       name: Brendan Moran
       organization: Arm Limited
-      email: Brendan.Moran@arm.com
+      email: brendan.moran.ietf@gmail.com
 
 normative:
   RFC8152:
@@ -42,23 +42,27 @@ informative:
 
 --- abstract
 
-This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability.
+This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case.
 
 --- middle
 
 #  Introduction
 
-Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define three choices of MTI profile:
+Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define four choices of MTI profile specifically for constrained node software update. These profiles are:
 
 * One Symmetric MTI profile
-* One "Current" Asymmetric MTI profile
+* Two "Current" Asymmetric MTI profiles
 * One "Future" Asymmetric MTI profile
 
-Devices MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile.
+At least one MTI algorithm in each category MUST be FIPS qualified.
 
-Devices MAY implement any number of other profiles.
+Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrined manifest recipients, the requirements for Recipients and Authors are different.
 
-MTI algorithms must be FIPS qualified.
+Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.
+
+Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
+
+Other use-cases of SUIT MAY define their own MTI algorithms.
 
 # Algorithms
 
@@ -72,10 +76,6 @@ The algorithms that form a part of the profiles defined in this document are gro
 ## Digest Algorithms
 
 * SHA-256 (-16)
-* SHAKE128 (-18)
-* SHA-384 (-43)
-* SHA-512 (-44)
-* SHAKE256 (-45)
 
 ## Authentication Algorithms
 
@@ -84,23 +84,15 @@ Authentication Algorithms are divided into three categories:
 ### Symmetric Authentication Algorithm
 
 * HMAC-256 (5)
-* HMAC-384 (6)
-* HMAC-512 (7)
 
 ### Asymmetric Classical Authentication Algorithms
 
 * ES256 (-7)
 * EdDSA (-8)
-* ES384 (-35)
-* ES512 (-36)
 
 ### Asymmetric Post-Quantum Authentication Algorithms
 
 * HSS-LMS (-46) {{RFC8778}}
-* XMSS (TBD)
-* Falcon-512 (TBD)
-* SPHINCS+ (TBD)
-* Crystals-Dilithium (TBD)
 
 ## Key Exchange Algorithms
 
@@ -109,34 +101,15 @@ Key Exchange Algorithms are divided into two three groups: Symmetric, Classical 
 ### Symmetric
 
 * A128 (-3)
-* A192 (-4)
-* A256 (-5)
 
 ### Classical Asymmetric
 
-* HPKE (TBD)
+* COSE HPKE (TBD)
 * ECDH-ES + HKDF-256 (-25)
-* ECDH-ES + HKDF-512 (-26)
-* ECDH-ES + A128KW (-29)
-* ECDH-ES + A192KW (-30)
-* ECDH-ES + A256KW (-31)
-
-### Post-Quantum Asymmetric
-
-* CRYSTALS-KYBER (TBD)
 
 ## Encryption Algorithms
 
 * A128GCM (1)
-* A192GCM (2)
-* A256GCM (3)
-* ChaCha20/Poly1305 (24)
-* AES-MAC 128/128 (25)
-* AES-MAC 256/128 (26)
-* AES-CCM-16-128-128 (30)
-* AES-CCM-16-128-256 (31)
-* AES-CCM-64-128-128 (32)
-* AES-CCM-64-128-256 (33)
 
 # Profiles
 
@@ -151,12 +124,21 @@ This profile requires the following algorithms:
 * A128W Key Wrap
 * AES-CCM-16-128-128
 
-## Current Asymmetric MTI Profile: suit-sha256-es256-hpke-a128gcm
+## Current Asymmetric MTI Profile 1: suit-sha256-es256-hpke-a128gcm
 
 This profile requires the following algorithms:
 
 * SHA-256
 * ES256
+* HPKE
+* AES-128-GCM
+
+## Current Asymmetric MTI Profile 2: suit-sha256-ed256-hpke-a128gcm
+
+This profile requires the following algorithms:
+
+* SHA-256
+* EDDSA
 * HPKE
 * AES-128-GCM
 

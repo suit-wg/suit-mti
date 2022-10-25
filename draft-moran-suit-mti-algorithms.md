@@ -1,5 +1,5 @@
 ---
-title: Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests
+title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
 docname: draft-moran-suit-mti-02
 category: std

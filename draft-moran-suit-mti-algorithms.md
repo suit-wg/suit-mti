@@ -39,6 +39,11 @@ normative:
 
 informative:
   I-D.ietf-suit-manifest:
+  IANA-COSE:
+    title: "CBOR Object Signing and Encryption (COSE)"
+    author:
+    date: 2022
+    target: https://www.iana.org/assignments/cose/cose.xhtml
 
 --- abstract
 
@@ -72,6 +77,8 @@ The algorithms that form a part of the profiles defined in this document are gro
 * Authentication Algorithms
 * Key Exchange Algorithms
 * Encryption Algorithms
+
+The COSE algorithm ID {{IANA-COSE}} for each algorithm is given in parentheses.
 
 ## Digest Algorithms
 

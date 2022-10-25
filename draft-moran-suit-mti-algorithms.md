@@ -86,7 +86,7 @@ The COSE algorithm ID {{IANA-COSE}} for each algorithm is given in parentheses.
 
 ## Authentication Algorithms
 
-Authentication Algorithms are divided into three categories:
+Authentication Algorithms are divided into three groups: Symmetric, Asymmetric Classical, and Asymmetric Post-Quantum
 
 ### Symmetric Authentication Algorithm
 
@@ -103,13 +103,13 @@ Authentication Algorithms are divided into three categories:
 
 ## Key Exchange Algorithms
 
-Key Exchange Algorithms are divided into two three groups: Symmetric, Classical Asymmetric, and Post-Quantum Asymmetric
+Key Exchange Algorithms are divided into two groups: Symmetric, and Asymmetric Classical
 
 ### Symmetric
 
 * A128 (-3)
 
-### Classical Asymmetric
+### Asymmetric Classical
 
 * COSE HPKE (TBD)
 * ECDH-ES + HKDF-256 (-25)

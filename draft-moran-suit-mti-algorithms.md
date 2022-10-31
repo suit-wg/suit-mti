@@ -1,5 +1,5 @@
 ---
-title: Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests
+title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
 docname: draft-moran-suit-mti-02
 category: std
@@ -39,6 +39,11 @@ normative:
 
 informative:
   I-D.ietf-suit-manifest:
+  IANA-COSE:
+    title: "CBOR Object Signing and Encryption (COSE)"
+    author:
+    date: 2022
+    target: https://www.iana.org/assignments/cose/cose.xhtml
 
 --- abstract
 
@@ -56,9 +61,9 @@ Mandatory algorithms may change over time due to an evolving threat landscape. A
 
 At least one MTI algorithm in each category MUST be FIPS qualified.
 
-Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrined manifest recipients, the requirements for Recipients and Authors are different.
+Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.
 
-Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.
+Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
@@ -73,13 +78,15 @@ The algorithms that form a part of the profiles defined in this document are gro
 * Key Exchange Algorithms
 * Encryption Algorithms
 
+The COSE algorithm ID {{IANA-COSE}} for each algorithm is given in parentheses.
+
 ## Digest Algorithms
 
 * SHA-256 (-16)
 
 ## Authentication Algorithms
 
-Authentication Algorithms are divided into three categories:
+Authentication Algorithms are divided into three groups: Symmetric, Asymmetric Classical, and Asymmetric Post-Quantum
 
 ### Symmetric Authentication Algorithm
 
@@ -96,13 +103,13 @@ Authentication Algorithms are divided into three categories:
 
 ## Key Exchange Algorithms
 
-Key Exchange Algorithms are divided into two three groups: Symmetric, Classical Asymmetric, and Post-Quantum Asymmetric
+Key Exchange Algorithms are divided into two groups: Symmetric, and Asymmetric Classical
 
 ### Symmetric
 
 * A128 (-3)
 
-### Classical Asymmetric
+### Asymmetric Classical
 
 * COSE HPKE (TBD)
 * ECDH-ES + HKDF-256 (-25)
@@ -162,7 +169,7 @@ Optional classical and PQC profiles are defined below.
     * ChaCha20 + Poly1305
 * suit-sha256-falcon512-hpke-a128gcm
     * SHA-256
-    * HSS-LMS
+    * Falcon-512
     * HPKE
     * AES-128-GCM
 * suit-shake256-dilithium-kyber-a128gcm

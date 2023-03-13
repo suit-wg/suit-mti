@@ -37,6 +37,11 @@ author:
       name: Øyvind Rønningstad
       organization: Nordic Semiconductor
       email: oyvind.ronningstad@gmail.com
+ -
+      ins: A. Tsukamoto
+      name: Akira Tsukamoto
+      organization:
+      email: akira.tsukamoto@gmail.com
 
 normative:
   RFC8152:

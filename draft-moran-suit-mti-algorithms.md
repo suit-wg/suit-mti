@@ -191,3 +191,14 @@ For the avoidance of doubt, there are scenarios where payload or manifest encryp
 
 TODO
 
+-- back
+
+# A. Full CDDL {#full-cddl}
+
+The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in protocols that share a ciphersuite with SUIT.
+
+To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in {{-cose, Section 1.4}}.
+
+~~~ CDDL
+{::include draft-ietf-suit-mti-algorithms.cddl}
+~~~

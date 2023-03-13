@@ -37,6 +37,11 @@ author:
       name: Øyvind Rønningstad
       organization: Nordic Semiconductor
       email: oyvind.ronningstad@gmail.com
+ -
+      ins: A. Tsukamoto
+      name: Akira Tsukamoto
+      organization:
+      email: akira.tsukamoto@gmail.com
 
 normative:
   RFC8152:
@@ -136,22 +141,22 @@ This profile requires the following algorithms:
 * A128W Key Wrap
 * AES-CCM-16-128-128
 
-## Current Asymmetric MTI Profile 1: suit-sha256-es256-hpke-a128gcm
+## Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm
 
 This profile requires the following algorithms:
 
 * SHA-256
 * ES256
-* HPKE
+* ECDH
 * AES-128-GCM
 
-## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-hpke-a128gcm
+## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128gcm
 
 This profile requires the following algorithms:
 
 * SHA-256
 * EDDSA
-* HPKE
+* ECDH
 * AES-128-GCM
 
 ## Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm

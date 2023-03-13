@@ -151,6 +151,24 @@ This profile requires the following algorithms:
 
 * SHA-256
 * EDDSA
+* ECDH
+* AES-128-GCM
+
+## Current Asymmetric MTI Profile 3: suit-sha256-es256-ecdh-a128gcm
+
+This profile requires the following algorithms:
+
+* SHA-256
+* ES256
+* ECDH
+* AES-128-GCM
+
+## Current Asymmetric MTI Profile 4: suit-sha256-eddsa-ecdh-a128gcm
+
+This profile requires the following algorithms:
+
+* SHA-256
+* EDDSA
 * HPKE
 * AES-128-GCM
 

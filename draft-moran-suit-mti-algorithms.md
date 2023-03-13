@@ -46,6 +46,7 @@ author:
 normative:
   RFC8152:
   RFC8778:
+  RFC9052: cose
 
 informative:
   I-D.ietf-suit-manifest:
@@ -205,5 +206,5 @@ The following CDDL creates a subset of COSE for use with SUIT. Both tagged and u
 To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in {{-cose, Section 1.4}}.
 
 ~~~ CDDL
-{::include draft-ietf-suit-mti-algorithms.cddl}
+{::include draft-moran-suit-mti-algorithms.cddl}
 ~~~

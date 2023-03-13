@@ -17,10 +17,10 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-moran-suit-mti-02" category="std">
+<rfc ipr="trust200902" docName="draft-ietf-suit-mti-00" category="std">
 
   <front>
-    <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Creators and Consumers of Software Update for the Internet of Things manifests</title>
+    <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests</title>
 
     <author initials="B." surname="Moran" fullname="Brendan Moran">
       <organization>Arm Limited</organization>
@@ -28,8 +28,20 @@
         <email>brendan.moran.ietf@gmail.com</email>
       </address>
     </author>
+    <author initials="Ø." surname="Rønningstad" fullname="Øyvind Rønningstad">
+      <organization>Nordic Semiconductor</organization>
+      <address>
+        <email>oyvind.ronningstad@gmail.com</email>
+      </address>
+    </author>
+    <author initials="A." surname="Tsukamoto" fullname="Akira Tsukamoto">
+      <organization></organization>
+      <address>
+        <email>akira.tsukamoto@gmail.com</email>
+      </address>
+    </author>
 
-    <date year="2022" month="October" day="24"/>
+    <date year="2023" month="March" day="13"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -50,28 +62,28 @@
   <middle>
 
 
-<section anchor="introduction" title="Introduction">
+<section anchor="introduction"><name>Introduction</name>
 
 <t>Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define four choices of MTI profile specifically for constrained node software update. These profiles are:</t>
 
 <t><list style="symbols">
   <t>One Symmetric MTI profile</t>
-  <t>Two “Current” Asymmetric MTI profiles</t>
-  <t>One “Future” Asymmetric MTI profile</t>
+  <t>Two "Current" Asymmetric MTI profiles</t>
+  <t>One "Future" Asymmetric MTI profile</t>
 </list></t>
 
 <t>At least one MTI algorithm in each category MUST be FIPS qualified.</t>
 
-<t>Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrined manifest recipients, the requirements for Recipients and Authors are different.</t>
+<t>Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.</t>
 
-<t>Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED thaty they implement the “Future” Asymmetric MTI profile. Recipients MAY implement any number of other profiles.</t>
+<t>Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.</t>
 
 <t>Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.</t>
 
 <t>Other use-cases of SUIT MAY define their own MTI algorithms.</t>
 
 </section>
-<section anchor="algorithms" title="Algorithms">
+<section anchor="algorithms"><name>Algorithms</name>
 
 <t>The algorithms that form a part of the profiles defined in this document are grouped into:</t>
 
@@ -82,25 +94,27 @@
   <t>Encryption Algorithms</t>
 </list></t>
 
-<section anchor="digest-algorithms" title="Digest Algorithms">
+<t>The COSE algorithm ID <xref target="IANA-COSE"/> for each algorithm is given in parentheses.</t>
+
+<section anchor="digest-algorithms"><name>Digest Algorithms</name>
 
 <t><list style="symbols">
   <t>SHA-256 (-16)</t>
 </list></t>
 
 </section>
-<section anchor="authentication-algorithms" title="Authentication Algorithms">
+<section anchor="authentication-algorithms"><name>Authentication Algorithms</name>
 
-<t>Authentication Algorithms are divided into three categories:</t>
+<t>Authentication Algorithms are divided into three groups: Symmetric, Asymmetric Classical, and Asymmetric Post-Quantum</t>
 
-<section anchor="symmetric-authentication-algorithm" title="Symmetric Authentication Algorithm">
+<section anchor="symmetric-authentication-algorithm"><name>Symmetric Authentication Algorithm</name>
 
 <t><list style="symbols">
   <t>HMAC-256 (5)</t>
 </list></t>
 
 </section>
-<section anchor="asymmetric-classical-authentication-algorithms" title="Asymmetric Classical Authentication Algorithms">
+<section anchor="asymmetric-classical-authentication-algorithms"><name>Asymmetric Classical Authentication Algorithms</name>
 
 <t><list style="symbols">
   <t>ES256 (-7)</t>
@@ -108,7 +122,7 @@
 </list></t>
 
 </section>
-<section anchor="asymmetric-post-quantum-authentication-algorithms" title="Asymmetric Post-Quantum Authentication Algorithms">
+<section anchor="asymmetric-post-quantum-authentication-algorithms"><name>Asymmetric Post-Quantum Authentication Algorithms</name>
 
 <t><list style="symbols">
   <t>HSS-LMS (-46) <xref target="RFC8778"/></t>
@@ -116,18 +130,18 @@
 
 </section>
 </section>
-<section anchor="key-exchange-algorithms" title="Key Exchange Algorithms">
+<section anchor="key-exchange-algorithms"><name>Key Exchange Algorithms</name>
 
-<t>Key Exchange Algorithms are divided into two three groups: Symmetric, Classical Asymmetric, and Post-Quantum Asymmetric</t>
+<t>Key Exchange Algorithms are divided into two groups: Symmetric, and Asymmetric Classical</t>
 
-<section anchor="symmetric" title="Symmetric">
+<section anchor="symmetric"><name>Symmetric</name>
 
 <t><list style="symbols">
   <t>A128 (-3)</t>
 </list></t>
 
 </section>
-<section anchor="classical-asymmetric" title="Classical Asymmetric">
+<section anchor="asymmetric-classical"><name>Asymmetric Classical</name>
 
 <t><list style="symbols">
   <t>COSE HPKE (TBD)</t>
@@ -136,7 +150,7 @@
 
 </section>
 </section>
-<section anchor="encryption-algorithms" title="Encryption Algorithms">
+<section anchor="encryption-algorithms"><name>Encryption Algorithms</name>
 
 <t><list style="symbols">
   <t>A128GCM (1)</t>
@@ -144,11 +158,11 @@
 
 </section>
 </section>
-<section anchor="profiles" title="Profiles">
+<section anchor="profiles"><name>Profiles</name>
 
 <t>Recognized profiles are defined below.</t>
 
-<section anchor="symmetric-mti-profile-suit-sha256-hmac-a128-ccm" title=" Symmetric MTI profile: suit-sha256-hmac-a128-ccm">
+<section anchor="symmetric-mti-profile-suit-sha256-hmac-a128-ccm"><name> Symmetric MTI profile: suit-sha256-hmac-a128-ccm</name>
 
 <t>This profile requires the following algorithms:</t>
 
@@ -160,31 +174,31 @@
 </list></t>
 
 </section>
-<section anchor="current-asymmetric-mti-profile-1-suit-sha256-es256-hpke-a128gcm" title="Current Asymmetric MTI Profile 1: suit-sha256-es256-hpke-a128gcm">
+<section anchor="current-asymmetric-mti-profile-1-suit-sha256-es256-ecdh-a128gcm"><name>Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm</name>
 
 <t>This profile requires the following algorithms:</t>
 
 <t><list style="symbols">
   <t>SHA-256</t>
   <t>ES256</t>
-  <t>HPKE</t>
+  <t>ECDH</t>
   <t>AES-128-GCM</t>
 </list></t>
 
 </section>
-<section anchor="current-asymmetric-mti-profile-2-suit-sha256-ed256-hpke-a128gcm" title="Current Asymmetric MTI Profile 2: suit-sha256-ed256-hpke-a128gcm">
+<section anchor="current-asymmetric-mti-profile-2-suit-sha256-eddsa-ecdh-a128gcm"><name>Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128gcm</name>
 
 <t>This profile requires the following algorithms:</t>
 
 <t><list style="symbols">
   <t>SHA-256</t>
   <t>EDDSA</t>
-  <t>HPKE</t>
+  <t>ECDH</t>
   <t>AES-128-GCM</t>
 </list></t>
 
 </section>
-<section anchor="future-asymmetric-mti-profile-suit-sha256-hsslms-hpke-a128gcm" title="Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm">
+<section anchor="future-asymmetric-mti-profile-suit-sha256-hsslms-hpke-a128gcm"><name>Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm</name>
 
 <t>This profile requires the following algorithms:</t>
 
@@ -196,7 +210,7 @@
 </list></t>
 
 </section>
-<section anchor="other-profiles" title="Other Profiles:">
+<section anchor="other-profiles"><name>Other Profiles:</name>
 
 <t>Optional classical and PQC profiles are defined below.</t>
 
@@ -211,7 +225,7 @@
   <t>suit-sha256-falcon512-hpke-a128gcm
   <list style="symbols">
       <t>SHA-256</t>
-      <t>HSS-LMS</t>
+      <t>Falcon-512</t>
       <t>HPKE</t>
       <t>AES-128-GCM</t>
     </list></t>
@@ -226,14 +240,149 @@
 
 </section>
 </section>
-<section anchor="security-considerations" title="Security Considerations">
+<section anchor="security-considerations"><name>Security Considerations</name>
 
-<t>TODO</t>
+<t>For the avoidance of doubt, there are scenarios where payload or manifest encryption are not required. In these scenarios, the encryption element of the selected profile is simply not used.</t>
 
 </section>
-<section anchor="iana-considerations" title="IANA Considerations">
+<section anchor="iana-considerations"><name>IANA Considerations</name>
 
 <t>TODO</t>
+
+<t>-- back</t>
+
+</section>
+<section anchor="full-cddl"><name>A. Full CDDL</name>
+
+<t>The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in protocols that share a ciphersuite with SUIT.</t>
+
+<t>To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in <xref section="1.4" sectionFormat="comma" target="RFC9052"/>.</t>
+
+<figure><sourcecode type="CDDL"><![CDATA[
+SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128-ccm
+SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128gcm
+SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128gcm
+SUIT_COSE_tool_tweak /= suit-sha256-hsslms-hpke-a128gcm
+
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128CCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128GCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM
+
+suit-sha256-hmac-a128-ccm = [5, 12]
+suit-sha256-es256-ecdh-a128gcm = [-7, 1]
+suit-sha256-eddsa-ecdh-a128gcm = [-8, 1]
+suit-sha256-hsslms-hpke-a128gcm = [-46, 1]
+
+SUIT_COSE_Profile_HMAC_A128CCM = SUIT_COSE_Profile<5,12> .and COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile<-7,1> .and COSE_Messages
+SUIT_COSE_Profile_EDDSA_ECDH_A128GCM = SUIT_COSE_Profile<-8,1> .and COSE_Messages
+SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM = SUIT_COSE_Profile<-46,1> .and COSE_Messages
+
+SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
+
+SUIT_COSE_Messages<authid, encid> = SUIT_COSE_Untagged_Message<authid, encid> /
+    SUIT_COSE_Tagged_Message<authid, encid> 
+      
+SUIT_COSE_Untagged_Message<authid, encid> = SUIT_COSE_Sign<authid> /
+    SUIT_COSE_Sign1<authid> / SUIT_COSE_Encrypt<encid> / 
+    SUIT_COSE_Encrypt0<encid> / SUIT_COSE_Mac<authid> /
+    SUIT_COSE_Mac0<authid> 
+
+SUIT_COSE_Tagged_Message<authid, encid> = SUIT_COSE_Sign_Tagged<authid> /
+    SUIT_COSE_Sign1_Tagged<authid> / SUIT_COSE_Encrypt_Tagged<encid> /
+    SUIT_COSE_Encrypt0_Tagged<encid> / SUIT_COSE_Mac_Tagged<authid> /
+    SUIT_COSE_Mac0_Tagged<authid>
+
+; Note: This is not the same definition as is used in COSE.
+; It restricts a COSE header definition further without
+; repeating the COSE definition. It should be merged
+; with COSE by using the CDDL .and operator.
+SUIT_COSE_Profile_Headers<algid> = (
+    protected : bstr .cbor SUIT_COSE_alg_map<algid>,
+    unprotected : SUIT_COSE_header_map
+)
+SUIT_COSE_alg_map<algid> = {
+    1 => algid,
+    * int => any
+}
+
+SUIT_COSE_header_map = {
+    * int => any
+}
+
+SUIT_COSE_Sign_Tagged<authid> = #6.98(SUIT_COSE_Sign<authid>)
+
+
+SUIT_COSE_Sign<authid> = [
+    SUIT_COSE_Profile_Headers<authid>,
+    payload : bstr / nil,
+    signatures : [+ SUIT_COSE_Signature<authid>]
+]
+
+
+SUIT_COSE_Signature<authid> =  [
+    SUIT_COSE_Profile_Headers<authid>,      
+    signature : bstr
+]
+
+
+SUIT_COSE_Sign1_Tagged<authid> = #6.18(SUIT_COSE_Sign1<authid>)
+
+
+SUIT_COSE_Sign1<authid> = [
+    SUIT_COSE_Profile_Headers<authid>,
+    payload : bstr / nil,
+    signature : bstr
+]
+
+
+SUIT_COSE_Encrypt_Tagged<encid> = #6.96(SUIT_COSE_Encrypt<encid>)
+
+
+SUIT_COSE_Encrypt<encid> = [
+    SUIT_COSE_Profile_Headers<encid>,
+    ciphertext : bstr / nil,
+    recipients : [+SUIT_COSE_recipient<encid>]
+]
+
+
+SUIT_COSE_recipient<encid> = [    
+    SUIT_COSE_Profile_Headers<encid>,
+    ciphertext : bstr / nil,
+    ? recipients : [+SUIT_COSE_recipient<encid>]
+]
+
+
+SUIT_COSE_Encrypt0_Tagged<encid> = #6.16(SUIT_COSE_Encrypt0<encid>)
+
+
+SUIT_COSE_Encrypt0<encid> = [
+    SUIT_COSE_Profile_Headers<encid>,
+    ciphertext : bstr / nil,
+]
+
+
+SUIT_COSE_Mac_Tagged<authid> = #6.97(SUIT_COSE_Mac<authid>)
+
+
+SUIT_COSE_Mac<authid> = [
+   SUIT_COSE_Profile_Headers<authid>,      
+   payload : bstr / nil,
+   tag : bstr,
+   recipients :[+SUIT_COSE_recipient<authid>]
+]
+
+
+SUIT_COSE_Mac0_Tagged<authid> = #6.17(SUIT_COSE_Mac0<authid>)
+
+
+SUIT_COSE_Mac0<authid> = [
+   SUIT_COSE_Profile_Headers<authid>,      
+   payload : bstr / nil,
+   tag : bstr,
+]
+]]></sourcecode></figure>
 
 </section>
 
@@ -274,6 +423,20 @@
 
 
 
+<reference anchor='RFC9052' target='https://www.rfc-editor.org/info/rfc9052'>
+<front>
+<title>CBOR Object Signing and Encryption (COSE): Structures and Process</title>
+<author fullname='J. Schaad' initials='J.' surname='Schaad'><organization/></author>
+<date month='August' year='2022'/>
+<abstract><t>Concise Binary Object Representation (CBOR) is a data format designed for small code size and small message size.  There is a need to be able to define basic security services for this data format.  This document defines the CBOR Object Signing and Encryption (COSE) protocol.  This specification describes how to create and process signatures, message authentication codes, and encryption using CBOR for serialization.  This specification additionally describes how to represent cryptographic keys using CBOR.  </t><t>This document, along with RFC 9053, obsoletes RFC 8152.</t></abstract>
+</front>
+<seriesInfo name='STD' value='96'/>
+<seriesInfo name='RFC' value='9052'/>
+<seriesInfo name='DOI' value='10.17487/RFC9052'/>
+</reference>
+
+
+
 
     </references>
 
@@ -282,7 +445,7 @@
 
 
 
-<reference anchor='I-D.ietf-suit-manifest'>
+<reference anchor='I-D.ietf-suit-manifest' target='https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest-22'>
    <front>
       <title>A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest</title>
       <author fullname='Brendan Moran' initials='B.' surname='Moran'>
@@ -300,7 +463,7 @@
       <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
          <organization>Nordic Semiconductor</organization>
       </author>
-      <date day='7' month='October' year='2022'/>
+      <date day='27' month='February' year='2023'/>
       <abstract>
 	 <t>   This specification describes the format of a manifest.  A manifest is
    a bundle of metadata about code/data obtained by a recipient (chiefly
@@ -314,11 +477,20 @@
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-20'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-20.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-22'/>
+   
 </reference>
 
 
+<reference anchor="IANA-COSE" target="https://www.iana.org/assignments/cose/cose.xhtml">
+  <front>
+    <title>CBOR Object Signing and Encryption (COSE)</title>
+    <author >
+      <organization></organization>
+    </author>
+    <date year="2022"/>
+  </front>
+</reference>
 
 
     </references>
@@ -328,41 +500,68 @@
   </back>
 
 <!-- ##markdown-source:
-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
+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
+zOt12tf7yw18T1c2738Hd2PzxyEAAA==
 
 -->
 

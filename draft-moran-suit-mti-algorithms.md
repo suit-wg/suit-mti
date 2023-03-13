@@ -136,25 +136,7 @@ This profile requires the following algorithms:
 * A128W Key Wrap
 * AES-CCM-16-128-128
 
-## Current Asymmetric MTI Profile 1: suit-sha256-es256-hpke-a128gcm
-
-This profile requires the following algorithms:
-
-* SHA-256
-* ES256
-* HPKE
-* AES-128-GCM
-
-## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-hpke-a128gcm
-
-This profile requires the following algorithms:
-
-* SHA-256
-* EDDSA
-* ECDH
-* AES-128-GCM
-
-## Current Asymmetric MTI Profile 3: suit-sha256-es256-ecdh-a128gcm
+## Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm
 
 This profile requires the following algorithms:
 
@@ -163,13 +145,13 @@ This profile requires the following algorithms:
 * ECDH
 * AES-128-GCM
 
-## Current Asymmetric MTI Profile 4: suit-sha256-eddsa-ecdh-a128gcm
+## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128gcm
 
 This profile requires the following algorithms:
 
 * SHA-256
 * EDDSA
-* HPKE
+* ECDH
 * AES-128-GCM
 
 ## Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm

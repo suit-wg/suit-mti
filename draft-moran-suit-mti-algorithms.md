@@ -1,7 +1,7 @@
 ---
 title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
-docname: draft-moran-suit-mti-02
+docname: draft-ietf-suit-mti-00
 category: std
 
 area: Security
@@ -32,6 +32,11 @@ author:
       name: Brendan Moran
       organization: Arm Limited
       email: brendan.moran.ietf@gmail.com
+ -
+      ins: Ø. Rønningstad
+      name: Øyvind Rønningstad
+      organization: Nordic Semiconductor
+      email: oyvind.ronningstad@gmail.com
 
 normative:
   RFC8152:
@@ -140,7 +145,7 @@ This profile requires the following algorithms:
 * HPKE
 * AES-128-GCM
 
-## Current Asymmetric MTI Profile 2: suit-sha256-ed256-hpke-a128gcm
+## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-hpke-a128gcm
 
 This profile requires the following algorithms:
 
@@ -180,9 +185,20 @@ Optional classical and PQC profiles are defined below.
 
 # Security Considerations
 
-TODO
+For the avoidance of doubt, there are scenarios where payload or manifest encryption are not required. In these scenarios, the encryption element of the selected profile is simply not used.
 
 # IANA Considerations
 
 TODO
 
+-- back
+
+# A. Full CDDL {#full-cddl}
+
+The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in protocols that share a ciphersuite with SUIT.
+
+To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in {{-cose, Section 1.4}}.
+
+~~~ CDDL
+{::include draft-ietf-suit-mti-algorithms.cddl}
+~~~

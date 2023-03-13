@@ -1,0 +1,123 @@
+SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128-ccm
+SUIT_COSE_tool_tweak /= suit-sha256-es256-hpke-a128gcm
+SUIT_COSE_tool_tweak /= suit-sha256-eddsa-hpke-a128gcm
+SUIT_COSE_tool_tweak /= suit-sha256-hsslms-hpke-a128gcm
+
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128CCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_HPKE_A128GCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_HPKE_A128GCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM
+
+suit-sha256-hmac-a128-ccm = [5, 12]
+suit-sha256-es256-hpke-a128gcm = [-7, 1]
+suit-sha256-eddsa-hpke-a128gcm = [-8, 1]
+suit-sha256-hsslms-hpke-a128gcm = [-46, 1]
+
+SUIT_COSE_Profile_HMAC_A128CCM = SUIT_COSE_Profile<5,12> .and COSE_Messages
+SUIT_COSE_Profile_ES256_HPKE_A128GCM = SUIT_COSE_Profile<-7,1> .and COSE_Messages
+SUIT_COSE_Profile_EDDSA_HPKE_A128GCM = SUIT_COSE_Profile<-8,1> .and COSE_Messages
+SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM = SUIT_COSE_Profile<-46,1> .and COSE_Messages
+
+SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
+
+SUIT_COSE_Messages<authid, encid> = SUIT_COSE_Untagged_Message<authid, encid> /
+    SUIT_COSE_Tagged_Message<authid, encid> 
+      
+SUIT_COSE_Untagged_Message<authid, encid> = SUIT_COSE_Sign<authid> /
+    SUIT_COSE_Sign1<authid> / SUIT_COSE_Encrypt<encid> / 
+    SUIT_COSE_Encrypt0<encid> / SUIT_COSE_Mac<authid> /
+    SUIT_COSE_Mac0<authid> 
+
+SUIT_COSE_Tagged_Message<authid, encid> = SUIT_COSE_Sign_Tagged<authid> /
+    SUIT_COSE_Sign1_Tagged<authid> / SUIT_COSE_Encrypt_Tagged<encid> /
+    SUIT_COSE_Encrypt0_Tagged<encid> / SUIT_COSE_Mac_Tagged<authid> /
+    SUIT_COSE_Mac0_Tagged<authid>
+
+; Note: This is not the same definition as is used in COSE.
+; It restricts a COSE header definition further without
+; repeating the COSE definition. It should be merged
+; with COSE by using the CDDL .and operator.
+SUIT_COSE_Profile_Headers<algid> = (
+    protected : bstr .cbor SUIT_COSE_alg_map<algid>,
+    unprotected : SUIT_COSE_header_map
+)
+SUIT_COSE_alg_map<algid> = {
+    1 => algid,
+    * int => any
+}
+
+SUIT_COSE_header_map = {
+    * int => any
+}
+
+SUIT_COSE_Sign_Tagged<authid> = #6.98(SUIT_COSE_Sign<authid>)
+
+
+SUIT_COSE_Sign<authid> = [
+    SUIT_COSE_Profile_Headers<authid>,
+    payload : bstr / nil,
+    signatures : [+ SUIT_COSE_Signature<authid>]
+]
+
+
+SUIT_COSE_Signature<authid> =  [
+    SUIT_COSE_Profile_Headers<authid>,      
+    signature : bstr
+]
+
+
+SUIT_COSE_Sign1_Tagged<authid> = #6.18(SUIT_COSE_Sign1<authid>)
+
+
+SUIT_COSE_Sign1<authid> = [
+    SUIT_COSE_Profile_Headers<authid>,
+    payload : bstr / nil,
+    signature : bstr
+]
+
+
+SUIT_COSE_Encrypt_Tagged<encid> = #6.96(SUIT_COSE_Encrypt<encid>)
+
+
+SUIT_COSE_Encrypt<encid> = [
+    SUIT_COSE_Profile_Headers<encid>,
+    ciphertext : bstr / nil,
+    recipients : [+SUIT_COSE_recipient<encid>]
+]
+
+
+SUIT_COSE_recipient<encid> = [    
+    SUIT_COSE_Profile_Headers<encid>,
+    ciphertext : bstr / nil,
+    ? recipients : [+SUIT_COSE_recipient<encid>]
+]
+
+
+SUIT_COSE_Encrypt0_Tagged<encid> = #6.16(SUIT_COSE_Encrypt0<encid>)
+
+
+SUIT_COSE_Encrypt0<encid> = [
+    SUIT_COSE_Profile_Headers<encid>,
+    ciphertext : bstr / nil,
+]
+
+
+SUIT_COSE_Mac_Tagged<authid> = #6.97(SUIT_COSE_Mac<authid>)
+
+
+SUIT_COSE_Mac<authid> = [
+   SUIT_COSE_Profile_Headers<authid>,      
+   payload : bstr / nil,
+   tag : bstr,
+   recipients :[+SUIT_COSE_recipient<authid>]
+]
+
+
+SUIT_COSE_Mac0_Tagged<authid> = #6.17(SUIT_COSE_Mac0<authid>)
+
+
+SUIT_COSE_Mac0<authid> = [
+   SUIT_COSE_Profile_Headers<authid>,      
+   payload : bstr / nil,
+   tag : bstr,
+]

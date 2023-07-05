@@ -17,7 +17,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-DRAFT = draft-moran-suit-mti-algorithms
+DRAFT = draft-ietf-suit-mti
 
 all: $(DRAFT).xml
 

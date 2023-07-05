@@ -1,7 +1,7 @@
 ---
 title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
-docname: draft-ietf-suit-mti-00
+docname: draft-ietf-suit-mti-01
 category: std
 
 area: Security
@@ -206,5 +206,5 @@ The following CDDL creates a subset of COSE for use with SUIT. Both tagged and u
 To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in {{-cose, Section 1.4}}.
 
 ~~~ CDDL
-{::include draft-moran-suit-mti-algorithms.cddl}
+{::include draft-ietf-suit-mti.cddl}
 ~~~

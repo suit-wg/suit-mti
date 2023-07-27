@@ -1,22 +1,24 @@
 SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128-ccm
 SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128gcm
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128gcm
-SUIT_COSE_tool_tweak /= suit-sha256-hsslms-hpke-a128gcm
+SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-chacha-poly
+SUIT_COSE_tool_tweak /= suit-sha256-hsslms-ecdh-a128gcm
 
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128CCM
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128GCM
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA_POLY
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_ECDH_A128GCM
 
 suit-sha256-hmac-a128-ccm = [5, 12]
 suit-sha256-es256-ecdh-a128gcm = [-7, 1]
 suit-sha256-eddsa-ecdh-a128gcm = [-8, 1]
-suit-sha256-hsslms-hpke-a128gcm = [-46, 1]
+suit-sha256-hsslms-ecdh-a128gcm = [-46, 1]
 
 SUIT_COSE_Profile_HMAC_A128CCM = SUIT_COSE_Profile<5,12> .and COSE_Messages
 SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile<-7,1> .and COSE_Messages
 SUIT_COSE_Profile_EDDSA_ECDH_A128GCM = SUIT_COSE_Profile<-8,1> .and COSE_Messages
-SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM = SUIT_COSE_Profile<-46,1> .and COSE_Messages
+SUIT_COSE_Profile_HSSLMS_ECDH_A128GCM = SUIT_COSE_Profile<-46,1> .and COSE_Messages
 
 SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
 

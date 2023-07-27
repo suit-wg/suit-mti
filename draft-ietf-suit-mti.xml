@@ -20,7 +20,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-suit-mti-01" category="std" tocInclude="true" sortRefs="true" symRefs="true">
+<rfc ipr="trust200902" docName="draft-ietf-suit-mti-02" category="std" tocInclude="true" sortRefs="true" symRefs="true">
   <front>
     <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests</title>
 
@@ -37,13 +37,13 @@
       </address>
     </author>
     <author initials="A." surname="Tsukamoto" fullname="Akira Tsukamoto">
-      <organization></organization>
+      <organization>ALAXALA Networks Corp.</organization>
       <address>
-        <email>akira.tsukamoto@gmail.com</email>
+        <email>akira.tsukamoto@alaxala.com</email>
       </address>
     </author>
 
-    <date year="2023" month="July" day="05"/>
+    <date year="2023" month="July" day="28"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -97,151 +97,121 @@
   <t>Encryption Algorithms</t>
 </list></t>
 
-<t>The COSE algorithm ID <xref target="IANA-COSE"/> for each algorithm is given in parentheses.</t>
-
-<section anchor="digest-algorithms"><name>Digest Algorithms</name>
-
-<t><list style="symbols">
-  <t>SHA-256 (-16)</t>
-</list></t>
-
-</section>
-<section anchor="authentication-algorithms"><name>Authentication Algorithms</name>
-
-<t>Authentication Algorithms are divided into three groups: Symmetric, Asymmetric Classical, and Asymmetric Post-Quantum</t>
-
-<section anchor="symmetric-authentication-algorithm"><name>Symmetric Authentication Algorithm</name>
-
-<t><list style="symbols">
-  <t>HMAC-256 (5)</t>
-</list></t>
-
-</section>
-<section anchor="asymmetric-classical-authentication-algorithms"><name>Asymmetric Classical Authentication Algorithms</name>
-
-<t><list style="symbols">
-  <t>ES256 (-7)</t>
-  <t>EdDSA (-8)</t>
-</list></t>
-
-</section>
-<section anchor="asymmetric-post-quantum-authentication-algorithms"><name>Asymmetric Post-Quantum Authentication Algorithms</name>
-
-<t><list style="symbols">
-  <t>HSS-LMS (-46) <xref target="RFC8778"/></t>
-</list></t>
-
-</section>
-</section>
-<section anchor="key-exchange-algorithms"><name>Key Exchange Algorithms</name>
-
-<t>Key Exchange Algorithms are divided into two groups: Symmetric, and Asymmetric Classical</t>
-
-<section anchor="symmetric"><name>Symmetric</name>
-
-<t><list style="symbols">
-  <t>A128 (-3)</t>
-</list></t>
-
-</section>
-<section anchor="asymmetric-classical"><name>Asymmetric Classical</name>
-
-<t><list style="symbols">
-  <t>COSE HPKE (TBD)</t>
-  <t>ECDH-ES + HKDF-256 (-25)</t>
-</list></t>
-
-</section>
-</section>
-<section anchor="encryption-algorithms"><name>Encryption Algorithms</name>
-
-<t><list style="symbols">
-  <t>A128GCM (1)</t>
-</list></t>
-
-</section>
 </section>
 <section anchor="profiles"><name>Profiles</name>
 
 <t>Recognized profiles are defined below.</t>
 
-<section anchor="symmetric-mti-profile-suit-sha256-hmac-a128-ccm"><name> Symmetric MTI profile: suit-sha256-hmac-a128-ccm</name>
+<section anchor="suit-sha256-hmac-a128-ccm"><name> Symmetric MTI profile: suit-sha256-hmac-a128-ccm</name>
 
-<t>This profile requires the following algorithms:</t>
-
-<t><list style="symbols">
-  <t>SHA-256</t>
-  <t>HMAC-256</t>
-  <t>A128W Key Wrap</t>
-  <t>AES-CCM-16-128-128</t>
-</list></t>
-
-</section>
-<section anchor="current-asymmetric-mti-profile-1-suit-sha256-es256-ecdh-a128gcm"><name>Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm</name>
-
-<t>This profile requires the following algorithms:</t>
-
-<t><list style="symbols">
-  <t>SHA-256</t>
-  <t>ES256</t>
-  <t>ECDH</t>
-  <t>AES-128-GCM</t>
-</list></t>
+<texttable>
+      <ttcol align='left'>Algorithm Type</ttcol>
+      <ttcol align='left'>Algorithm</ttcol>
+      <ttcol align='left'>COSE Key</ttcol>
+      <c>Digest</c>
+      <c>SHA-256</c>
+      <c>-16</c>
+      <c>Authentication</c>
+      <c>HMAC-256</c>
+      <c>5</c>
+      <c>Key Exchange</c>
+      <c>A128W Key Wrap</c>
+      <c>-3</c>
+      <c>Encryption</c>
+      <c>AES-CCM-16-128-128</c>
+      <c>30</c>
+</texttable>
 
 </section>
-<section anchor="current-asymmetric-mti-profile-2-suit-sha256-eddsa-ecdh-a128gcm"><name>Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128gcm</name>
+<section anchor="suit-sha256-es256-ecdh-a128gcm"><name>Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm</name>
 
-<t>This profile requires the following algorithms:</t>
-
-<t><list style="symbols">
-  <t>SHA-256</t>
-  <t>EDDSA</t>
-  <t>ECDH</t>
-  <t>AES-128-GCM</t>
-</list></t>
-
-</section>
-<section anchor="future-asymmetric-mti-profile-suit-sha256-hsslms-hpke-a128gcm"><name>Future Asymmetric MTI Profile: suit-sha256-hsslms-hpke-a128gcm</name>
-
-<t>This profile requires the following algorithms:</t>
-
-<t><list style="symbols">
-  <t>SHA-256</t>
-  <t>HSS-LMS</t>
-  <t>HPKE</t>
-  <t>AES-128-GCM</t>
-</list></t>
+<texttable>
+      <ttcol align='left'>Algorithm Type</ttcol>
+      <ttcol align='left'>Algorithm</ttcol>
+      <ttcol align='left'>COSE Key</ttcol>
+      <c>Digest</c>
+      <c>SHA-256</c>
+      <c>-16</c>
+      <c>Authentication</c>
+      <c>ES256</c>
+      <c>-7</c>
+      <c>Key Exchange</c>
+      <c>ECDH-ES + HKDF-256</c>
+      <c>-25</c>
+      <c>Encryption</c>
+      <c>A128GCM</c>
+      <c>1</c>
+</texttable>
 
 </section>
-<section anchor="other-profiles"><name>Other Profiles:</name>
+<section anchor="suit-sha256-eddsa-ecdh-a128gcm"><name>Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128gcm</name>
 
-<t>Optional classical and PQC profiles are defined below.</t>
-
-<t><list style="symbols">
-  <t>suit-sha256-eddsa-ecdh-es-chacha-poly
-  <list style="symbols">
-      <t>SHA-256</t>
-      <t>EdDSA</t>
-      <t>ECDH-ES + HKDF-256</t>
-      <t>ChaCha20 + Poly1305</t>
-    </list></t>
-  <t>suit-sha256-falcon512-hpke-a128gcm
-  <list style="symbols">
-      <t>SHA-256</t>
-      <t>Falcon-512</t>
-      <t>HPKE</t>
-      <t>AES-128-GCM</t>
-    </list></t>
-  <t>suit-shake256-dilithium-kyber-a128gcm
-  <list style="symbols">
-      <t>SHAKE256</t>
-      <t>Crystals-Dilithium</t>
-      <t>Crystal-Kyber</t>
-      <t>AES-128GCM</t>
-    </list></t>
-</list></t>
+<texttable>
+      <ttcol align='left'>Algorithm Type</ttcol>
+      <ttcol align='left'>Algorithm</ttcol>
+      <ttcol align='left'>COSE Key</ttcol>
+      <c>Digest</c>
+      <c>SHA-256</c>
+      <c>-16</c>
+      <c>Authentication</c>
+      <c>EDDSA</c>
+      <c>-8</c>
+      <c>Key Exchange</c>
+      <c>ECDH-ES + HKDF-256</c>
+      <c>-25</c>
+      <c>Encryption</c>
+      <c>A128GCM</c>
+      <c>1</c>
+</texttable>
 
 </section>
+<section anchor="suit-sha256-eddsa-ecdh-chacha-poly"><name>Current Asymmetric MTI Profile 3: suit-sha256-eddsa-ecdh-chacha-poly</name>
+
+<texttable>
+      <ttcol align='left'>Algorithm Type</ttcol>
+      <ttcol align='left'>Algorithm</ttcol>
+      <ttcol align='left'>COSE Key</ttcol>
+      <c>Digest</c>
+      <c>SHA-256</c>
+      <c>-16</c>
+      <c>Authentication</c>
+      <c>EDDSA</c>
+      <c>-8</c>
+      <c>Key Exchange</c>
+      <c>ECDH-ES + HKDF-256</c>
+      <c>-25</c>
+      <c>Encryption</c>
+      <c>ChaCha20/Poly1305</c>
+      <c>24</c>
+</texttable>
+
+</section>
+<section anchor="suit-sha256-hsslms-ecdh-a128gcm"><name>Future Asymmetric MTI Profile 1: suit-sha256-hsslms-ecdh-a128gcm</name>
+
+<texttable>
+      <ttcol align='left'>Algorithm Type</ttcol>
+      <ttcol align='left'>Algorithm</ttcol>
+      <ttcol align='left'>COSE Key</ttcol>
+      <c>Digest</c>
+      <c>SHA-256</c>
+      <c>-16</c>
+      <c>Authentication</c>
+      <c>HSS-LMS</c>
+      <c>-46</c>
+      <c>Key Exchange</c>
+      <c>ECDH-ES + HKDF-256</c>
+      <c>-25</c>
+      <c>Encryption</c>
+      <c>A128GCM</c>
+      <c>1</c>
+</texttable>
+
+</section>
+</section>
+<section anchor="reporting-profiles"><name>Reporting Profiles</name>
+
+<t>When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-ecdh-a128gcm. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-ecdsa-ecdh-a128gcm.</t>
+
 </section>
 <section anchor="security-considerations"><name>Security Considerations</name>
 
@@ -250,7 +220,56 @@
 </section>
 <section anchor="iana-considerations"><name>IANA Considerations</name>
 
-<t>TODO</t>
+<t>IANA is requested to create a page for COSE Algorithm Profiles within
+the category for Software Update for the Internet of Things (SUIT)</t>
+
+<t>IANA is also requested to create a registry for COSE Alforithm Profiles
+within this page. The initial content of the registry is:</t>
+
+<texttable>
+      <ttcol align='left'>Profile</ttcol>
+      <ttcol align='left'>Status</ttcol>
+      <ttcol align='left'>Digest</ttcol>
+      <ttcol align='left'>Authentication</ttcol>
+      <ttcol align='left'>Key Exchange</ttcol>
+      <ttcol align='left'>Encryption</ttcol>
+      <ttcol align='left'>Descriptor Array</ttcol>
+      <ttcol align='left'>Reference</ttcol>
+      <c>suit-sha256-hmac-a128-ccm</c>
+      <c>MANDATORY</c>
+      <c>-16</c>
+      <c>5</c>
+      <c>-3</c>
+      <c>12</c>
+      <c>[-16, 5, -3, 12]</c>
+      <c><xref target="suit-sha256-hmac-a128-ccm"/></c>
+      <c>suit-sha256-es256-ecdh-a128gcm</c>
+      <c>MANDATORY</c>
+      <c>-16</c>
+      <c>-7</c>
+      <c>-25</c>
+      <c>1</c>
+      <c>[-16, -7, -3, 1]</c>
+      <c><xref target="suit-sha256-es256-ecdh-a128gcm"/></c>
+      <c>suit-sha256-eddsa-ecdh-a128gcm</c>
+      <c>MANDATORY</c>
+      <c>-16</c>
+      <c>-8</c>
+      <c>-25</c>
+      <c>1</c>
+      <c>[-16, -8, -3, 1]</c>
+      <c><xref target="suit-sha256-eddsa-ecdh-a128gcm"/></c>
+      <c>suit-sha256-hsslms-ecdh-a128gcm</c>
+      <c>MANDATORY</c>
+      <c>-16</c>
+      <c>-8</c>
+      <c>-25</c>
+      <c>1</c>
+      <c>[-16, -46, -3, 1]</c>
+      <c><xref target="suit-sha256-hsslms-ecdh-a128gcm"/></c>
+</texttable>
+
+<t>New entries to this registry require standards action.</t>
 
 <t>-- back</t>
 
@@ -265,22 +284,24 @@
 SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128-ccm
 SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128gcm
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128gcm
-SUIT_COSE_tool_tweak /= suit-sha256-hsslms-hpke-a128gcm
+SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-chacha-poly
+SUIT_COSE_tool_tweak /= suit-sha256-hsslms-ecdh-a128gcm
 
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128CCM
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128GCM
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA_POLY
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_ECDH_A128GCM
 
 suit-sha256-hmac-a128-ccm = [5, 12]
 suit-sha256-es256-ecdh-a128gcm = [-7, 1]
 suit-sha256-eddsa-ecdh-a128gcm = [-8, 1]
-suit-sha256-hsslms-hpke-a128gcm = [-46, 1]
+suit-sha256-hsslms-ecdh-a128gcm = [-46, 1]
 
 SUIT_COSE_Profile_HMAC_A128CCM = SUIT_COSE_Profile<5,12> .and COSE_Messages
 SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile<-7,1> .and COSE_Messages
 SUIT_COSE_Profile_EDDSA_ECDH_A128GCM = SUIT_COSE_Profile<-8,1> .and COSE_Messages
-SUIT_COSE_Profile_HSSLMS_HPKE_A128GCM = SUIT_COSE_Profile<-46,1> .and COSE_Messages
+SUIT_COSE_Profile_HSSLMS_ECDH_A128GCM = SUIT_COSE_Profile<-46,1> .and COSE_Messages
 
 SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
 
@@ -505,68 +526,73 @@ SUIT_COSE_Mac0<authid> = [
   </back>
 
 <!-- ##markdown-source:
-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
-zOt12tf7yw18T1c2739mMW8MxyEAAA==
+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
 
 -->
 

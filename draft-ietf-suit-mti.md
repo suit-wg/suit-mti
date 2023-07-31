@@ -47,6 +47,8 @@ normative:
   RFC8152:
   RFC8778:
   RFC9052: cose
+  I-D.ietf-cose-aes-ctr-and-cbc:
+  I-D.ietf-suit-firmware-encryption:
 
 informative:
   I-D.ietf-suit-manifest:
@@ -64,10 +66,10 @@ This document specifies algorithm profiles for SUIT manifest parsers and authors
 
 #  Introduction
 
-Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define four choices of MTI profile specifically for constrained node software update. These profiles are:
+Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of MTI profile specifically for constrained node software update. These profiles are:
 
 * One Symmetric MTI profile
-* Two "Current" Asymmetric MTI profiles
+* Three "Current" Asymmetric MTI profiles
 * One "Future" Asymmetric MTI profile
 
 At least one MTI algorithm in each category MUST be FIPS qualified.
@@ -93,32 +95,32 @@ The algorithms that form a part of the profiles defined in this document are gro
 
 Recognized profiles are defined below.
 
-## Symmetric MTI profile: suit-sha256-hmac-a128-ccm {#suit-sha256-hmac-a128-ccm}
+## Symmetric MTI profile: suit-sha256-hmac-a128-a128ctr {#suit-sha256-hmac-a128-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
 | Authentication | HMAC-256 | 5 |
 | Key Exchange | A128W Key Wrap | -3 |
-| Encryption | AES-CCM-16-128-128 | 30 |
+| Encryption | A128CTR | -65534 |
 
-## Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm {#suit-sha256-es256-ecdh-a128gcm}
+## Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr {#suit-sha256-es256-ecdh-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
 | Authentication | ES256 | -7 |
 | Key Exchange | ECDH-ES + HKDF-256 | -25 |
-| Encryption | A128GCM | 1 |
+| Encryption | A128CTR | -65534 |
 
-## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128gcm {#suit-sha256-eddsa-ecdh-a128gcm}
+## Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr {#suit-sha256-eddsa-ecdh-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
 | Authentication | EDDSA | -8 |
 | Key Exchange | ECDH-ES + HKDF-256 | -25 |
-| Encryption | A128GCM | 1 |
+| Encryption | A128CTR | -65534 |
 
 ## Current Asymmetric MTI Profile 3: suit-sha256-eddsa-ecdh-chacha-poly {#suit-sha256-eddsa-ecdh-chacha-poly}
 
@@ -129,22 +131,31 @@ Recognized profiles are defined below.
 | Key Exchange | ECDH-ES + HKDF-256 | -25 |
 | Encryption | ChaCha20/Poly1305 | 24 |
 
-## Future Asymmetric MTI Profile 1: suit-sha256-hsslms-ecdh-a128gcm {#suit-sha256-hsslms-ecdh-a128gcm}
+## Future Asymmetric MTI Profile 1: suit-sha256-hsslms-ecdh-a128ctr {#suit-sha256-hsslms-ecdh-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
 | Authentication | HSS-LMS | -46 |
 | Key Exchange | ECDH-ES + HKDF-256 | -25 |
-| Encryption | A128GCM | 1 |
+| Encryption | A128CTR | -65534 |
 
 # Reporting Profiles
 
-When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-ecdh-a128gcm. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-ecdsa-ecdh-a128gcm.
+When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-ecdh-a128ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-ecdsa-ecdh-a128ctr.
 
 # Security Considerations
 
 For the avoidance of doubt, there are scenarios where payload or manifest encryption are not required. In these scenarios, the encryption element of the selected profile is simply not used.
+
+AES-CTR mode is specified, see {{I-D.ietf-cose-aes-ctr-and-cbc}}. All of the AES-CTR security considerations in {{I-D.ietf-cose-aes-ctr-and-cbc}} apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:
+
+* Streaming decryption must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.
+* Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.
+* There are no chosen plaintext attacks: the plaintext is authenticated prior to encryption.
+* Content Encryption Keys MUST be used to encrypt only once. See {{I-D.ietf-suit-firmware-encryption}}.
+
+As a result of these mitigating circumstances, AES-CTR is the most appropriate cipher for typical software/firmware delivery scenarios.
 
 # IANA Considerations
 
@@ -156,10 +167,11 @@ within this page. The initial content of the registry is:
 
 | Profile | Status | Digest | Authentication | Key Exchange | Encryption | Descriptor Array | Reference
 |====|
-| suit-sha256-hmac-a128-ccm       | MANDATORY | -16 | 5  | -3  | 12 | \[-16, 5, -3, 12\]  | {{suit-sha256-hmac-a128-ccm}}
-| suit-sha256-es256-ecdh-a128gcm  | MANDATORY | -16 | -7 | -25 | 1  | \[-16, -7, -3, 1\]  | {{suit-sha256-es256-ecdh-a128gcm}}
-| suit-sha256-eddsa-ecdh-a128gcm  | MANDATORY | -16 | -8 | -25 | 1  | \[-16, -8, -3, 1\]  | {{suit-sha256-eddsa-ecdh-a128gcm}}
-| suit-sha256-hsslms-ecdh-a128gcm | MANDATORY | -16 | -8 | -25 | 1  | \[-16, -46, -3, 1\] | {{suit-sha256-hsslms-ecdh-a128gcm}}
+| suit-sha256-hmac-a128-a128ctr   | MANDATORY | -16 | 5  | -3  | -65534 | \[-16, 5, -3, -65534\]  | {{suit-sha256-hmac-a128-a128ctr}}
+| suit-sha256-es256-ecdh-a128ctr  | MANDATORY | -16 | -7 | -25 | -65534  | \[-16, -7, -25, -65534\]  | {{suit-sha256-es256-ecdh-a128ctr}}
+| suit-sha256-eddsa-ecdh-a128ctr  | MANDATORY | -16 | -8 | -25 | -65534  | \[-16, -8, -25, -65534\]  | {{suit-sha256-eddsa-ecdh-a128ctr}}
+| suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8 | -25 | 24 | \[-16, -8, -25, 24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
+| suit-sha256-hsslms-ecdh-a128ctr | MANDATORY | -16 | -46 | -25 | -65534  | \[-16, -46, -25, -65534\] | {{suit-sha256-hsslms-ecdh-a128ctr}}
 
 New entries to this registry require standards action.
 

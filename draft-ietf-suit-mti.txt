@@ -5,10 +5,10 @@
 SUIT                                                            B. Moran
 Internet-Draft                                               Arm Limited
 Intended status: Standards Track                          Ø. Rønningstad
-Expires: 1 February 2024                            Nordic Semiconductor
+Expires: 4 March 2024                               Nordic Semiconductor
                                                             A. Tsukamoto
                                                   ALAXALA Networks Corp.
-                                                            31 July 2023
+                                                        1 September 2023
 
 
 Mandatory-to-Implement Algorithms for Authors and Recipients of Software
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 February 2024.
+   This Internet-Draft will expire on 4 March 2024.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 1]
+Moran, et al.             Expires 4 March 2024                  [Page 1]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 2]
+Moran, et al.             Expires 4 March 2024                  [Page 2]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
    Because SUIT presents an asymmetric communication profile, with
@@ -165,9 +165,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 3]
+Moran, et al.             Expires 4 March 2024                  [Page 3]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
 3.2.  Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr
@@ -221,9 +221,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 4]
+Moran, et al.             Expires 4 March 2024                  [Page 4]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
 3.5.  Future Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr
@@ -277,9 +277,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 5]
+Moran, et al.             Expires 4 March 2024                  [Page 5]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
    *  Content Encryption Keys MUST be used to encrypt only once.  See
@@ -333,9 +333,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 6]
+Moran, et al.             Expires 4 March 2024                  [Page 6]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
 7.  A.  Full CDDL
@@ -349,29 +349,29 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
    it.  The COSE CDDL can be obtained by following the directions in
    [RFC9052], Section 1.4.
 
-   SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128-ccm
-   SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128gcm
-   SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128gcm
+   SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128kw-a128ctr
+   SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128ctr
+   SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128ctr
    SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-chacha-poly
-   SUIT_COSE_tool_tweak /= suit-sha256-hsslms-ecdh-a128gcm
+   SUIT_COSE_tool_tweak /= suit-sha256-hsslms-a256kw-a256ctr
 
-   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128CCM
-   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
-   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128GCM
+   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128KW_A128CTR
+   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128CTR
+   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128CTR
    SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304
-   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_ECDH_A128GCM
+   SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR
 
-   suit-sha256-hmac-a128-ccm = [-16, 5, -3, -65534]
-   suit-sha256-es256-ecdh-a128gcm = [-16, -7, -25, -65534]
-   suit-sha256-eddsa-ecdh-a128gcm = [-16, -8, -25, -65534]
+   suit-sha256-hmac-a128kw-a128ctr = [-16, 5, -3, -65534]
+   suit-sha256-es256-ecdh-a128ctr = [-16, -7, -25, -65534]
+   suit-sha256-eddsa-ecdh-a128ctr = [-16, -8, -25, -65534]
    suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -25, 24]
-   suit-sha256-hsslms-ecdh-a128gcm = [-16, -46, -25, -65534]
+   suit-sha256-hsslms-a256kw-a256ctr = [-16, -46, -5, -65532]
 
-   SUIT_COSE_Profile_HMAC_A128CTR = SUIT_COSE_Profile<5,-65534> .and COSE_Messages
+   SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile<5, -65534> .and COSE_Messages
    SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile<-7,-65534> .and COSE_Messages
    SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile<-8,-65534> .and COSE_Messages
    SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = SUIT_COSE_Profile<-8,24> .and COSE_Messages
-   SUIT_COSE_Profile_HSSLMS_ECDH_A128CTR = SUIT_COSE_Profile<-46,-65534> .and COSE_Messages
+   SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = SUIT_COSE_Profile<-46,-65532> .and COSE_Messages
 
    SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
 
@@ -389,9 +389,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 7]
+Moran, et al.             Expires 4 March 2024                  [Page 7]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
        SUIT_COSE_Mac0_Tagged<authid>
@@ -445,9 +445,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 8]
+Moran, et al.             Expires 4 March 2024                  [Page 8]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
    SUIT_COSE_Encrypt<encid> = [
@@ -501,9 +501,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024                [Page 9]
+Moran, et al.             Expires 4 March 2024                  [Page 9]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
    [I-D.ietf-cose-aes-ctr-and-cbc]
@@ -517,9 +517,9 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
               Tschofenig, H., Housley, R., Moran, B., Brown, D., and K.
               Takayama, "Encrypted Payloads in SUIT Manifests", Work in
               Progress, Internet-Draft, draft-ietf-suit-firmware-
-              encryption-13, 10 July 2023,
+              encryption-14, 26 August 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-suit-
-              firmware-encryption-13>.
+              firmware-encryption-14>.
 
    [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
               RFC 8152, DOI 10.17487/RFC8152, July 2017,
@@ -557,9 +557,9 @@ Authors' Addresses
 
 
 
-Moran, et al.            Expires 1 February 2024               [Page 10]
+Moran, et al.             Expires 4 March 2024                 [Page 10]
 
-Internet-Draft             MTI SUIT Algorithms                 July 2023
+Internet-Draft             MTI SUIT Algorithms            September 2023
 
 
    Email: brendan.moran.ietf@gmail.com
@@ -613,4 +613,4 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
 
-Moran, et al.            Expires 1 February 2024               [Page 11]
+Moran, et al.             Expires 4 March 2024                 [Page 11]

@@ -95,13 +95,13 @@ The algorithms that form a part of the profiles defined in this document are gro
 
 Recognized profiles are defined below.
 
-## Symmetric MTI profile: suit-sha256-hmac-a128-a128ctr {#suit-sha256-hmac-a128-a128ctr}
+## Symmetric MTI profile: suit-sha256-hmac-a128kw-a128ctr {#suit-sha256-hmac-a128kw-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
 | Authentication | HMAC-256 | 5 |
-| Key Exchange | A128W Key Wrap | -3 |
+| Key Exchange | A128KW Key Wrap | -3 |
 | Encryption | A128CTR | -65534 |
 
 ## Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr {#suit-sha256-es256-ecdh-a128ctr}
@@ -131,14 +131,14 @@ Recognized profiles are defined below.
 | Key Exchange | ECDH-ES + HKDF-256 | -25 |
 | Encryption | ChaCha20/Poly1305 | 24 |
 
-## Future Asymmetric MTI Profile 1: suit-sha256-hsslms-ecdh-a128ctr {#suit-sha256-hsslms-ecdh-a128ctr}
+## Future Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr {#suit-sha256-hsslms-a256kw-a256ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
 | Authentication | HSS-LMS | -46 |
-| Key Exchange | ECDH-ES + HKDF-256 | -25 |
-| Encryption | A128CTR | -65534 |
+| Key Exchange | A256KW | -5 |
+| Encryption | A256CTR | -65532 |
 
 # Reporting Profiles
 
@@ -165,13 +165,13 @@ the category for Software Update for the Internet of Things (SUIT)
 IANA is also requested to create a registry for COSE Alforithm Profiles
 within this page. The initial content of the registry is:
 
-| Profile | Status | Digest | Authentication | Key Exchange | Encryption | Descriptor Array | Reference
+| Profile | Status | Digest | Auth | Key Exchange | Encryption | Descriptor Array | Reference
 |====|
-| suit-sha256-hmac-a128-a128ctr   | MANDATORY | -16 | 5  | -3  | -65534 | \[-16, 5, -3, -65534\]  | {{suit-sha256-hmac-a128-a128ctr}}
-| suit-sha256-es256-ecdh-a128ctr  | MANDATORY | -16 | -7 | -25 | -65534  | \[-16, -7, -25, -65534\]  | {{suit-sha256-es256-ecdh-a128ctr}}
-| suit-sha256-eddsa-ecdh-a128ctr  | MANDATORY | -16 | -8 | -25 | -65534  | \[-16, -8, -25, -65534\]  | {{suit-sha256-eddsa-ecdh-a128ctr}}
-| suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8 | -25 | 24 | \[-16, -8, -25, 24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
-| suit-sha256-hsslms-ecdh-a128ctr | MANDATORY | -16 | -46 | -25 | -65534  | \[-16, -46, -25, -65534\] | {{suit-sha256-hsslms-ecdh-a128ctr}}
+| suit-sha256-hmac-a128kw-a128ctr    | MANDATORY | -16 | 5   | -3  | -65534 | \[-16,   5,  -3, -65534\] | {{suit-sha256-hmac-a128kw-a128ctr}}
+| suit-sha256-es256-ecdh-a128ctr     | MANDATORY | -16 | -7  | -25 | -65534 | \[-16,  -7, -25, -65534\] | {{suit-sha256-es256-ecdh-a128ctr}}
+| suit-sha256-eddsa-ecdh-a128ctr     | MANDATORY | -16 | -8  | -25 | -65534 | \[-16,  -8, -25, -65534\] | {{suit-sha256-eddsa-ecdh-a128ctr}}
+| suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8  | -25 | 24     | \[-16,  -8, -25,     24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
+| suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 
 New entries to this registry require standards action.
 

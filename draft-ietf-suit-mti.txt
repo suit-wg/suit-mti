@@ -72,7 +72,8 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Algorithms  . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     3.1.   Symmetric MTI profile: suit-sha256-hmac-a128-a128ctr . .   3
+     3.1.   Symmetric MTI profile:
+           suit-sha256-hmac-a128kw-a128ctr . . . . . . . . . . . . .   3
      3.2.  Current Asymmetric MTI Profile 1:
            suit-sha256-es256-ecdh-a128ctr  . . . . . . . . . . . . .   4
      3.3.  Current Asymmetric MTI Profile 2:
@@ -80,7 +81,7 @@ Table of Contents
      3.4.  Current Asymmetric MTI Profile 3:
            suit-sha256-eddsa-ecdh-chacha-poly  . . . . . . . . . . .   4
      3.5.  Future Asymmetric MTI Profile 1:
-           suit-sha256-hsslms-ecdh-a128ctr . . . . . . . . . . . . .   5
+           suit-sha256-hsslms-a256kw-a256ctr . . . . . . . . . . . .   5
    4.  Reporting Profiles  . . . . . . . . . . . . . . . . . . . . .   5
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
@@ -105,7 +106,6 @@ Table of Contents
    *  One "Future" Asymmetric MTI profile
 
    At least one MTI algorithm in each category MUST be FIPS qualified.
-
 
 
 
@@ -145,21 +145,21 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
 
    Recognized profiles are defined below.
 
-3.1.   Symmetric MTI profile: suit-sha256-hmac-a128-a128ctr
+3.1.   Symmetric MTI profile: suit-sha256-hmac-a128kw-a128ctr
 
-              +================+================+==========+
-              | Algorithm Type | Algorithm      | COSE Key |
-              +================+================+==========+
-              | Digest         | SHA-256        | -16      |
-              +----------------+----------------+----------+
-              | Authentication | HMAC-256       | 5        |
-              +----------------+----------------+----------+
-              | Key Exchange   | A128W Key Wrap | -3       |
-              +----------------+----------------+----------+
-              | Encryption     | A128CTR        | -65534   |
-              +----------------+----------------+----------+
+              +================+=================+==========+
+              | Algorithm Type | Algorithm       | COSE Key |
+              +================+=================+==========+
+              | Digest         | SHA-256         | -16      |
+              +----------------+-----------------+----------+
+              | Authentication | HMAC-256        | 5        |
+              +----------------+-----------------+----------+
+              | Key Exchange   | A128KW Key Wrap | -3       |
+              +----------------+-----------------+----------+
+              | Encryption     | A128CTR         | -65534   |
+              +----------------+-----------------+----------+
 
-                                 Table 1
+                                  Table 1
 
 
 
@@ -226,21 +226,21 @@ Moran, et al.            Expires 1 February 2024                [Page 4]
 Internet-Draft             MTI SUIT Algorithms                 July 2023
 
 
-3.5.  Future Asymmetric MTI Profile 1: suit-sha256-hsslms-ecdh-a128ctr
+3.5.  Future Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr
 
-            +================+====================+==========+
-            | Algorithm Type | Algorithm          | COSE Key |
-            +================+====================+==========+
-            | Digest         | SHA-256            | -16      |
-            +----------------+--------------------+----------+
-            | Authentication | HSS-LMS            | -46      |
-            +----------------+--------------------+----------+
-            | Key Exchange   | ECDH-ES + HKDF-256 | -25      |
-            +----------------+--------------------+----------+
-            | Encryption     | A128CTR            | -65534   |
-            +----------------+--------------------+----------+
+                 +================+===========+==========+
+                 | Algorithm Type | Algorithm | COSE Key |
+                 +================+===========+==========+
+                 | Digest         | SHA-256   | -16      |
+                 +----------------+-----------+----------+
+                 | Authentication | HSS-LMS   | -46      |
+                 +----------------+-----------+----------+
+                 | Key Exchange   | A256KW    | -5       |
+                 +----------------+-----------+----------+
+                 | Encryption     | A256CTR   | -65532   |
+                 +----------------+-----------+----------+
 
-                                 Table 5
+                                  Table 5
 
 4.  Reporting Profiles
 
@@ -296,37 +296,37 @@ Internet-Draft             MTI SUIT Algorithms                 July 2023
    IANA is also requested to create a registry for COSE Alforithm
    Profiles within this page.  The initial content of the registry is:
 
-   +=============+=========+======+==============+========+==========+==========+=========+
-   |Profile      |Status   |Digest|Authentication|Key     |Encryption|Descriptor|Reference|
-   |             |         |      |              |Exchange|          |Array     |         |
-   +=============+=========+======+==============+========+==========+==========+=========+
-   |suit-sha256- |MANDATORY|-16   |5             |-3      |-65534    |[-16, 5,  |Section  |
-   |hmac-        |         |      |              |        |          |-3,       |3.1      |
-   |a128-a128ctr |         |      |              |        |          |-65534]   |         |
-   +-------------+---------+------+--------------+--------+----------+----------+---------+
-   |suit-        |MANDATORY|-16   |-7            |-25     |-65534    |[-16, -7, |Section  |
-   |sha256-es256-|         |      |              |        |          |-25,      |3.2      |
-   |ecdh-a128ctr |         |      |              |        |          |-65534]   |         |
-   +-------------+---------+------+--------------+--------+----------+----------+---------+
-   |suit-sha256- |MANDATORY|-16   |-8            |-25     |-65534    |[-16, -8, |Section  |
-   |eddsa-ecdh-  |         |      |              |        |          |-25,      |3.3      |
-   |a128ctr      |         |      |              |        |          |-65534]   |         |
-   +-------------+---------+------+--------------+--------+----------+----------+---------+
-   |suit-sha256- |MANDATORY|-16   |-8            |-25     |24        |[-16, -8, |Section  |
-   |eddsa-ecdh-  |         |      |              |        |          |-25, 24]  |3.4      |
-   |chacha-poly  |         |      |              |        |          |          |         |
-   +-------------+---------+------+--------------+--------+----------+----------+---------+
-   |suit-sha256- |MANDATORY|-16   |-46           |-25     |-65534    |[-16, -46,|Section  |
-   |hsslms-ecdh- |         |      |              |        |          |-25,      |3.5      |
-   |a128ctr      |         |      |              |        |          |-65534]   |         |
-   +-------------+---------+------+--------------+--------+----------+----------+---------+
+   +=============+=========+======+====+========+==========+==========+=========+
+   |Profile      |Status   |Digest|Auth|Key     |Encryption|Descriptor|Reference|
+   |             |         |      |    |Exchange|          |Array     |         |
+   +=============+=========+======+====+========+==========+==========+=========+
+   |suit-sha256- |MANDATORY|-16   |5   |-3      |-65534    |[-16, 5,  |Section  |
+   |hmac-a128kw- |         |      |    |        |          |-3,       |3.1      |
+   |a128ctr      |         |      |    |        |          |-65534]   |         |
+   +-------------+---------+------+----+--------+----------+----------+---------+
+   |suit-        |MANDATORY|-16   |-7  |-25     |-65534    |[-16, -7, |Section  |
+   |sha256-es256-|         |      |    |        |          |-25,      |3.2      |
+   |ecdh-a128ctr |         |      |    |        |          |-65534]   |         |
+   +-------------+---------+------+----+--------+----------+----------+---------+
+   |suit-sha256- |MANDATORY|-16   |-8  |-25     |-65534    |[-16, -8, |Section  |
+   |eddsa-ecdh-  |         |      |    |        |          |-25,      |3.3      |
+   |a128ctr      |         |      |    |        |          |-65534]   |         |
+   +-------------+---------+------+----+--------+----------+----------+---------+
+   |suit-sha256- |MANDATORY|-16   |-8  |-25     |24        |[-16, -8, |Section  |
+   |eddsa-ecdh-  |         |      |    |        |          |-25, 24]  |3.4      |
+   |chacha-poly  |         |      |    |        |          |          |         |
+   +-------------+---------+------+----+--------+----------+----------+---------+
+   |suit-sha256- |MANDATORY|-16   |-46 |-5      |-65532    |[-16, -46,|Section  |
+   |hsslms-      |         |      |    |        |          |-5,       |3.5      |
+   |a256kw-      |         |      |    |        |          |-65532]   |         |
+   |a256ctr      |         |      |    |        |          |          |         |
+   +-------------+---------+------+----+--------+----------+----------+---------+
 
                                   Table 6
 
    New entries to this registry require standards action.
 
    -- back
-
 
 
 

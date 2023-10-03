@@ -142,7 +142,7 @@ Recognized profiles are defined below.
 
 # Reporting Profiles
 
-When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-ecdh-a128ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-ecdsa-ecdh-a128ctr.
+When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-eddsa-ecdh-a128ctr.
 
 # Security Considerations
 

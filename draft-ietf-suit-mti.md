@@ -183,7 +183,7 @@ within this page. The initial content of the registry is:
 | suit-sha256-hmac-a128kw-a128ctr    | MANDATORY | -16 | 5   | -3  | -65534 | \[-16,   5,  -3, -65534\] | {{suit-sha256-hmac-a128kw-a128ctr}}
 | suit-sha256-es256-ecdh-a128ctr     | MANDATORY | -16 | -7  | -25 | -65534 | \[-16,  -7, -25, -65534\] | {{suit-sha256-es256-ecdh-a128ctr}}
 | suit-sha256-eddsa-ecdh-a128ctr     | MANDATORY | -16 | -8  | -25 | -65534 | \[-16,  -8, -25, -65534\] | {{suit-sha256-eddsa-ecdh-a128ctr}}
-| suit-sha256-es256-ecdh-a128ctr     | MANDATORY | -16 | -7  | -25 | 1      | \[-16,  -7, -25,      1\] | {{suit-sha256-es256-ecdh-a128gcm}}
+| suit-sha256-es256-ecdh-a128gcm     | MANDATORY | -16 | -7  | -25 | 1      | \[-16,  -7, -25,      1\] | {{suit-sha256-es256-ecdh-a128gcm}}
 | suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8  | -25 | 24     | \[-16,  -8, -25,     24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
 | suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 

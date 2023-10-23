@@ -13,10 +13,10 @@
     " name="description">
 <meta content="xml2rfc 3.17.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-ietf-suit-mti-02" name="ietf.draft">
+<meta content="draft-ietf-suit-mti-03" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.17.1
-    Python 3.11.3
+    Python 3.11.5
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
@@ -26,7 +26,7 @@
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.28.2
-    setuptools 67.6.1
+    setuptools 68.1.2
     six 1.16.0
     wcwidth 0.2.6
 -->
@@ -1204,11 +1204,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">MTI SUIT Algorithms</td>
-<td class="right">September 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Moran, et al.</td>
-<td class="center">Expires 4 March 2024</td>
+<td class="center">Expires 25 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1218,15 +1218,15 @@ li > p:last-of-type:only-child {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">SUIT</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-suit-mti-02</dd>
+<dd class="internet-draft">draft-ietf-suit-mti-03</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-01" class="published">1 September 2023</time>
+<time datetime="2023-10-23" class="published">23 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-04">4 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-25">25 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1268,7 +1268,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1310,16 +1310,19 @@ li > p:last-of-type:only-child {
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-symmetric-mti-profile-suit-" class="internal xref">Symmetric MTI profile: suit-sha256-hmac-a128kw-a128ctr</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-current-asymmetric-mti-prof" class="internal xref">Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-current-constrained-asymmet" class="internal xref">Current Constrained Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-current-asymmetric-mti-profi" class="internal xref">Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-current-constrained-asymmetr" class="internal xref">Current Constrained Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-current-asymmetric-mti-profil" class="internal xref">Current Asymmetric MTI Profile 3: suit-sha256-eddsa-ecdh-chacha-poly</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-current-aead-asymmetric-mti" class="internal xref">Current AEAD Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-future-asymmetric-mti-profi" class="internal xref">Future Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-current-aead-asymmetric-mti-" class="internal xref">Current AEAD Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-chacha-poly</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
+                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-future-constrained-asymmetr" class="internal xref">Future Constrained Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr</a></p>
 </li>
             </ul>
 </li>
@@ -1362,16 +1365,19 @@ li > p:last-of-type:only-child {
 <ul class="normal">
 <li class="normal" id="section-1-2.1">One Symmetric MTI profile<a href="#section-1-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-2.2">Three "Current" Asymmetric MTI profiles<a href="#section-1-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-1-2.2">Two "Current" Constrained Asymmetric MTI profiles<a href="#section-1-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-2.3">One "Future" Asymmetric MTI profile<a href="#section-1-2.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-1-2.3">Two "Current" AEAD Asymmetric MTI profiles<a href="#section-1-2.3" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-1-2.4">One "Future" Constrained Asymmetric MTI profile<a href="#section-1-2.4" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-1-3">At least one MTI algorithm in each category MUST be FIPS qualified.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">Other use-cases of SUIT MAY define their own MTI algorithms.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-7">AEAD is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require streaming decryption, which necessitates a non-AEAD ecryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">Other use-cases of SUIT MAY define their own MTI algorithms.<a href="#section-1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="algorithms">
@@ -1439,8 +1445,8 @@ li > p:last-of-type:only-child {
 </div>
 <div id="suit-sha256-es256-ecdh-a128ctr">
 <section id="section-3.2">
-        <h3 id="name-current-asymmetric-mti-prof">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-current-asymmetric-mti-prof" class="section-name selfRef">Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr</a>
+        <h3 id="name-current-constrained-asymmet">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-current-constrained-asymmet" class="section-name selfRef">Current Constrained Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr</a>
         </h3>
 <table class="center" id="table-2">
           <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
@@ -1478,8 +1484,8 @@ li > p:last-of-type:only-child {
 </div>
 <div id="suit-sha256-eddsa-ecdh-a128ctr">
 <section id="section-3.3">
-        <h3 id="name-current-asymmetric-mti-profi">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-current-asymmetric-mti-profi" class="section-name selfRef">Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr</a>
+        <h3 id="name-current-constrained-asymmetr">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-current-constrained-asymmetr" class="section-name selfRef">Current Constrained Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr</a>
         </h3>
 <table class="center" id="table-3">
           <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
@@ -1515,13 +1521,52 @@ li > p:last-of-type:only-child {
         </table>
 </section>
 </div>
-<div id="suit-sha256-eddsa-ecdh-chacha-poly">
+<div id="suit-sha256-es256-ecdh-a128gcm">
 <section id="section-3.4">
-        <h3 id="name-current-asymmetric-mti-profil">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-current-asymmetric-mti-profil" class="section-name selfRef">Current Asymmetric MTI Profile 3: suit-sha256-eddsa-ecdh-chacha-poly</a>
+        <h3 id="name-current-aead-asymmetric-mti">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-current-aead-asymmetric-mti" class="section-name selfRef">Current AEAD Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm</a>
         </h3>
 <table class="center" id="table-4">
           <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Algorithm Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Algorithm</th>
+              <th class="text-left" rowspan="1" colspan="1">COSE Key</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Digest</td>
+              <td class="text-left" rowspan="1" colspan="1">SHA-256</td>
+              <td class="text-left" rowspan="1" colspan="1">-16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Authentication</td>
+              <td class="text-left" rowspan="1" colspan="1">ES256</td>
+              <td class="text-left" rowspan="1" colspan="1">-7</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Key Exchange</td>
+              <td class="text-left" rowspan="1" colspan="1">ECDH-ES + HKDF-256</td>
+              <td class="text-left" rowspan="1" colspan="1">-25</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Encryption</td>
+              <td class="text-left" rowspan="1" colspan="1">A128GCM</td>
+              <td class="text-left" rowspan="1" colspan="1">1</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+</div>
+<div id="suit-sha256-eddsa-ecdh-chacha-poly">
+<section id="section-3.5">
+        <h3 id="name-current-aead-asymmetric-mti-">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-current-aead-asymmetric-mti-" class="section-name selfRef">Current AEAD Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-chacha-poly</a>
+        </h3>
+<table class="center" id="table-5">
+          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Algorithm Type</th>
@@ -1555,12 +1600,12 @@ li > p:last-of-type:only-child {
 </section>
 </div>
 <div id="suit-sha256-hsslms-a256kw-a256ctr">
-<section id="section-3.5">
-        <h3 id="name-future-asymmetric-mti-profi">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-future-asymmetric-mti-profi" class="section-name selfRef">Future Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr</a>
+<section id="section-3.6">
+        <h3 id="name-future-constrained-asymmetr">
+<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-future-constrained-asymmetr" class="section-name selfRef">Future Constrained Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr</a>
         </h3>
-<table class="center" id="table-5">
-          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<table class="center" id="table-6">
+          <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Algorithm Type</th>
@@ -1600,7 +1645,7 @@ li > p:last-of-type:only-child {
       <h2 id="name-reporting-profiles">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-reporting-profiles" class="section-name selfRef">Reporting Profiles</a>
       </h2>
-<p id="section-4-1">When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-ecdh-a128ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-ecdsa-ecdh-a128ctr.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1632,8 +1677,8 @@ li > p:last-of-type:only-child {
 the category for Software Update for the Internet of Things (SUIT)<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">IANA is also requested to create a registry for COSE Alforithm Profiles
 within this page. The initial content of the registry is:<a href="#section-6-2" class="pilcrow">¶</a></p>
-<table class="center" id="table-6">
-        <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
+<table class="center" id="table-7">
+        <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Profile</th>
@@ -1684,6 +1729,18 @@ within this page. The initial content of the registry is:<a href="#section-6-2" 
 </td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">suit-sha256-es256-ecdh-a128ctr</td>
+            <td class="text-left" rowspan="1" colspan="1">MANDATORY</td>
+            <td class="text-left" rowspan="1" colspan="1">-16</td>
+            <td class="text-left" rowspan="1" colspan="1">-7</td>
+            <td class="text-left" rowspan="1" colspan="1">-25</td>
+            <td class="text-left" rowspan="1" colspan="1">1</td>
+            <td class="text-left" rowspan="1" colspan="1">[-16,  -7, -25,      1]</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <a href="#suit-sha256-es256-ecdh-a128gcm" class="auto internal xref">Section 3.4</a>
+</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">suit-sha256-eddsa-ecdh-chacha-poly</td>
             <td class="text-left" rowspan="1" colspan="1">MANDATORY</td>
             <td class="text-left" rowspan="1" colspan="1">-16</td>
@@ -1692,7 +1749,7 @@ within this page. The initial content of the registry is:<a href="#section-6-2" 
             <td class="text-left" rowspan="1" colspan="1">24</td>
             <td class="text-left" rowspan="1" colspan="1">[-16,  -8, -25,     24]</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#suit-sha256-eddsa-ecdh-chacha-poly" class="auto internal xref">Section 3.4</a>
+              <a href="#suit-sha256-eddsa-ecdh-chacha-poly" class="auto internal xref">Section 3.5</a>
 </td>
           </tr>
           <tr>
@@ -1704,7 +1761,7 @@ within this page. The initial content of the registry is:<a href="#section-6-2" 
             <td class="text-left" rowspan="1" colspan="1">-65532</td>
             <td class="text-left" rowspan="1" colspan="1">[-16, -46,  -5, -65532]</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#suit-sha256-hsslms-a256kw-a256ctr" class="auto internal xref">Section 3.5</a>
+              <a href="#suit-sha256-hsslms-a256kw-a256ctr" class="auto internal xref">Section 3.6</a>
 </td>
           </tr>
         </tbody>
@@ -1727,22 +1784,26 @@ SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128ctr
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128ctr
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-chacha-poly
 SUIT_COSE_tool_tweak /= suit-sha256-hsslms-a256kw-a256ctr
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profiles
 
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128KW_A128CTR
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128CTR
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128CTR
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_HMAC_A128KW_A128CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_ES256_ECDH_A128CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_EDDSA_ECDH_A128CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR
 
 suit-sha256-hmac-a128kw-a128ctr = [-16, 5, -3, -65534]
 suit-sha256-es256-ecdh-a128ctr = [-16, -7, -25, -65534]
 suit-sha256-eddsa-ecdh-a128ctr = [-16, -8, -25, -65534]
+suit-sha256-es256-ecdh-a128gcm = [-16, -7, -25, 1]
 suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -25, 24]
 suit-sha256-hsslms-a256kw-a256ctr = [-16, -46, -5, -65532]
 
 SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile&lt;5, -65534&gt; .and COSE_Messages
 SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile&lt;-7,-65534&gt; .and COSE_Messages
 SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile&lt;-8,-65534&gt; .and COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile&lt;-7,1&gt; .and COSE_Messages
 SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = SUIT_COSE_Profile&lt;-8,24&gt; .and COSE_Messages
 SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = SUIT_COSE_Profile&lt;-46,-65532&gt; .and COSE_Messages
 
@@ -1868,7 +1929,7 @@ SUIT_COSE_Mac0&lt;authid&gt; = [
 <dd class="break"></dd>
 <dt id="I-D.ietf-suit-firmware-encryption">[I-D.ietf-suit-firmware-encryption]</dt>
         <dd>
-<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Moran, B.</span>, <span class="refAuthor">Brown, D.</span>, and <span class="refAuthor">K. Takayama</span>, <span class="refTitle">"Encrypted Payloads in SUIT Manifests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-suit-firmware-encryption-14</span>, <time datetime="2023-08-26" class="refDate">26 August 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-suit-firmware-encryption-14">https://datatracker.ietf.org/doc/html/draft-ietf-suit-firmware-encryption-14</a>&gt;</span>. </dd>
+<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Moran, B.</span>, <span class="refAuthor">Brown, D.</span>, and <span class="refAuthor">K. Takayama</span>, <span class="refTitle">"Encrypted Payloads in SUIT Manifests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-suit-firmware-encryption-18</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-suit-firmware-encryption-18">https://datatracker.ietf.org/doc/html/draft-ietf-suit-firmware-encryption-18</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8152">[RFC8152]</dt>
         <dd>
@@ -1891,7 +1952,7 @@ SUIT_COSE_Mac0&lt;authid&gt; = [
 <dl class="references">
 <dt id="I-D.ietf-suit-manifest">[I-D.ietf-suit-manifest]</dt>
         <dd>
-<span class="refAuthor">Moran, B.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Zandberg, K.</span>, and <span class="refAuthor">O. Rønningstad</span>, <span class="refTitle">"A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-suit-manifest-22</span>, <time datetime="2023-02-27" class="refDate">27 February 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest-22">https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest-22</a>&gt;</span>. </dd>
+<span class="refAuthor">Moran, B.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Zandberg, K.</span>, and <span class="refAuthor">O. Rønningstad</span>, <span class="refTitle">"A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-suit-manifest-23</span>, <time datetime="2023-09-10" class="refDate">10 September 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest-23">https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest-23</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA-COSE">[IANA-COSE]</dt>
       <dd>

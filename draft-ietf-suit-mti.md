@@ -1,7 +1,7 @@
 ---
 title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
-docname: draft-ietf-suit-mti-02
+docname: draft-ietf-suit-mti-03
 category: std
 
 area: Security

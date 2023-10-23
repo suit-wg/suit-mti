@@ -20,7 +20,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-suit-mti-02" category="std" tocInclude="true" sortRefs="true" symRefs="true">
+<rfc ipr="trust200902" docName="draft-ietf-suit-mti-03" category="std" tocInclude="true" sortRefs="true" symRefs="true">
   <front>
     <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests</title>
 
@@ -43,7 +43,7 @@
       </address>
     </author>
 
-    <date year="2023" month="September" day="01"/>
+    <date year="2023" month="October" day="23"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -71,8 +71,9 @@
 
 <t><list style="symbols">
   <t>One Symmetric MTI profile</t>
-  <t>Three "Current" Asymmetric MTI profiles</t>
-  <t>One "Future" Asymmetric MTI profile</t>
+  <t>Two "Current" Constrained Asymmetric MTI profiles</t>
+  <t>Two "Current" AEAD Asymmetric MTI profiles</t>
+  <t>One "Future" Constrained Asymmetric MTI profile</t>
 </list></t>
 
 <t>At least one MTI algorithm in each category MUST be FIPS qualified.</t>
@@ -82,6 +83,8 @@
 <t>Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.</t>
 
 <t>Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.</t>
+
+<t>AEAD is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require streaming decryption, which necessitates a non-AEAD ecryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.</t>
 
 <t>Other use-cases of SUIT MAY define their own MTI algorithms.</t>
 
@@ -123,7 +126,7 @@
 </texttable>
 
 </section>
-<section anchor="suit-sha256-es256-ecdh-a128ctr"><name>Current Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr</name>
+<section anchor="suit-sha256-es256-ecdh-a128ctr"><name>Current Constrained Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr</name>
 
 <texttable>
       <ttcol align='left'>Algorithm Type</ttcol>
@@ -144,7 +147,7 @@
 </texttable>
 
 </section>
-<section anchor="suit-sha256-eddsa-ecdh-a128ctr"><name>Current Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr</name>
+<section anchor="suit-sha256-eddsa-ecdh-a128ctr"><name>Current Constrained Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr</name>
 
 <texttable>
       <ttcol align='left'>Algorithm Type</ttcol>
@@ -165,7 +168,28 @@
 </texttable>
 
 </section>
-<section anchor="suit-sha256-eddsa-ecdh-chacha-poly"><name>Current Asymmetric MTI Profile 3: suit-sha256-eddsa-ecdh-chacha-poly</name>
+<section anchor="suit-sha256-es256-ecdh-a128gcm"><name>Current AEAD Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm</name>
+
+<texttable>
+      <ttcol align='left'>Algorithm Type</ttcol>
+      <ttcol align='left'>Algorithm</ttcol>
+      <ttcol align='left'>COSE Key</ttcol>
+      <c>Digest</c>
+      <c>SHA-256</c>
+      <c>-16</c>
+      <c>Authentication</c>
+      <c>ES256</c>
+      <c>-7</c>
+      <c>Key Exchange</c>
+      <c>ECDH-ES + HKDF-256</c>
+      <c>-25</c>
+      <c>Encryption</c>
+      <c>A128GCM</c>
+      <c>1</c>
+</texttable>
+
+</section>
+<section anchor="suit-sha256-eddsa-ecdh-chacha-poly"><name>Current AEAD Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-chacha-poly</name>
 
 <texttable>
       <ttcol align='left'>Algorithm Type</ttcol>
@@ -186,7 +210,7 @@
 </texttable>
 
 </section>
-<section anchor="suit-sha256-hsslms-a256kw-a256ctr"><name>Future Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr</name>
+<section anchor="suit-sha256-hsslms-a256kw-a256ctr"><name>Future Constrained Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr</name>
 
 <texttable>
       <ttcol align='left'>Algorithm Type</ttcol>
@@ -210,7 +234,7 @@
 </section>
 <section anchor="reporting-profiles"><name>Reporting Profiles</name>
 
-<t>When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-ecdh-a128ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-ecdsa-ecdh-a128ctr.</t>
+<t>When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.</t>
 
 </section>
 <section anchor="security-considerations"><name>Security Considerations</name>
@@ -270,6 +294,14 @@ within this page. The initial content of the registry is:</t>
       <c>-65534</c>
       <c>[-16,  -8, -25, -65534]</c>
       <c><xref target="suit-sha256-eddsa-ecdh-a128ctr"/></c>
+      <c>suit-sha256-es256-ecdh-a128ctr</c>
+      <c>MANDATORY</c>
+      <c>-16</c>
+      <c>-7</c>
+      <c>-25</c>
+      <c>1</c>
+      <c>[-16,  -7, -25,      1]</c>
+      <c><xref target="suit-sha256-es256-ecdh-a128gcm"/></c>
       <c>suit-sha256-eddsa-ecdh-chacha-poly</c>
       <c>MANDATORY</c>
       <c>-16</c>
@@ -305,22 +337,26 @@ SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128ctr
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128ctr
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-chacha-poly
 SUIT_COSE_tool_tweak /= suit-sha256-hsslms-a256kw-a256ctr
+SUIT_COSE_tool_tweak /= SUIT_COSE_Profiles
 
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HMAC_A128KW_A128CTR
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_ES256_ECDH_A128CTR
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_A128CTR
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304
-SUIT_COSE_tool_tweak /= SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_HMAC_A128KW_A128CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_ES256_ECDH_A128CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_EDDSA_ECDH_A128CTR
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304
+SUIT_COSE_Profiles /= SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR
 
 suit-sha256-hmac-a128kw-a128ctr = [-16, 5, -3, -65534]
 suit-sha256-es256-ecdh-a128ctr = [-16, -7, -25, -65534]
 suit-sha256-eddsa-ecdh-a128ctr = [-16, -8, -25, -65534]
+suit-sha256-es256-ecdh-a128gcm = [-16, -7, -25, 1]
 suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -25, 24]
 suit-sha256-hsslms-a256kw-a256ctr = [-16, -46, -5, -65532]
 
 SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile<5, -65534> .and COSE_Messages
 SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile<-7,-65534> .and COSE_Messages
 SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile<-8,-65534> .and COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile<-7,1> .and COSE_Messages
 SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = SUIT_COSE_Profile<-8,24> .and COSE_Messages
 SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = SUIT_COSE_Profile<-46,-65532> .and COSE_Messages
 
@@ -494,13 +530,7 @@ SUIT_COSE_Mac0<authid> = [
       </author>
       <date day='25' month='May' year='2023'/>
       <abstract>
-	 <t>   The Concise Binary Object Representation (CBOR) data format is
-   designed for small code size and small message size.  CBOR Object
-   Signing and Encryption (COSE) is specified in RFC 9052 to provide
-   basic security services using the CBOR data format.  This document
-   specifies the conventions for using AES-CTR and AES-CBC as Content
-   Encryption algorithms with COSE.
-
+	 <t>The Concise Binary Object Representation (CBOR) data format is designed for small code size and small message size.  CBOR Object Signing and Encryption (COSE) is specified in RFC 9052 to provide basic security services using the CBOR data format.  This document specifies the conventions for using AES-CTR and AES-CBC as content encryption algorithms with COSE.
 	 </t>
       </abstract>
    </front>
@@ -526,19 +556,20 @@ SUIT_COSE_Mac0<authid> = [
       <author fullname='Ken Takayama' initials='K.' surname='Takayama'>
          <organization>SECOM CO., LTD.</organization>
       </author>
-      <date day='26' month='August' year='2023'/>
+      <date day='23' month='October' year='2023'/>
       <abstract>
-	 <t>   This document specifies techniques for encrypting software, firmware
-   and personalization data by utilizing the IETF SUIT manifest.  Key
-   agreement is provided by ephemeral-static (ES) Diffie-Hellman (DH)
-   and AES Key Wrap (AES-KW).  ES-DH uses public key cryptography while
-   AES-KW uses a pre-shared key.  Encryption of the plaintext is
-   accomplished with conventional symmetric key cryptography.
+	 <t>   This document specifies techniques for encrypting software, firmware,
+   machine learning models, and personalization data by utilizing the
+   IETF SUIT manifest.  Key agreement is provided by ephemeral-static
+   (ES) Diffie-Hellman (DH) and AES Key Wrap (AES-KW).  ES-DH uses
+   public key cryptography while AES-KW uses a pre-shared key.
+   Encryption of the plaintext is accomplished with conventional
+   symmetric key cryptography.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-firmware-encryption-14'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-firmware-encryption-18'/>
    
 </reference>
 
@@ -559,8 +590,7 @@ SUIT_COSE_Mac0<authid> = [
          <organization>Arm Limited</organization>
       </author>
       <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
-         <organization>Arm Limited</organization>
-      </author>
+         </author>
       <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
          <organization>Fraunhofer SIT</organization>
       </author>
@@ -570,21 +600,20 @@ SUIT_COSE_Mac0<authid> = [
       <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
          <organization>Nordic Semiconductor</organization>
       </author>
-      <date day='27' month='February' year='2023'/>
+      <date day='10' month='September' year='2023'/>
       <abstract>
 	 <t>   This specification describes the format of a manifest.  A manifest is
    a bundle of metadata about code/data obtained by a recipient (chiefly
-   the firmware for an IoT device), where to find the that code/data,
-   the devices to which it applies, and cryptographic information
-   protecting the manifest.  Software updates and Trusted Invocation
-   both tend to use sequences of common operations, so the manifest
-   encodes those sequences of operations, rather than declaring the
-   metadata.
+   the firmware for an IoT device), where to find the code/data, the
+   devices to which it applies, and cryptographic information protecting
+   the manifest.  Software updates and Trusted Invocation both tend to
+   use sequences of common operations, so the manifest encodes those
+   sequences of operations, rather than declaring the metadata.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-22'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-23'/>
    
 </reference>
 
@@ -607,83 +636,87 @@ SUIT_COSE_Mac0<authid> = [
   </back>
 
 <!-- ##markdown-source:
-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
-n15HbDeat0kMN5u2EcKfO60VbDfbYFdYBFunNs99jjmnm6Zzd5107nv7z5ht
-71/OqRf+I5Opwf4Ckw9fDPHd3zt/ffryBzTYDz9n++Mx2tVz15We+/4zCK5L
-jk+ZIy5irDrdvQuuyWLVrLXEtDZvM+HU8w5uNq+dGzbm9tfmdVN4PY2YuSHm
-d23XusKFWIetv66Bf8N6RIZ28MQTWIfeTefqVAtrfp7aDbfrVnvwh9VuOOS2
-Bfo3Vd7ppt1acWDurDpVb+r+mjoVYnqUhzL+ZkVpNa2ScSJtJesSXVre+mRV
-Ca/L7trPeRv5syul/Yfnwc31t7HQZ9F+fHNhGtxvRlsjvr7+ukLM1mb68b1G
-oGUiHm1dEWN79WDbrlfbYH1HXvzqjW0IbeKvRLYcTLXLdbHVDV0Hhva8JhME
-f2OvFH3sf9a63aov0WxJI90lj67v0FAkkL4e5h7TrY/7nxmqy2zRMRfc3RHU
-c6dlYT9bo1pHlQbzCpEL1wLXlUwjbz9r1JBM6NMlVFoFEGOSLZWs7GTpryDt
-bCpybMTZfwFA99XrCmSLCuGSzNxB3rHWoQrNXTwNGP3HAutFE/9PCG4+5M9T
-nvt5O3ZSmbWnNbJu5yQe3A22qcDSH62Wffb0G2afOa336AM++yxbBp/aPtno
-rSdvF+5yy6fs9uPeVwd3usPxbrA+vzXxxzUn2rCnk3RbqC4KvS13WSYTN0JX
-vNxd/A7Yj/fXQsSOVKreBe82AK0IANWNYXnOWoHg4XUssxGq1nD764bb3265
-/T/RdN24uxnEnfjjO9uY9G6XjmbyddCdoMPnuhl7/bYJvvnvBXvujcZ6wOta
-P/X1cQJVH+UXAPb3Pw5tCxs7X+kw+d5VNt/7wkZfhdqRFZxnPLmzItTt0O0E
-6uF9TsRtdWlUDf6hfds+iO5z2MIMHQnNn8La9va27m/vT9/gO2qcg/8CPPIM
-OeArAAA=
+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
+/9kv+IYmA97/AcOvaA4cMAAA
 
 -->
 

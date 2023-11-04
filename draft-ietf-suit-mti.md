@@ -166,7 +166,7 @@ AES-CTR mode is specified, see {{I-D.ietf-cose-aes-ctr-and-cbc}}. All of the AES
 * Streaming decryption must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.
 * Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.
 * There are no chosen plaintext attacks: the plaintext is authenticated prior to encryption.
-* Content Encryption Keys MUST be used to encrypt only once. See {{I-D.ietf-suit-firmware-encryption}}.
+* Content Encryption Keys must be used to encrypt only once. See {{I-D.ietf-suit-firmware-encryption}}.
 
 As a result of these mitigating circumstances, AES-CTR is the most appropriate cipher for typical software/firmware delivery scenarios.
 

@@ -48,10 +48,10 @@ normative:
   RFC8778:
   RFC9052: cose
   I-D.ietf-cose-aes-ctr-and-cbc:
-  I-D.ietf-suit-firmware-encryption:
 
 informative:
   I-D.ietf-suit-manifest:
+  I-D.ietf-suit-firmware-encryption:
   IANA-COSE:
     title: "CBOR Object Signing and Encryption (COSE)"
     author:

@@ -17,9 +17,20 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-DRAFT = draft-ietf-suit-mti
+MD_FILE := draft-ietf-suit-mti.md
+DRAFT := $(shell grep 'docname: ' $(MD_FILE) | awk '{print $$2}')
 
-all: $(DRAFT).xml
+all: $(DRAFT).xml $(DRAFT).txt $(DRAFT).html
 
-$(DRAFT).xml: $(DRAFT).md
-	kdrfc -ht3 $<
+$(DRAFT).html: $(DRAFT).xml
+	xml2rfc $(DRAFT).xml --html
+
+$(DRAFT).txt: $(DRAFT).xml
+	xml2rfc $(DRAFT).xml
+
+$(DRAFT).xml: $(MD_FILE)
+	kramdown-rfc2629 $(MD_FILE) > $(DRAFT).xml
+
+.PHONY: clean
+clean:
+	rm -fr $(DRAFT).xml $(DRAFT).txt $(DRAFT).html

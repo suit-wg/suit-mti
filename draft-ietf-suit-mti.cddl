@@ -1,6 +1,7 @@
 SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128kw-a128ctr
 SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128ctr
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-a128ctr
+SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128gcm
 SUIT_COSE_tool_tweak /= suit-sha256-eddsa-ecdh-chacha-poly
 SUIT_COSE_tool_tweak /= suit-sha256-hsslms-a256kw-a256ctr
 SUIT_COSE_tool_tweak /= SUIT_COSE_Profiles

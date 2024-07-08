@@ -20,7 +20,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-suit-mti-03" category="std" tocInclude="true" sortRefs="true" symRefs="true">
+<rfc ipr="trust200902" docName="draft-ietf-suit-mti-05" category="std" tocInclude="true" sortRefs="true" symRefs="true">
   <front>
     <title abbrev="MTI SUIT Algorithms">Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests</title>
 
@@ -43,7 +43,7 @@
       </address>
     </author>
 
-    <date year="2023" month="October" day="23"/>
+    <date year="2024" month="February" day="12"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -139,8 +139,8 @@
       <c>ES256</c>
       <c>-7</c>
       <c>Key Exchange</c>
-      <c>ECDH-ES + HKDF-256</c>
-      <c>-25</c>
+      <c>ECDH-ES + A128KW</c>
+      <c>-29</c>
       <c>Encryption</c>
       <c>A128CTR</c>
       <c>-65534</c>
@@ -160,8 +160,8 @@
       <c>EDDSA</c>
       <c>-8</c>
       <c>Key Exchange</c>
-      <c>ECDH-ES + HKDF-256</c>
-      <c>-25</c>
+      <c>ECDH-ES + A128KW</c>
+      <c>-29</c>
       <c>Encryption</c>
       <c>A128CTR</c>
       <c>-65534</c>
@@ -181,8 +181,8 @@
       <c>ES256</c>
       <c>-7</c>
       <c>Key Exchange</c>
-      <c>ECDH-ES + HKDF-256</c>
-      <c>-25</c>
+      <c>ECDH-ES + A128KW</c>
+      <c>-29</c>
       <c>Encryption</c>
       <c>A128GCM</c>
       <c>1</c>
@@ -202,8 +202,8 @@
       <c>EDDSA</c>
       <c>-8</c>
       <c>Key Exchange</c>
-      <c>ECDH-ES + HKDF-256</c>
-      <c>-25</c>
+      <c>ECDH-ES + A128KW</c>
+      <c>-29</c>
       <c>Encryption</c>
       <c>ChaCha20/Poly1305</c>
       <c>24</c>
@@ -241,7 +241,7 @@
 
 <t>For the avoidance of doubt, there are scenarios where payload or manifest encryption are not required. In these scenarios, the encryption element of the selected profile is simply not used.</t>
 
-<t>AES-CTR mode is specified, see <xref target="I-D.ietf-cose-aes-ctr-and-cbc"/>. All of the AES-CTR security considerations in <xref target="I-D.ietf-cose-aes-ctr-and-cbc"/> apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:</t>
+<t>AES-CTR mode is specified, see <xref target="RFC9459"/>. All of the AES-CTR security considerations in <xref target="RFC9459"/> apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:</t>
 
 <t><list style="symbols">
   <t>Streaming decryption must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.</t>
@@ -282,33 +282,33 @@ within this page. The initial content of the registry is:</t>
       <c>MANDATORY</c>
       <c>-16</c>
       <c>-7</c>
-      <c>-25</c>
+      <c>-29</c>
       <c>-65534</c>
-      <c>[-16,  -7, -25, -65534]</c>
+      <c>[-16,  -7, -29, -65534]</c>
       <c><xref target="suit-sha256-es256-ecdh-a128ctr"/></c>
       <c>suit-sha256-eddsa-ecdh-a128ctr</c>
       <c>MANDATORY</c>
       <c>-16</c>
       <c>-8</c>
-      <c>-25</c>
+      <c>-29</c>
       <c>-65534</c>
-      <c>[-16,  -8, -25, -65534]</c>
+      <c>[-16,  -8, -29, -65534]</c>
       <c><xref target="suit-sha256-eddsa-ecdh-a128ctr"/></c>
       <c>suit-sha256-es256-ecdh-a128gcm</c>
       <c>MANDATORY</c>
       <c>-16</c>
       <c>-7</c>
-      <c>-25</c>
+      <c>-29</c>
       <c>1</c>
-      <c>[-16,  -7, -25,      1]</c>
+      <c>[-16,  -7, -29,      1]</c>
       <c><xref target="suit-sha256-es256-ecdh-a128gcm"/></c>
       <c>suit-sha256-eddsa-ecdh-chacha-poly</c>
       <c>MANDATORY</c>
       <c>-16</c>
       <c>-8</c>
-      <c>-25</c>
+      <c>-29</c>
       <c>24</c>
-      <c>[-16,  -8, -25,     24]</c>
+      <c>[-16,  -8, -29,     24]</c>
       <c><xref target="suit-sha256-eddsa-ecdh-chacha-poly"/></c>
       <c>suit-sha256-hsslms-a256kw-a256ctr</c>
       <c>MANDATORY</c>
@@ -322,9 +322,167 @@ within this page. The initial content of the registry is:</t>
 
 <t>New entries to this registry require standards action.</t>
 
-<t>-- back</t>
-
 </section>
+
+
+  </middle>
+
+  <back>
+
+
+    <references title='Normative References'>
+
+
+
+<reference anchor='RFC8152'>
+  <front>
+    <title>CBOR Object Signing and Encryption (COSE)</title>
+    <author fullname='J. Schaad' initials='J.' surname='Schaad'/>
+    <date month='July' year='2017'/>
+    <abstract>
+      <t>Concise Binary Object Representation (CBOR) is a data format designed for small code size and small message size. There is a need for the ability to have basic security services defined for this data format. This document defines the CBOR Object Signing and Encryption (COSE) protocol. This specification describes how to create and process signatures, message authentication codes, and encryption using CBOR for serialization. This specification additionally describes how to represent cryptographic keys using CBOR.</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='8152'/>
+  <seriesInfo name='DOI' value='10.17487/RFC8152'/>
+</reference>
+
+<reference anchor='RFC8778'>
+  <front>
+    <title>Use of the HSS/LMS Hash-Based Signature Algorithm with CBOR Object Signing and Encryption (COSE)</title>
+    <author fullname='R. Housley' initials='R.' surname='Housley'/>
+    <date month='April' year='2020'/>
+    <abstract>
+      <t>This document specifies the conventions for using the Hierarchical Signature System (HSS) / Leighton-Micali Signature (LMS) hash-based signature algorithm with the CBOR Object Signing and Encryption (COSE) syntax. The HSS/LMS algorithm is one form of hash-based digital signature; it is described in RFC 8554.</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='8778'/>
+  <seriesInfo name='DOI' value='10.17487/RFC8778'/>
+</reference>
+
+<reference anchor='RFC9052'>
+  <front>
+    <title>CBOR Object Signing and Encryption (COSE): Structures and Process</title>
+    <author fullname='J. Schaad' initials='J.' surname='Schaad'/>
+    <date month='August' year='2022'/>
+    <abstract>
+      <t>Concise Binary Object Representation (CBOR) is a data format designed for small code size and small message size. There is a need to be able to define basic security services for this data format. This document defines the CBOR Object Signing and Encryption (COSE) protocol. This specification describes how to create and process signatures, message authentication codes, and encryption using CBOR for serialization. This specification additionally describes how to represent cryptographic keys using CBOR.</t>
+      <t>This document, along with RFC 9053, obsoletes RFC 8152.</t>
+    </abstract>
+  </front>
+  <seriesInfo name='STD' value='96'/>
+  <seriesInfo name='RFC' value='9052'/>
+  <seriesInfo name='DOI' value='10.17487/RFC9052'/>
+</reference>
+
+<reference anchor='RFC9459'>
+  <front>
+    <title>CBOR Object Signing and Encryption (COSE): AES-CTR and AES-CBC</title>
+    <author fullname='R. Housley' initials='R.' surname='Housley'/>
+    <author fullname='H. Tschofenig' initials='H.' surname='Tschofenig'/>
+    <date month='September' year='2023'/>
+    <abstract>
+      <t>The Concise Binary Object Representation (CBOR) data format is designed for small code size and small message size. CBOR Object Signing and Encryption (COSE) is specified in RFC 9052 to provide basic security services using the CBOR data format. This document specifies the conventions for using AES-CTR and AES-CBC as content encryption algorithms with COSE.</t>
+    </abstract>
+  </front>
+  <seriesInfo name='RFC' value='9459'/>
+  <seriesInfo name='DOI' value='10.17487/RFC9459'/>
+</reference>
+
+
+<reference anchor='I-D.ietf-suit-manifest'>
+   <front>
+      <title>A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest</title>
+      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         </author>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
+      </author>
+      <author fullname='Koen Zandberg' initials='K.' surname='Zandberg'>
+         <organization>Inria</organization>
+      </author>
+      <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
+         <organization>Nordic Semiconductor</organization>
+      </author>
+      <date day='5' month='February' year='2024'/>
+      <abstract>
+	 <t>   This specification describes the format of a manifest.  A manifest is
+   a bundle of metadata about code/data obtained by a recipient (chiefly
+   the firmware for an IoT device), where to find the code/data, the
+   devices to which it applies, and cryptographic information protecting
+   the manifest.  Software updates and Trusted Invocation both tend to
+   use sequences of common operations, so the manifest encodes those
+   sequences of operations, rather than declaring the metadata.
+
+	 </t>
+      </abstract>
+   </front>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-25'/>
+   
+</reference>
+
+
+
+
+    </references>
+
+    <references title='Informative References'>
+
+
+
+
+<reference anchor='I-D.ietf-suit-firmware-encryption'>
+   <front>
+      <title>Encrypted Payloads in SUIT Manifests</title>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         </author>
+      <author fullname='Russ Housley' initials='R.' surname='Housley'>
+         <organization>Vigil Security, LLC</organization>
+      </author>
+      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='David Brown' initials='D.' surname='Brown'>
+         <organization>Linaro</organization>
+      </author>
+      <author fullname='Ken Takayama' initials='K.' surname='Takayama'>
+         <organization>SECOM CO., LTD.</organization>
+      </author>
+      <date day='23' month='October' year='2023'/>
+      <abstract>
+	 <t>   This document specifies techniques for encrypting software, firmware,
+   machine learning models, and personalization data by utilizing the
+   IETF SUIT manifest.  Key agreement is provided by ephemeral-static
+   (ES) Diffie-Hellman (DH) and AES Key Wrap (AES-KW).  ES-DH uses
+   public key cryptography while AES-KW uses a pre-shared key.
+   Encryption of the plaintext is accomplished with conventional
+   symmetric key cryptography.
+
+	 </t>
+      </abstract>
+   </front>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-firmware-encryption-18'/>
+   
+</reference>
+
+
+<reference anchor="IANA-COSE" target="https://www.iana.org/assignments/cose/cose.xhtml">
+  <front>
+    <title>CBOR Object Signing and Encryption (COSE)</title>
+    <author >
+      <organization></organization>
+    </author>
+    <date year="2022"/>
+  </front>
+</reference>
+
+
+    </references>
+
+
 <section anchor="full-cddl"><name>A. Full CDDL</name>
 
 <t>The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in protocols that share a ciphersuite with SUIT.</t>
@@ -468,255 +626,90 @@ SUIT_COSE_Mac0<authid> = [
 </section>
 
 
-  </middle>
-
-  <back>
-
-
-    <references title='Normative References'>
-
-
-
-<reference anchor='RFC8152'>
-  <front>
-    <title>CBOR Object Signing and Encryption (COSE)</title>
-    <author fullname='J. Schaad' initials='J.' surname='Schaad'/>
-    <date month='July' year='2017'/>
-    <abstract>
-      <t>Concise Binary Object Representation (CBOR) is a data format designed for small code size and small message size. There is a need for the ability to have basic security services defined for this data format. This document defines the CBOR Object Signing and Encryption (COSE) protocol. This specification describes how to create and process signatures, message authentication codes, and encryption using CBOR for serialization. This specification additionally describes how to represent cryptographic keys using CBOR.</t>
-    </abstract>
-  </front>
-  <seriesInfo name='RFC' value='8152'/>
-  <seriesInfo name='DOI' value='10.17487/RFC8152'/>
-</reference>
-
-<reference anchor='RFC8778'>
-  <front>
-    <title>Use of the HSS/LMS Hash-Based Signature Algorithm with CBOR Object Signing and Encryption (COSE)</title>
-    <author fullname='R. Housley' initials='R.' surname='Housley'/>
-    <date month='April' year='2020'/>
-    <abstract>
-      <t>This document specifies the conventions for using the Hierarchical Signature System (HSS) / Leighton-Micali Signature (LMS) hash-based signature algorithm with the CBOR Object Signing and Encryption (COSE) syntax. The HSS/LMS algorithm is one form of hash-based digital signature; it is described in RFC 8554.</t>
-    </abstract>
-  </front>
-  <seriesInfo name='RFC' value='8778'/>
-  <seriesInfo name='DOI' value='10.17487/RFC8778'/>
-</reference>
-
-<reference anchor='RFC9052'>
-  <front>
-    <title>CBOR Object Signing and Encryption (COSE): Structures and Process</title>
-    <author fullname='J. Schaad' initials='J.' surname='Schaad'/>
-    <date month='August' year='2022'/>
-    <abstract>
-      <t>Concise Binary Object Representation (CBOR) is a data format designed for small code size and small message size. There is a need to be able to define basic security services for this data format. This document defines the CBOR Object Signing and Encryption (COSE) protocol. This specification describes how to create and process signatures, message authentication codes, and encryption using CBOR for serialization. This specification additionally describes how to represent cryptographic keys using CBOR.</t>
-      <t>This document, along with RFC 9053, obsoletes RFC 8152.</t>
-    </abstract>
-  </front>
-  <seriesInfo name='STD' value='96'/>
-  <seriesInfo name='RFC' value='9052'/>
-  <seriesInfo name='DOI' value='10.17487/RFC9052'/>
-</reference>
-
-
-<reference anchor='I-D.ietf-cose-aes-ctr-and-cbc'>
-   <front>
-      <title>CBOR Object Signing and Encryption (COSE): AES-CTR and AES-CBC</title>
-      <author fullname='Russ Housley' initials='R.' surname='Housley'>
-         <organization>Vigil Security, LLC</organization>
-      </author>
-      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
-         <organization>Arm Limited</organization>
-      </author>
-      <date day='25' month='May' year='2023'/>
-      <abstract>
-	 <t>The Concise Binary Object Representation (CBOR) data format is designed for small code size and small message size.  CBOR Object Signing and Encryption (COSE) is specified in RFC 9052 to provide basic security services using the CBOR data format.  This document specifies the conventions for using AES-CTR and AES-CBC as content encryption algorithms with COSE.
-	 </t>
-      </abstract>
-   </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-cose-aes-ctr-and-cbc-06'/>
-   
-</reference>
-
-
-<reference anchor='I-D.ietf-suit-firmware-encryption'>
-   <front>
-      <title>Encrypted Payloads in SUIT Manifests</title>
-      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
-         </author>
-      <author fullname='Russ Housley' initials='R.' surname='Housley'>
-         <organization>Vigil Security, LLC</organization>
-      </author>
-      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
-         <organization>Arm Limited</organization>
-      </author>
-      <author fullname='David Brown' initials='D.' surname='Brown'>
-         <organization>Linaro</organization>
-      </author>
-      <author fullname='Ken Takayama' initials='K.' surname='Takayama'>
-         <organization>SECOM CO., LTD.</organization>
-      </author>
-      <date day='23' month='October' year='2023'/>
-      <abstract>
-	 <t>   This document specifies techniques for encrypting software, firmware,
-   machine learning models, and personalization data by utilizing the
-   IETF SUIT manifest.  Key agreement is provided by ephemeral-static
-   (ES) Diffie-Hellman (DH) and AES Key Wrap (AES-KW).  ES-DH uses
-   public key cryptography while AES-KW uses a pre-shared key.
-   Encryption of the plaintext is accomplished with conventional
-   symmetric key cryptography.
-
-	 </t>
-      </abstract>
-   </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-firmware-encryption-18'/>
-   
-</reference>
-
-
-
-
-    </references>
-
-    <references title='Informative References'>
-
-
-
-
-<reference anchor='I-D.ietf-suit-manifest'>
-   <front>
-      <title>A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest</title>
-      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
-         <organization>Arm Limited</organization>
-      </author>
-      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
-         </author>
-      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
-         <organization>Fraunhofer SIT</organization>
-      </author>
-      <author fullname='Koen Zandberg' initials='K.' surname='Zandberg'>
-         <organization>Inria</organization>
-      </author>
-      <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
-         <organization>Nordic Semiconductor</organization>
-      </author>
-      <date day='10' month='September' year='2023'/>
-      <abstract>
-	 <t>   This specification describes the format of a manifest.  A manifest is
-   a bundle of metadata about code/data obtained by a recipient (chiefly
-   the firmware for an IoT device), where to find the code/data, the
-   devices to which it applies, and cryptographic information protecting
-   the manifest.  Software updates and Trusted Invocation both tend to
-   use sequences of common operations, so the manifest encodes those
-   sequences of operations, rather than declaring the metadata.
-
-	 </t>
-      </abstract>
-   </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-23'/>
-   
-</reference>
-
-
-<reference anchor="IANA-COSE" target="https://www.iana.org/assignments/cose/cose.xhtml">
-  <front>
-    <title>CBOR Object Signing and Encryption (COSE)</title>
-    <author >
-      <organization></organization>
-    </author>
-    <date year="2022"/>
-  </front>
-</reference>
-
-
-    </references>
-
-
-
   </back>
 
 <!-- ##markdown-source:
-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
-z4tpbnOayUmUnKjcmRE0Zbcee6LwUvP5HAmNSm2RuDcxah1y1NqYyn3CYCpO
-QfjT0Rrm5YY9Ni30Fj4mg5Yzr1IaaYbjWgUqcuAbGiViV1RIyU2ZcWdFhRC4
-VIZ7GxDFKMCUygW/NLNGK515joIlktCmbqlt+q1XA54QWzXVtgObrhp8iVHV
-TjgAZoDXHiFak2QHvfumsv7222+GoUfSXhD/C61UdAFQw9+y/ce7suyN9rWz
-1M22tfLJx25rBNvNLtgVFlt31s/rxq79rJPygqaOF3a0eOHmOTfeawYjF9TO
-f/xWmhB84tb1U787PP2UUw+fjfFv2L94efb8x8G9/v2ba2wyQWd+YRvwC9dq
-e94uFPCY2aRI2bCq62+8HeW63LVRgTf2tStrte/gun3tItg6b7D1qGapah03
-3Diqu6JU26hQ1HXiTYf7djkq6zDP19Vdv2E9ys1m8dTl0w6+bSfuZAuFfBzb
-loN3sz34SLYt598m7eDjBW3FxDaRhzcVtzNWurnCBaz1O1m3eX9NfSGVMoBx
-GX6zxrTcVtJYkiaTTYouLq9dNS6JN2n3zXdEavrza6ndF2+8m/NvykLfY3Hr
-7YNpcVCvNlZcN/N1KTHb2OnW+zVBQ0U82Hoi1vrVYlOv1+tg80aO/PqLtYja
-8pckWwxT3nKTbP1Cu4ShO2/QeN4/2AtFXxk6b0wTq6GlwWzSjtTyamYJFET8
-eth7QjM2+307Ap4GVS0EtxOZau+syMznwwTmVKGxLxOpsAOHCqrV9OZLBjko
-I/qEFFAyg8TYZLCgoZ2u3MjX7CYUZyLOfH0IvW6vK5CNVAiXaG4NecdohyCo
-HfONGH3bifWCqfsCk90P+ouYp27fntlUJM1tNa29OZF7d71tLHD0e8NlwB5/
-w8wzy/UL+pDaPEtW3oemT9Z8q83bibvc8jG7/bD31cGd7nC8623ub2z8acOJ
-Wvq0lPYK5VjW6XKfJTKyKzRS53bQPmI/fbkRImalZPXGe9MSaI0AUt1YLJez
-1kRw4nUc0wpVo7jBpuIG2zU3+Iyq65a7O4NYiz+8sy2T3u3iUW/eJboltPLZ
-ds0MO9vC119bMnavOVYLjtem1TfXSajKlH+CYP/8dNG2ZGPrKx0q71+n8/6f
-rPR1UTuqgvWMR3fWiLodullAnXgfE3FbXRqowT00b5uG6LbDlszQUdCcFTau
-1996v/5nv+Abmgx4/wdB3BpCHDAAAA==
+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
+M0+m8NZjTxVeaj6bIaJRri0S9yZGskOQWpk5uY8LTMopqKh0tIZ5uWGHTQq9
+gY8JoeUAq5RGmkm3VoGKXEUNSInYZRVCuSkz7qwoE6LYlOHOWo1iADC5cs4v
+zeDQSmeeI2OJJLSxW2obf+vVgCfEVk20basmywZfYlT1CFWtpagIHrvGod97
+YFLrb7/9Zhh6JO0F8b/QSkUXqGr4O7b7ZFuYvdG+dpi62bZWQPnUbQ1vu9kF
+u/xi4876ed2ttZ91Ul7QCPHCttYXbkBz471m0nFBHfqnb6Wm/zO3rp763eHp
+55x6+HyEf4O9i1dnL37s3997cHPExmO02xe2q75w/bPnbSsDnjAbFSkcVon9
+rbclX5e7bKLZ37CvnVqrfQfX7WtnwdZ5/Y1HNXNV67jB2lHdKaXaRpmiThRv
+O8y3y1BZh3q+ru76DetRbDaLpy6edvBtG3EnWwDyaWxbBt7N9uAT2baMf5O0
+/U8XtOUTm0Qe3FTcTl/p5goTsNrvZN3m/TU1hpTKUI3L8JsVpuW2ksaSNJms
+U3RxeeOycUm8TrtrvvBR059fS+2+NuPdnH9TFvpSiltvH0yL/Xq1seLama9L
+idnaTre+VxM0IOLBxhOxtlctNnG9HoP1Gzny6y/WImrLX5JsUEx5y3Wy1Qtt
+E4buvEbjef9gLxV9/+e8MSKsJpGmZpN2TpZXg0hUQcSvh70nNDiz35ajwtNU
+VXPB7Uim2jstMvNhLxVzqtDYl4lU2IlDVarV9OYbAzkoI/q4E6VkBomxydSC
+hnaydHNcs5uqOONx5rtAaHZ7XY5spIK7RDOryDsGHSpB7exuyOirS6wXTNy3
+kex+0F/EPHX7dsymImluq2ntzYncu+ttYoGjPxguffbkG2aeWa736BNn8yxZ
+eh+bNlnzrTZvJu4yyyfs9sPe44M73e5411vf39j405oRtfC0lPYK5azVYbnL
+EhnZFZqTczs9H7KfvlpzEbNSsnrrvW0JtEIAqW4slotZKyI48TqOabmqAa6/
+Dlx/M3L9Lwhdt9zdEcRq/OGdTZH0bhePevM20S2hlc+2a2ba2Ra+/g6S0XvN
+sVpwvNa1vr5OQlWq/BME++fni7YhGltb6YB87zrM9/5k0FdF7cgK1jIe3Vkh
+6jboZgJ14n2Kx200aVQN7qF521REtx42RIaOhOa0sHa9vY332/viF3xLkwHv
+/5gHq8XaLwAA
 
 -->
 

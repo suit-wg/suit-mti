@@ -13,12 +13,12 @@ SUIT_COSE_Profiles /= SUIT_COSE_Profile_ES256_ECDH_A128GCM
 SUIT_COSE_Profiles /= SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304
 SUIT_COSE_Profiles /= SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR
 
-suit-sha256-hmac-a128kw-a128ctr = [-16, 5, -3, -65534]
-suit-sha256-es256-ecdh-a128ctr = [-16, -7, -25, -65534]
-suit-sha256-eddsa-ecdh-a128ctr = [-16, -8, -25, -65534]
-suit-sha256-es256-ecdh-a128gcm = [-16, -7, -25, 1]
-suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -25, 24]
-suit-sha256-hsslms-a256kw-a256ctr = [-16, -46, -5, -65532]
+suit-sha256-hmac-a128kw-a128ctr    = [-16, 5, -3, -65534]
+suit-sha256-es256-ecdh-a128ctr     = [-16, -7, -29, -65534]
+suit-sha256-eddsa-ecdh-a128ctr     = [-16, -8, -29, -65534]
+suit-sha256-es256-ecdh-a128gcm     = [-16, -7, -29, 1]
+suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -29, 24]
+suit-sha256-hsslms-a256kw-a256ctr  = [-16, -46, -5, -65532]
 
 SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile<5, -65534> .and COSE_Messages
 SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile<-7,-65534> .and COSE_Messages

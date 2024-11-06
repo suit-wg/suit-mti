@@ -1,7 +1,7 @@
 ---
 title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
 abbrev: MTI SUIT Algorithms
-docname: draft-ietf-suit-mti-05
+docname: draft-ietf-suit-mti-08
 category: std
 
 area: Security
@@ -77,7 +77,7 @@ At least one MTI algorithm in each category MUST be FIPS qualified.
 
 Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.
 
-Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles.
+Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles. Recipients MAY choose not to implement an encryption algorithm if encrypted payloads will never be used.
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
@@ -91,8 +91,8 @@ The algorithms that form a part of the profiles defined in this document are gro
 
 * Digest Algorithms
 * Authentication Algorithms
-* Key Exchange Algorithms
-* Encryption Algorithms
+* Key Exchange Algorithms (OPTIONAL)
+* Encryption Algorithms (OPTIONAL)
 
 # Profiles
 
@@ -152,6 +152,8 @@ Recognized profiles are defined below.
 | Authentication | HSS-LMS | -46 |
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
+
+This draft does not specify a particular set of HSS-LMS parameters. Deep trees are RECOMMENDED due to key lifetimes in IoT devices.
 
 # Reporting Profiles
 

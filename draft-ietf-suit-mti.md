@@ -40,8 +40,8 @@ author:
  -
       ins: A. Tsukamoto
       name: Akira Tsukamoto
-      organization: ALAXALA Networks Corp.
-      email: akira.tsukamoto@alaxala.com
+      organization: 
+      email: akira.tsukamoto@gmail.com
 
 normative:
   RFC8152:

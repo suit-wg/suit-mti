@@ -40,7 +40,7 @@ author:
  -
       ins: A. Tsukamoto
       name: Akira Tsukamoto
-      organization: 
+      organization: Openchip & Software Technologies, S.L.
       email: akira.tsukamoto@gmail.com
 
 normative:

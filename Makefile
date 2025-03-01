@@ -20,6 +20,7 @@
 MD_FILE := draft-ietf-suit-mti.md
 DRAFT := $(shell grep 'docname: ' $(MD_FILE) | awk '{print $$2}')
 
+.PHONY: all
 all: $(DRAFT).xml $(DRAFT).txt $(DRAFT).html
 
 $(DRAFT).html: $(DRAFT).xml

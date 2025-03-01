@@ -5,14 +5,15 @@
 SUIT                                                            B. Moran
 Internet-Draft                                               Arm Limited
 Intended status: Standards Track                          Ø. Rønningstad
-Expires: 1 June 2025                                Nordic Semiconductor
+Expires: 3 September 2025                           Nordic Semiconductor
                                                             A. Tsukamoto
-                                                        28 November 2024
+                                  Openchip & Software Technologies, S.L.
+                                                            2 March 2025
 
 
 Mandatory-to-Implement Algorithms for Authors and Recipients of Software
               Update for the Internet of Things manifests
-                         draft-ietf-suit-mti-08
+                          draft-ietf-suit-mti
 
 Abstract
 
@@ -35,12 +36,27 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2025.
+   This Internet-Draft will expire on 3 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+
+Moran, et al.           Expires 3 September 2025                [Page 1]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -51,26 +67,19 @@ Copyright Notice
    described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Revised BSD License.
 
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 1]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
-
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Algorithms  . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.   Symmetric MTI profile:
-           suit-sha256-hmac-a128kw-a128ctr . . . . . . . . . . . . .   3
+           suit-sha256-hmac-a128kw-a128ctr . . . . . . . . . . . . .   4
      3.2.  Current Constrained Asymmetric MTI Profile 1:
            suit-sha256-es256-ecdh-a128ctr  . . . . . . . . . . . . .   4
      3.3.  Current Constrained Asymmetric MTI Profile 2:
            suit-sha256-eddsa-ecdh-a128ctr  . . . . . . . . . . . . .   4
      3.4.  Current AEAD Asymmetric MTI Profile 1:
-           suit-sha256-es256-ecdh-a128gcm  . . . . . . . . . . . . .   4
+           suit-sha256-es256-ecdh-a128gcm  . . . . . . . . . . . . .   5
      3.5.  Current AEAD Asymmetric MTI Profile 2:
            suit-sha256-eddsa-ecdh-chacha-poly  . . . . . . . . . . .   5
      3.6.  Future Constrained Asymmetric MTI Profile 1:
@@ -98,6 +107,13 @@ Table of Contents
 
    *  Two "Current" AEAD Asymmetric MTI profiles
 
+
+
+Moran, et al.           Expires 3 September 2025                [Page 2]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
    *  One "Future" Constrained Asymmetric MTI profile
 
    At least one MTI algorithm in each category MUST be FIPS qualified.
@@ -106,13 +122,6 @@ Table of Contents
    powerful/complex manifest authors and constrained manifest
    recipients, the requirements for Recipients and Authors are
    different.
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 2]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
 
    Recipients MAY choose which MTI profile they wish to implement.  It
    is RECOMMENDED that they implement the "Future" Asymmetric MTI
@@ -148,6 +157,19 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
 
    Recognized profiles are defined below.
 
+
+
+
+
+
+
+
+
+Moran, et al.           Expires 3 September 2025                [Page 3]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
 3.1.   Symmetric MTI profile: suit-sha256-hmac-a128kw-a128ctr
 
               +================+=================+==========+
@@ -161,14 +183,6 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
               +----------------+-----------------+----------+
               | Encryption     | A128CTR         | -65534   |
               +----------------+-----------------+----------+
-
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 3]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
 
                                   Table 1
 
@@ -204,6 +218,14 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
              | Encryption     | A128CTR          | -65534   |
              +----------------+------------------+----------+
 
+
+
+
+Moran, et al.           Expires 3 September 2025                [Page 4]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
                                  Table 3
 
 3.4.  Current AEAD Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-
@@ -218,14 +240,6 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
              +----------------+------------------+----------+
              | Key Exchange   | ECDH-ES + A128KW | -29      |
              +----------------+------------------+----------+
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 4]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
-
              | Encryption     | A128GCM          | 1        |
              +----------------+------------------+----------+
 
@@ -260,6 +274,14 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
                  +----------------+-----------+----------+
                  | Key Exchange   | A256KW    | -5       |
                  +----------------+-----------+----------+
+
+
+
+Moran, et al.           Expires 3 September 2025                [Page 5]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
                  | Encryption     | A256CTR   | -65532   |
                  +----------------+-----------+----------+
 
@@ -267,20 +289,6 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
 
    This draft does not specify a particular set of HSS-LMS parameters.
    Deep trees are RECOMMENDED due to key lifetimes in IoT devices.
-
-
-
-
-
-
-
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 5]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
 
 4.  Reporting Profiles
 
@@ -323,20 +331,15 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
    IANA is requested to create a page for COSE Algorithm Profiles within
    the category for Software Update for the Internet of Things (SUIT)
 
+
+
+Moran, et al.           Expires 3 September 2025                [Page 6]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
    IANA is also requested to create a registry for COSE Alforithm
    Profiles within this page.  The initial content of the registry is:
-
-
-
-
-
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 6]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
 
    +=============+=========+======+====+========+==========+==========+=========+
    |Profile      |Status   |Digest|Auth|Key     |Encryption|Descriptor|Reference|
@@ -376,23 +379,29 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
 
 7.1.  Normative References
 
+
+
+
+
+
+
+
+
+
+
+Moran, et al.           Expires 3 September 2025                [Page 7]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
    [I-D.ietf-suit-manifest]
               Moran, B., Tschofenig, H., Birkholz, H., Zandberg, K., and
               O. Rønningstad, "A Concise Binary Object Representation
               (CBOR)-based Serialization Format for the Software Updates
               for Internet of Things (SUIT) Manifest", Work in Progress,
-              Internet-Draft, draft-ietf-suit-manifest-29, 7 November
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              suit-manifest-29>.
-
-
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 7]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
+              Internet-Draft, draft-ietf-suit-manifest-33, 24 February
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              suit-manifest-33>.
 
    [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
               RFC 8152, DOI 10.17487/RFC8152, July 2017,
@@ -419,9 +428,9 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
               Tschofenig, H., Housley, R., Moran, B., Brown, D., and K.
               Takayama, "Encrypted Payloads in SUIT Manifests", Work in
               Progress, Internet-Draft, draft-ietf-suit-firmware-
-              encryption-21, 21 October 2024,
+              encryption-23, 29 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-suit-
-              firmware-encryption-21>.
+              firmware-encryption-23>.
 
    [IANA-COSE]
               "CBOR Object Signing and Encryption (COSE)", 2022,
@@ -434,21 +443,16 @@ Appendix A.  A.  Full CDDL
    messages, but untagged messages are also defined for use in protocols
    that share a ciphersuite with SUIT.
 
+
+
+Moran, et al.           Expires 3 September 2025                [Page 8]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
    To be valid, the following CDDL MUST have the COSE CDDL appended to
    it.  The COSE CDDL can be obtained by following the directions in
    [RFC9052], Section 1.4.
-
-
-
-
-
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 8]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
 
    SUIT_COSE_tool_tweak /= suit-sha256-hmac-a128kw-a128ctr
    SUIT_COSE_tool_tweak /= suit-sha256-es256-ecdh-a128ctr
@@ -494,18 +498,18 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
        SUIT_COSE_Encrypt0_Tagged<encid> / SUIT_COSE_Mac_Tagged<authid> /
        SUIT_COSE_Mac0_Tagged<authid>
 
+
+
+
+Moran, et al.           Expires 3 September 2025                [Page 9]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
    ; Note: This is not the same definition as is used in COSE.
    ; It restricts a COSE header definition further without
    ; repeating the COSE definition. It should be merged
    ; with COSE by using the CDDL .and operator.
-
-
-
-Moran, et al.              Expires 1 June 2025                  [Page 9]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
-
    SUIT_COSE_Profile_Headers<algid> = (
        protected : bstr .cbor SUIT_COSE_alg_map<algid>,
        unprotected : SUIT_COSE_header_map
@@ -550,16 +554,17 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
 
    SUIT_COSE_Encrypt<encid> = [
        SUIT_COSE_Profile_Headers<encid>,
+
+
+
+Moran, et al.           Expires 3 September 2025               [Page 10]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
        ciphertext : bstr / nil,
        recipients : [+SUIT_COSE_recipient<encid>]
    ]
-
-
-
-
-Moran, et al.              Expires 1 June 2025                 [Page 10]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
 
 
    SUIT_COSE_recipient<encid> = [
@@ -605,21 +610,22 @@ Authors' Addresses
    Email: brendan.moran.ietf@gmail.com
 
 
+
+
+
+Moran, et al.           Expires 3 September 2025               [Page 11]
+
+Internet-Draft             MTI SUIT Algorithms                March 2025
+
+
    Øyvind Rønningstad
    Nordic Semiconductor
    Email: oyvind.ronningstad@gmail.com
 
 
-
-
-
-Moran, et al.              Expires 1 June 2025                 [Page 11]
-
-Internet-Draft             MTI SUIT Algorithms             November 2024
-
-
    Akira Tsukamoto
-   Email: akira.tsukamoto@alaxala.com
+   Openchip & Software Technologies, S.L.
+   Email: akira.tsukamoto@gmail.com
 
 
 
@@ -663,10 +669,4 @@ Internet-Draft             MTI SUIT Algorithms             November 2024
 
 
 
-
-
-
-
-
-
-Moran, et al.              Expires 1 June 2025                 [Page 12]
+Moran, et al.           Expires 3 September 2025               [Page 12]

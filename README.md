@@ -73,6 +73,6 @@ docname: draft-ietf-suit-mti-09
 ```
 
 2)
-Generate the xml file with ‘make’ command.
-This will generate the ‘draft-ietf-suit-mti-09.xml’ for the example above.
+Generate the xml file with `make` command.
+This will generate the `draft-ietf-suit-mti-09.xml` for the example above.
 Upload the new xml file as the draft to the datatracker at ietf.

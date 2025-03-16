@@ -60,13 +60,13 @@ informative:
 
 --- abstract
 
-This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case.
+This document specifies cryptographic algorithm profiles to be used with the SUIT manifest (see draft-ietf-suit-manifest).  These are the mandatory-to-implement algorithms to ensure interoperability.
 
 --- middle
 
 #  Introduction
 
-Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of MTI profile specifically for constrained node software update. These profiles are:
+This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case. Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of Mandatory To Implement (MTI) profile specifically for constrained node software update. These profiles are:
 
 * One Symmetric MTI profile
 * Two "Current" Constrained Asymmetric MTI profiles
@@ -75,15 +75,15 @@ Mandatory algorithms may change over time due to an evolving threat landscape. A
 
 At least one MTI algorithm in each category MUST be FIPS qualified.
 
-Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.
+Because SUIT presents an asymmetric communication profile, where manifest authors have unlimited resources and manifest recipients have constrained resources, the requirements for Recipients and Authors are different.
 
 Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles. Recipients MAY choose not to implement an encryption algorithm if encrypted payloads will never be used.
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
-AEAD is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require streaming decryption, which necessitates a non-AEAD ecryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.
+Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require on-the-fly decryption, which necessitates a non-AEAD encryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.
 
-Other use-cases of SUIT MAY define their own MTI algorithms.
+Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
 
 # Algorithms
 
@@ -157,7 +157,7 @@ This draft does not specify a particular set of HSS-LMS parameters. Deep trees a
 
 # Reporting Profiles
 
-When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.
+When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.
 
 # Security Considerations
 
@@ -165,12 +165,12 @@ For the avoidance of doubt, there are scenarios where payload or manifest encryp
 
 AES-CTR mode is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:
 
-* Streaming decryption must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.
+* On-the-fly decryption (without the whole payload) must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.
 * Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.
-* There are no chosen plaintext attacks: the plaintext is authenticated prior to encryption.
+* Chosen plaintext attacks are extremely difficult to achieve, since the payloads are typically constructed in a relatively secure environment--the developer's computer or build infrastructure--and should be signed in an air-gapped or similarly protected environment. In short, the plaintext is authenticated prior to encryption.
 * Content Encryption Keys must be used to encrypt only once. See {{I-D.ietf-suit-firmware-encryption}}.
 
-As a result of these mitigating circumstances, AES-CTR is the most appropriate cipher for typical software/firmware delivery scenarios.
+As a result of these mitigating circumstances, AES-CTR is an acceptable cipher for typical software/firmware delivery scenarios.
 
 # IANA Considerations
 

@@ -43,7 +43,7 @@
       </address>
     </author>
 
-    <date year="2025" month="March" day="02"/>
+    <date year="2025" month="March" day="17"/>
 
     <area>Security</area>
     <workgroup>SUIT</workgroup>
@@ -52,7 +52,7 @@
     <abstract>
 
 
-<t>This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case.</t>
+<t>This document specifies cryptographic algorithm profiles to be used with the SUIT manifest (see draft-ietf-suit-manifest).  These are the mandatory-to-implement algorithms to ensure interoperability.</t>
 
 
 
@@ -67,7 +67,7 @@
 
 <section anchor="introduction"><name>Introduction</name>
 
-<t>Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of MTI profile specifically for constrained node software update. These profiles are:</t>
+<t>This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case. Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of Mandatory To Implement (MTI) profile specifically for constrained node software update. These profiles are:</t>
 
 <t><list style="symbols">
   <t>One Symmetric MTI profile</t>
@@ -78,15 +78,15 @@
 
 <t>At least one MTI algorithm in each category MUST be FIPS qualified.</t>
 
-<t>Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.</t>
+<t>Because SUIT presents an asymmetric communication profile, where manifest authors have unlimited resources and manifest recipients have constrained resources, the requirements for Recipients and Authors are different.</t>
 
 <t>Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles. Recipients MAY choose not to implement an encryption algorithm if encrypted payloads will never be used.</t>
 
 <t>Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.</t>
 
-<t>AEAD is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require streaming decryption, which necessitates a non-AEAD ecryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.</t>
+<t>Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require on-the-fly decryption, which necessitates a non-AEAD encryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.</t>
 
-<t>Other use-cases of SUIT MAY define their own MTI algorithms.</t>
+<t>Other use-cases of the SUIT Manifest (<xref target="I-D.ietf-suit-manifest"/>) MAY define their own MTI algorithms.</t>
 
 </section>
 <section anchor="algorithms"><name>Algorithms</name>
@@ -236,7 +236,7 @@
 </section>
 <section anchor="reporting-profiles"><name>Reporting Profiles</name>
 
-<t>When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.</t>
+<t>When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.</t>
 
 </section>
 <section anchor="security-considerations"><name>Security Considerations</name>
@@ -246,13 +246,13 @@
 <t>AES-CTR mode is specified, see <xref target="RFC9459"/>. All of the AES-CTR security considerations in <xref target="RFC9459"/> apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:</t>
 
 <t><list style="symbols">
-  <t>Streaming decryption must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.</t>
+  <t>On-the-fly decryption (without the whole payload) must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.</t>
   <t>Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.</t>
-  <t>There are no chosen plaintext attacks: the plaintext is authenticated prior to encryption.</t>
+  <t>Chosen plaintext attacks are extremely difficult to achieve, since the payloads are typically constructed in a relatively secure environment--the developer's computer or build infrastructure--and should be signed in an air-gapped or similarly protected environment. In short, the plaintext is authenticated prior to encryption.</t>
   <t>Content Encryption Keys must be used to encrypt only once. See <xref target="I-D.ietf-suit-firmware-encryption"/>.</t>
 </list></t>
 
-<t>As a result of these mitigating circumstances, AES-CTR is the most appropriate cipher for typical software/firmware delivery scenarios.</t>
+<t>As a result of these mitigating circumstances, AES-CTR is an acceptable cipher for typical software/firmware delivery scenarios.</t>
 
 </section>
 <section anchor="iana-considerations"><name>IANA Considerations</name>
@@ -516,16 +516,23 @@ suit-sha256-es256-ecdh-a128gcm     = [-16, -7, -29, 1]
 suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -29, 24]
 suit-sha256-hsslms-a256kw-a256ctr  = [-16, -46, -5, -65532]
 
-SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile<5, -65534> .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile<-7,-65534> .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile<-8,-65534> .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile<-7,1> .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = SUIT_COSE_Profile<-8,24> .and COSE_Messages
-SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = SUIT_COSE_Profile<-46,-65532> .and COSE_Messages
+SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile<5, -65534> .and /
+    COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile<-7,-65534> .and /
+    COSE_Messages
+SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile<-8,-65534> .and /
+    COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile<-7,1> .and /
+    COSE_Messages
+SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = /
+    SUIT_COSE_Profile<-8,24> .and COSE_Messages
+SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = /
+    SUIT_COSE_Profile<-46,-65532> .and COSE_Messages
 
 SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
 
-SUIT_COSE_Messages<authid, encid> = SUIT_COSE_Untagged_Message<authid, encid> /
+SUIT_COSE_Messages<authid, encid> = /
+    SUIT_COSE_Untagged_Message<authid, encid> /
     SUIT_COSE_Tagged_Message<authid, encid> 
       
 SUIT_COSE_Untagged_Message<authid, encid> = SUIT_COSE_Sign<authid> /
@@ -634,89 +641,94 @@ SUIT_COSE_Mac0<authid> = [
   </back>
 
 <!-- ##markdown-source:
-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
-C2vX29l4v50vfsF3NGDw/gcsVFWKMDEAAA==
+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
 
 -->
 

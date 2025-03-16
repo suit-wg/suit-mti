@@ -9,7 +9,7 @@
 <meta content="Øyvind Rønningstad" name="author">
 <meta content="Akira Tsukamoto" name="author">
 <meta content="
-       This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case. 
+       This document specifies cryptographic algorithm profiles to be used with the SUIT manifest (see draft-ietf-suit-manifest).  These are the mandatory-to-implement algorithms to ensure interoperability. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1210,7 +1210,7 @@ li > p:last-of-type:only-child {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Moran, et al.</td>
-<td class="center">Expires 3 September 2025</td>
+<td class="center">Expires 18 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1223,12 +1223,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-suit-mti</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-02" class="published">2 March 2025</time>
+<time datetime="2025-03-17" class="published">17 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-03">3 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-18">18 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1249,7 +1249,7 @@ li > p:last-of-type:only-child {
 <h1 id="title">Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document specifies cryptographic algorithm profiles to be used with the SUIT manifest (see draft-ietf-suit-manifest).  These are the mandatory-to-implement algorithms to ensure interoperability.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1270,7 +1270,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1363,7 +1363,7 @@ li > p:last-of-type:only-child {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of MTI profile specifically for constrained node software update. These profiles are:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case. Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of Mandatory To Implement (MTI) profile specifically for constrained node software update. These profiles are:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-2.1">One Symmetric MTI profile<a href="#section-1-2.1" class="pilcrow">¶</a>
 </li>
@@ -1375,11 +1375,11 @@ li > p:last-of-type:only-child {
 </li>
       </ul>
 <p id="section-1-3">At least one MTI algorithm in each category MUST be FIPS qualified.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">Because SUIT presents an asymmetric communication profile, with powerful/complex manifest authors and constrained manifest recipients, the requirements for Recipients and Authors are different.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">Because SUIT presents an asymmetric communication profile, where manifest authors have unlimited resources and manifest recipients have constrained resources, the requirements for Recipients and Authors are different.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles. Recipients MAY choose not to implement an encryption algorithm if encrypted payloads will never be used.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">AEAD is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require streaming decryption, which necessitates a non-AEAD ecryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">Other use-cases of SUIT MAY define their own MTI algorithms.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-7">Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require on-the-fly decryption, which necessitates a non-AEAD encryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">Other use-cases of the SUIT Manifest (<span>[<a href="#I-D.ietf-suit-manifest" class="cite xref">I-D.ietf-suit-manifest</a>]</span>) MAY define their own MTI algorithms.<a href="#section-1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="algorithms">
@@ -1648,7 +1648,7 @@ li > p:last-of-type:only-child {
       <h2 id="name-reporting-profiles">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-reporting-profiles" class="section-name selfRef">Reporting Profiles</a>
       </h2>
-<p id="section-4-1">When using reverse-direction communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1659,16 +1659,16 @@ li > p:last-of-type:only-child {
 <p id="section-5-1">For the avoidance of doubt, there are scenarios where payload or manifest encryption are not required. In these scenarios, the encryption element of the selected profile is simply not used.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">AES-CTR mode is specified, see <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span>. All of the AES-CTR security considerations in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span> apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:<a href="#section-5-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-3.1">Streaming decryption must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.<a href="#section-5-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5-3.1">On-the-fly decryption (without the whole payload) must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.<a href="#section-5-3.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-5-3.2">Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.<a href="#section-5-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-5-3.3">There are no chosen plaintext attacks: the plaintext is authenticated prior to encryption.<a href="#section-5-3.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-3.3">Chosen plaintext attacks are extremely difficult to achieve, since the payloads are typically constructed in a relatively secure environment--the developer's computer or build infrastructure--and should be signed in an air-gapped or similarly protected environment. In short, the plaintext is authenticated prior to encryption.<a href="#section-5-3.3" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-5-3.4">Content Encryption Keys must be used to encrypt only once. See <span>[<a href="#I-D.ietf-suit-firmware-encryption" class="cite xref">I-D.ietf-suit-firmware-encryption</a>]</span>.<a href="#section-5-3.4" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-5-4">As a result of these mitigating circumstances, AES-CTR is the most appropriate cipher for typical software/firmware delivery scenarios.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-4">As a result of these mitigating circumstances, AES-CTR is an acceptable cipher for typical software/firmware delivery scenarios.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1850,16 +1850,23 @@ suit-sha256-es256-ecdh-a128gcm     = [-16, -7, -29, 1]
 suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -29, 24]
 suit-sha256-hsslms-a256kw-a256ctr  = [-16, -46, -5, -65532]
 
-SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile&lt;5, -65534&gt; .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile&lt;-7,-65534&gt; .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile&lt;-8,-65534&gt; .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile&lt;-7,1&gt; .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = SUIT_COSE_Profile&lt;-8,24&gt; .and COSE_Messages
-SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = SUIT_COSE_Profile&lt;-46,-65532&gt; .and COSE_Messages
+SUIT_COSE_Profile_HMAC_A128KW_A128CTR = SUIT_COSE_Profile&lt;5, -65534&gt; .and /
+    COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128CTR = SUIT_COSE_Profile&lt;-7,-65534&gt; .and /
+    COSE_Messages
+SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = SUIT_COSE_Profile&lt;-8,-65534&gt; .and /
+    COSE_Messages
+SUIT_COSE_Profile_ES256_ECDH_A128GCM = SUIT_COSE_Profile&lt;-7,1&gt; .and /
+    COSE_Messages
+SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = /
+    SUIT_COSE_Profile&lt;-8,24&gt; .and COSE_Messages
+SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = /
+    SUIT_COSE_Profile&lt;-46,-65532&gt; .and COSE_Messages
 
 SUIT_COSE_Profile&lt;authid, encid&gt; = SUIT_COSE_Messages&lt;authid,encid&gt;
 
-SUIT_COSE_Messages&lt;authid, encid&gt; = SUIT_COSE_Untagged_Message&lt;authid, encid&gt; /
+SUIT_COSE_Messages&lt;authid, encid&gt; = /
+    SUIT_COSE_Untagged_Message&lt;authid, encid&gt; /
     SUIT_COSE_Tagged_Message&lt;authid, encid&gt;
 
 SUIT_COSE_Untagged_Message&lt;authid, encid&gt; = SUIT_COSE_Sign&lt;authid&gt; /

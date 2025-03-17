@@ -86,6 +86,8 @@ Table of Contents
            suit-sha256-hsslms-a256kw-a256ctr . . . . . . . . . . . .   6
    4.  Reporting Profiles  . . . . . . . . . . . . . . . . . . . . .   6
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+     5.1.  Payload encryption as a cybersecurity defense . . . . . .   6
+     5.2.  Use of AES-CTR in payload encryption  . . . . . . . . . .   7
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
@@ -104,8 +106,6 @@ Table of Contents
    five choices of Mandatory To Implement (MTI) profile specifically for
    constrained node software update.  These profiles are:
 
-   *  One Symmetric MTI profile
-
 
 
 
@@ -113,6 +113,8 @@ Moran, et al.           Expires 18 September 2025               [Page 2]
 
 Internet-Draft             MTI SUIT Algorithms                March 2025
 
+
+   *  One Symmetric MTI profile
 
    *  Two "Current" Constrained Asymmetric MTI profiles
 
@@ -136,12 +138,16 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
    Authors MUST implement all MTI profiles.  Authors MAY implement any
    number of other profiles.
 
+   This draft makes use of AES-CTR in COSE ([RFC9459]), which is
+   Deprecated.  AES-CTR is used because it enables out-of-order
+   reception and decryption of blocks, which is necessary for some
+   constrained node use cases.  Out-of-order reception with on-the-fly
+   decryption is not available in the prefered encryption algorithms.
    Authenticated Encryption with Additional Data (AEAD) is preferred
-   over un-authenticated encryption.  Where possible an AEAD profile
-   SHOULD be selected.  Certain constrained IoT applications require on-
-   the-fly decryption, which necessitates a non-AEAD encryption
-   algorithm.  If the application is not a constrained device, the two
-   AEAD profiles are RECOMMENDED.
+   over un-authenticated encryption and an AEAD profile SHOULD be
+   selected wherever possible.  See Security Considerations in this
+   draft (Section 5.2) and in [RFC9459] (Section 8) for additional
+   details on the considerations for the use of AES-CTR.
 
    Other use-cases of the SUIT Manifest ([I-D.ietf-suit-manifest]) MAY
    define their own MTI algorithms.
@@ -157,18 +163,14 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
 
    *  Key Exchange Algorithms (OPTIONAL)
 
-   *  Encryption Algorithms (OPTIONAL)
-
-
-
-
-
 
 
 Moran, et al.           Expires 18 September 2025               [Page 3]
 
 Internet-Draft             MTI SUIT Algorithms                March 2025
 
+
+   *  Encryption Algorithms (OPTIONAL)
 
 3.  Profiles
 
@@ -216,8 +218,6 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
              | Digest         | SHA-256          | -16      |
              +----------------+------------------+----------+
              | Authentication | EDDSA            | -8       |
-             +----------------+------------------+----------+
-             | Key Exchange   | ECDH-ES + A128KW | -29      |
 
 
 
@@ -226,6 +226,8 @@ Moran, et al.           Expires 18 September 2025               [Page 4]
 Internet-Draft             MTI SUIT Algorithms                March 2025
 
 
+             +----------------+------------------+----------+
+             | Key Exchange   | ECDH-ES + A128KW | -29      |
              +----------------+------------------+----------+
              | Encryption     | A128CTR          | -65534   |
              +----------------+------------------+----------+
@@ -275,8 +277,6 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
 
 
 
-
-
 Moran, et al.           Expires 18 September 2025               [Page 5]
 
 Internet-Draft             MTI SUIT Algorithms                March 2025
@@ -314,22 +314,22 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
 
 5.  Security Considerations
 
-   For the avoidance of doubt, there are scenarios where payload or
-   manifest encryption are not required.  In these scenarios, the
-   encryption element of the selected profile is simply not used.
+   Payload encryption is predominantly to protect user data, such as
+   personalisation data, in transit ([RFC8890]).  It can also serve to
+   protect Intellectual Property in transit.
 
-   AES-CTR mode is specified, see [RFC9459].  All of the AES-CTR
-   security considerations in [RFC9459] apply.  A non-AEAD encryption
-   mode is specified in this draft due to the following mitigating
-   circumstances:
+5.1.  Payload encryption as a cybersecurity defense
 
-   *  On-the-fly decryption (without the whole payload) must be
-      supported.  Therefore, there is no difference between AEAD and
-      plaintext hash verification.
+   To define the purpose of payload encryption as a defensive
+   cybersecurity tool, it is important to define the capabilities of
+   modern threat actors.  A variety of capabilities are possible:
 
-   *  Out-of-order decryption must be supported.  Therefore, we must use
-      a stream cipher that supports random access.
+   *  find bugs by binary code inspection
 
+   *  send unexpected data to communication interfaces, looking for
+      unexpected behavior
+
+   *  use fault injection to bypass or manipulate code
 
 
 
@@ -337,6 +337,30 @@ Moran, et al.           Expires 18 September 2025               [Page 6]
 
 Internet-Draft             MTI SUIT Algorithms                March 2025
 
+
+   *  use communication attacks or fault injection along with gadgets
+      found in the code
+
+   Given this range of capabilities, it is important to understand which
+   capabilities are impacted by firmware encryption.  Threat actors who
+   find bugs by manual inspection or use gadgets found in the code will
+   need to first extract the code from the target.  In the IoT context,
+   it is expected that most threat actors will start with sample devices
+   and physical access to test attacks.
+
+   Due to these factors, payload encryption serves to limit the pool of
+   attackers to those who have the technical capability to extract code
+   from physical devices and those who perform code-free attacks.
+
+5.2.  Use of AES-CTR in payload encryption
+
+   AES-CTR mode with a digest is specified, see [RFC9459].  All of the
+   AES-CTR security considerations in [RFC9459] apply.  A non-AEAD
+   encryption mode is specified in this draft due to the following
+   mitigating circumstances:
+
+   *  Out-of-order decryption must be supported.  Therefore, we must use
+      a stream cipher that supports random access.
 
    *  Chosen plaintext attacks are extremely difficult to achieve, since
       the payloads are typically constructed in a relatively secure
@@ -358,30 +382,6 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
 
    IANA is also requested to create a registry for COSE Alforithm
    Profiles within this page.  The initial content of the registry is:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -483,6 +483,10 @@ Internet-Draft             MTI SUIT Algorithms                March 2025
               "CBOR Object Signing and Encryption (COSE)", 2022,
               <https://www.iana.org/assignments/cose/cose.xhtml>.
 
+   [RFC8890]  Nottingham, M., "The Internet is for End Users", RFC 8890,
+              DOI 10.17487/RFC8890, August 2020,
+              <https://www.rfc-editor.org/rfc/rfc8890>.
+
 Appendix A.  A.  Full CDDL
 
    The following CDDL creates a subset of COSE for use with SUIT.  Both
@@ -493,10 +497,6 @@ Appendix A.  A.  Full CDDL
    To be valid, the following CDDL MUST have the COSE CDDL appended to
    it.  The COSE CDDL can be obtained by following the directions in
    [RFC9052], Section 1.4.
-
-
-
-
 
 
 

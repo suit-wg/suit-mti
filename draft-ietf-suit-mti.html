@@ -1850,22 +1850,22 @@ suit-sha256-es256-ecdh-a128gcm     = [-16, -7, -29, 1]
 suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -29, 24]
 suit-sha256-hsslms-a256kw-a256ctr  = [-16, -46, -5, -65532]
 
-SUIT_COSE_Profile_HMAC_A128KW_A128CTR = /
+SUIT_COSE_Profile_HMAC_A128KW_A128CTR =
     SUIT_COSE_Profile&lt;5,-65534&gt; .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128CTR = /
+SUIT_COSE_Profile_ES256_ECDH_A128CTR =
     SUIT_COSE_Profile&lt;-7,-65534&gt; .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = /
+SUIT_COSE_Profile_EDDSA_ECDH_A128CTR =
     SUIT_COSE_Profile&lt;-8,-65534&gt; .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128GCM = /
+SUIT_COSE_Profile_ES256_ECDH_A128GCM =
     SUIT_COSE_Profile&lt;-7,1&gt; .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = /
+SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 =
     SUIT_COSE_Profile&lt;-8,24&gt; .and COSE_Messages
-SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = /
+SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR =
     SUIT_COSE_Profile&lt;-46,-65532&gt; .and COSE_Messages
 
 SUIT_COSE_Profile&lt;authid, encid&gt; = SUIT_COSE_Messages&lt;authid,encid&gt;
 
-SUIT_COSE_Messages&lt;authid, encid&gt; = /
+SUIT_COSE_Messages&lt;authid, encid&gt; =
     SUIT_COSE_Untagged_Message&lt;authid, encid&gt; /
     SUIT_COSE_Tagged_Message&lt;authid, encid&gt;
 
@@ -1874,10 +1874,10 @@ SUIT_COSE_Untagged_Message&lt;authid, encid&gt; = SUIT_COSE_Sign&lt;authid&gt; /
     SUIT_COSE_Encrypt0&lt;encid&gt; / SUIT_COSE_Mac&lt;authid&gt; /
     SUIT_COSE_Mac0&lt;authid&gt;
 
-SUIT_COSE_Tagged_Message&lt;authid, encid&gt; = SUIT_COSE_Sign_Tagged&lt;authid&gt; /
-    SUIT_COSE_Sign1_Tagged&lt;authid&gt; / SUIT_COSE_Encrypt_Tagged&lt;encid&gt; /
-    SUIT_COSE_Encrypt0_Tagged&lt;encid&gt; / SUIT_COSE_Mac_Tagged&lt;authid&gt; /
-    SUIT_COSE_Mac0_Tagged&lt;authid&gt;
+SUIT_COSE_Tagged_Message&lt;authid, encid&gt; =
+    SUIT_COSE_Sign_Tagged&lt;authid&gt; / SUIT_COSE_Sign1_Tagged&lt;authid&gt; /
+    SUIT_COSE_Encrypt_Tagged&lt;encid&gt; / SUIT_COSE_Encrypt0_Tagged&lt;encid&gt; /
+    SUIT_COSE_Mac_Tagged&lt;authid&gt; / SUIT_COSE_Mac0_Tagged&lt;authid&gt;
 
 ; Note: This is not the same definition as is used in COSE.
 ; It restricts a COSE header definition further without

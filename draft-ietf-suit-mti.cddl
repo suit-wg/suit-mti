@@ -20,22 +20,22 @@ suit-sha256-es256-ecdh-a128gcm     = [-16, -7, -29, 1]
 suit-sha256-eddsa-ecdh-chacha-poly = [-16, -8, -29, 24]
 suit-sha256-hsslms-a256kw-a256ctr  = [-16, -46, -5, -65532]
 
-SUIT_COSE_Profile_HMAC_A128KW_A128CTR = /
+SUIT_COSE_Profile_HMAC_A128KW_A128CTR =
     SUIT_COSE_Profile<5,-65534> .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128CTR = /
+SUIT_COSE_Profile_ES256_ECDH_A128CTR =
     SUIT_COSE_Profile<-7,-65534> .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_A128CTR = /
+SUIT_COSE_Profile_EDDSA_ECDH_A128CTR =
     SUIT_COSE_Profile<-8,-65534> .and COSE_Messages
-SUIT_COSE_Profile_ES256_ECDH_A128GCM = /
+SUIT_COSE_Profile_ES256_ECDH_A128GCM =
     SUIT_COSE_Profile<-7,1> .and COSE_Messages
-SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 = /
+SUIT_COSE_Profile_EDDSA_ECDH_CHACHA20_POLY1304 =
     SUIT_COSE_Profile<-8,24> .and COSE_Messages
-SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR = /
+SUIT_COSE_Profile_HSSLMS_A256KW_A256CTR =
     SUIT_COSE_Profile<-46,-65532> .and COSE_Messages
 
 SUIT_COSE_Profile<authid, encid> = SUIT_COSE_Messages<authid,encid>
 
-SUIT_COSE_Messages<authid, encid> = /
+SUIT_COSE_Messages<authid, encid> =
     SUIT_COSE_Untagged_Message<authid, encid> /
     SUIT_COSE_Tagged_Message<authid, encid> 
       
@@ -44,10 +44,10 @@ SUIT_COSE_Untagged_Message<authid, encid> = SUIT_COSE_Sign<authid> /
     SUIT_COSE_Encrypt0<encid> / SUIT_COSE_Mac<authid> /
     SUIT_COSE_Mac0<authid> 
 
-SUIT_COSE_Tagged_Message<authid, encid> = SUIT_COSE_Sign_Tagged<authid> /
-    SUIT_COSE_Sign1_Tagged<authid> / SUIT_COSE_Encrypt_Tagged<encid> /
-    SUIT_COSE_Encrypt0_Tagged<encid> / SUIT_COSE_Mac_Tagged<authid> /
-    SUIT_COSE_Mac0_Tagged<authid>
+SUIT_COSE_Tagged_Message<authid, encid> =
+    SUIT_COSE_Sign_Tagged<authid> / SUIT_COSE_Sign1_Tagged<authid> /
+    SUIT_COSE_Encrypt_Tagged<encid> / SUIT_COSE_Encrypt0_Tagged<encid> /
+    SUIT_COSE_Mac_Tagged<authid> / SUIT_COSE_Mac0_Tagged<authid>
 
 ; Note: This is not the same definition as is used in COSE.
 ; It restricts a COSE header definition further without

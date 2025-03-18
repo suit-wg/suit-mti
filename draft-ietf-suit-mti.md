@@ -57,6 +57,7 @@ informative:
     author:
     date: 2022
     target: https://www.iana.org/assignments/cose/cose.xhtml
+  RFC8890:
 
 --- abstract
 
@@ -81,7 +82,8 @@ Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDE
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
-Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption. Where possible an AEAD profile SHOULD be selected. Certain constrained IoT applications require on-the-fly decryption, which necessitates a non-AEAD encryption algorithm. If the application is not a constrained device, the two AEAD profiles are RECOMMENDED.
+This draft makes use of AES-CTR in COSE ({{-ctrcbc}}), which is Deprecated. AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the prefered encryption algorithms.
+Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption and an AEAD profile SHOULD be selected wherever possible. See Security Considerations in this draft ({{aes-ctr-payloads}}) and in {{-ctrcbc}} (Section 8) for additional details on the considerations for the use of AES-CTR.
 
 Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
 
@@ -159,13 +161,27 @@ This draft does not specify a particular set of HSS-LMS parameters. Deep trees a
 
 When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.
 
-# Security Considerations
+# Security Considerations {#security}
 
-For the avoidance of doubt, there are scenarios where payload or manifest encryption are not required. In these scenarios, the encryption element of the selected profile is simply not used.
+Payload encryption is predominantly to protect user data, such as personalisation data, in transit ({{RFC8890}}). It can also serve to protect Intellectual Property in transit.
 
-AES-CTR mode is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:
+## Payload encryption as a cybersecurity defense
 
-* On-the-fly decryption (without the whole payload) must be supported. Therefore, there is no difference between AEAD and plaintext hash verification.
+To define the purpose of payload encryption as a defensive cybersecurity tool, it is important to define the capabilities of modern threat actors. A variety of capabilities are possible:
+
+* find bugs by binary code inspection
+* send unexpected data to communication interfaces, looking for unexpected behavior
+* use fault injection to bypass or manipulate code
+* use communication attacks or fault injection along with gadgets found in the code
+
+Given this range of capabilities, it is important to understand which capabilities are impacted by firmware encryption. Threat actors who find bugs by manual inspection or use gadgets found in the code will need to first extract the code from the target. In the IoT context, it is expected that most threat actors will start with sample devices and physical access to test attacks.
+
+Due to these factors, payload encryption serves to limit the pool of attackers to those who have the technical capability to extract code from physical devices and those who perform code-free attacks.
+
+## Use of AES-CTR in payload encryption {#aes-ctr-payloads}
+
+AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:
+
 * Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.
 * Chosen plaintext attacks are extremely difficult to achieve, since the payloads are typically constructed in a relatively secure environment--the developer's computer or build infrastructure--and should be signed in an air-gapped or similarly protected environment. In short, the plaintext is authenticated prior to encryption.
 * Content Encryption Keys must be used to encrypt only once. See {{I-D.ietf-suit-firmware-encryption}}.

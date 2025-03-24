@@ -49,6 +49,7 @@ normative:
   RFC9052: cose
   RFC9459: ctrcbc
   I-D.ietf-suit-manifest:
+  I-D.ietf-jose-fully-specified-algorithms:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
@@ -82,7 +83,7 @@ Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDE
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
-This draft makes use of AES-CTR in COSE ({{-ctrcbc}}), which is Deprecated. AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the prefered encryption algorithms.
+This draft 'makes use of AES-CTR with a digest algorithm in COSE as specified in ({{-ctrcbc}}). AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the preferred encryption algorithms.
 Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption and an AEAD profile SHOULD be selected wherever possible. See Security Considerations in this draft ({{aes-ctr-payloads}}) and in {{-ctrcbc}} (Section 8) for additional details on the considerations for the use of AES-CTR.
 
 Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
@@ -109,12 +110,12 @@ Recognized profiles are defined below.
 | Key Exchange | A128KW Key Wrap | -3 |
 | Encryption | A128CTR | -65534 |
 
-## Current Constrained Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128ctr {#suit-sha256-es256-ecdh-a128ctr}
+## Current Constrained Asymmetric MTI Profile 1: suit-sha256-esp256-ecdh-a128ctr {#suit-sha256-es256-ecdh-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | ES256 | -7 |
+| Authentication | ESP256 | -9 | 
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128CTR | -65534 |
 
@@ -123,25 +124,25 @@ Recognized profiles are defined below.
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | EDDSA | -8 |
+| Authentication | Ed25519 | -50 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128CTR | -65534 |
 
-## Current AEAD Asymmetric MTI Profile 1: suit-sha256-es256-ecdh-a128gcm {#suit-sha256-es256-ecdh-a128gcm}
+## Current AEAD Asymmetric MTI Profile 1: suit-sha256-esp256-ecdh-a128gcm {#suit-sha256-esp256-ecdh-a128gcm}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | ES256 | -7 |
+| Authentication | ESp256 | -9 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128GCM | 1 |
 
-## Current AEAD Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-chacha-poly {#suit-sha256-eddsa-ecdh-chacha-poly}
+## Current AEAD Asymmetric MTI Profile 2: suit-sha256-ed25519-ecdh-chacha-poly {#suit-sha256-ed25519-ecdh-chacha-poly}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | EDDSA | -8 |
+| Authentication | Ed25519 | -50 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | ChaCha20/Poly1305 | 24 |
 
@@ -163,7 +164,7 @@ When using Manifest Recipients Response communication, particularly data structu
 
 # Security Considerations {#security}
 
-Payload encryption is predominantly to protect user data, such as personalisation data, in transit ({{RFC8890}}). It can also serve to protect Intellectual Property in transit.
+Payload encryption is often used to protect Intellectual Property (IP) and Personally Identifying Information (PII) in transit. The primary function of payload in SUIT is to act as a defense against passive IP and PII snooping. By encrypting payloads, confidential IP and PII can be protected during distribution. However, payload encryption of firmware or software updates of a commodity device is not a cybersecurity defense against targetted attacks on that device.
 
 ## Payload encryption as a cybersecurity defense
 

@@ -133,7 +133,7 @@ Recognized profiles are defined below.
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | ESp256 | -9 |
+| Authentication | ESP256 | -9 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128GCM | 1 |
 

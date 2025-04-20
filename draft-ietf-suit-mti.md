@@ -73,7 +73,7 @@ This document specifies algorithm profiles for SUIT manifest parsers and authors
 * One Symmetric MTI profile
 * Two "Current" Constrained Asymmetric MTI profiles
 * Two "Current" AEAD Asymmetric MTI profiles
-* One "Future" Constrained Asymmetric MTI profile
+* One "Future" Constrained Asymmetric MTI profile (Quantum-Safe)
 
 At least one MTI algorithm in each category MUST be FIPS qualified.
 
@@ -83,7 +83,9 @@ Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDE
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
-This draft 'makes use of AES-CTR with a digest algorithm in COSE as specified in ({{-ctrcbc}}). AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the preferred encryption algorithms.
+This draft makes use of AES-CTR with a digest algorithm in COSE as specified in ({{-ctrcbc}}). AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases.
+Out-of-order reception with on-the-fly decryption is not available in the preferred encryption algorithms.
+
 Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption and an AEAD profile SHOULD be selected wherever possible. See Security Considerations in this draft ({{aes-ctr-payloads}}) and in {{-ctrcbc}} (Section 8) for additional details on the considerations for the use of AES-CTR.
 
 Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.

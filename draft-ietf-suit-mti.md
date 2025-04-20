@@ -158,7 +158,11 @@ Recognized profiles are defined below.
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
 
-This draft does not specify a particular set of HSS-LMS parameters. Deep trees are RECOMMENDED due to key lifetimes in IoT devices.
+This draft does not specify a particular set of HSS-LMS parameters.
+Deep trees are RECOMMENDED due to key lifetimes in IoT devices.
+
+This choices uses HSS-LMS as described in {{?RFC8778}}.
+This choice is considered quantum-safe (see {{?I-D.ietf-psquip-pqc-engineers}}).
 
 # Reporting Profiles
 

@@ -212,7 +212,12 @@ within this page. The initial content of the registry is:
 | suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8  | -29 | 24     | \[-16,  -8, -29,     24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
 | suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 
-New entries to this registry require standards action.
+New entries to this registry require Standards Action.
+A recipient device that claims conformance to this document will have implemented at least one of the above algorithms.
+
+As time progresses, if entries are removed from mandatory status, they will become SHOULD, MAY and then possibly NOT RECOMMENDED for new implementation.  However, as it may be impossible to update the SUIT manifest processor in the field, support for all relevant algorithms will almost always be required by authoring tools.
+
+When new algorithms are added by subsequent documents, the device and authoring tools will then claim conformance to those new documents.
 
 --- back
 

@@ -156,7 +156,10 @@ Recognized profiles are defined below.
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
 
-This draft does not specify a particular set of HSS-LMS parameters. Deep trees are RECOMMENDED due to key lifetimes in IoT devices.
+The decision as to how deep the tree is, is a decision that affects authoring tools only.
+Verification is not affected by the choice of "W" parameter, but the size of the signature is affected.
+In order to support long the lifetimes needed by IoT device, a deep trees are RECOMMENDED.
+
 
 # Reporting Profiles
 

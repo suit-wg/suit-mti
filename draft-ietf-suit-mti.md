@@ -158,7 +158,7 @@ Recognized profiles are defined below.
 
 The decision as to how deep the tree is, is a decision that affects authoring tools only.
 Verification is not affected by the choice of "W" parameter, but the size of the signature is affected.
-In order to support long the lifetimes needed by IoT device, a deep trees are RECOMMENDED.
+In order to support long the lifetimes needed by IoT device, deep trees are RECOMMENDED.
 
 
 # Reporting Profiles

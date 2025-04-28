@@ -110,7 +110,7 @@ Recognized profiles are defined below.
 | Key Exchange | A128KW Key Wrap | -3 |
 | Encryption | A128CTR | -65534 |
 
-## Current Constrained Asymmetric MTI Profile 1: suit-sha256-esp256-ecdh-a128ctr {#suit-sha256-es256-ecdh-a128ctr}
+## Current Constrained Asymmetric MTI Profile 1: suit-sha256-esp256-ecdh-a128ctr {#suit-sha256-esp256-ecdh-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
@@ -163,7 +163,7 @@ In order to support long lifetimes needed by IoT device, deep trees are RECOMMEN
 
 # Reporting Profiles
 
-When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-es256-ecdh-a128ctr.
+When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-esp256-ecdh-a128ctr.
 
 # Security Considerations {#security}
 
@@ -203,9 +203,9 @@ within this page. The initial content of the registry is:
 | Profile | Status | Digest | Auth | Key Exchange | Encryption | Descriptor Array | Reference
 |====|
 | suit-sha256-hmac-a128kw-a128ctr    | MANDATORY | -16 | 5   | -3  | -65534 | \[-16,   5,  -3, -65534\] | {{suit-sha256-hmac-a128kw-a128ctr}}
-| suit-sha256-es256-ecdh-a128ctr     | MANDATORY | -16 | -7  | -29 | -65534 | \[-16,  -7, -29, -65534\] | {{suit-sha256-es256-ecdh-a128ctr}}
+| suit-sha256-esp256-ecdh-a128ctr    | MANDATORY | -16 | -7  | -29 | -65534 | \[-16,  -7, -29, -65534\] | {{suit-sha256-esp256-ecdh-a128ctr}}
 | suit-sha256-eddsa-ecdh-a128ctr     | MANDATORY | -16 | -8  | -29 | -65534 | \[-16,  -8, -29, -65534\] | {{suit-sha256-eddsa-ecdh-a128ctr}}
-| suit-sha256-es256-ecdh-a128gcm     | MANDATORY | -16 | -7  | -29 | 1      | \[-16,  -7, -29,      1\] | {{suit-sha256-es256-ecdh-a128gcm}}
+| suit-sha256-esp256-ecdh-a128gcm    | MANDATORY | -16 | -7  | -29 | 1      | \[-16,  -7, -29,      1\] | {{suit-sha256-esp256-ecdh-a128gcm}}
 | suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8  | -29 | 24     | \[-16,  -8, -29,     24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
 | suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 

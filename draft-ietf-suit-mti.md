@@ -157,7 +157,7 @@ Recognized profiles are defined below.
 | Encryption | A256CTR | -65532 |
 
 The decision as to how deep the tree is, is a decision that affects authoring tools only.
-Verification is not affected by the choice of "W" parameter, but the size of the signature is affected.
+Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected.
 In order to support long lifetimes needed by IoT device, deep trees are RECOMMENDED.
 
 

@@ -115,7 +115,7 @@ Recognized profiles are defined below.
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | ESP256 | -9 | 
+| Authentication | ESP256 | -9 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128CTR | -65534 |
 
@@ -156,7 +156,10 @@ Recognized profiles are defined below.
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
 
-This draft does not specify a particular set of HSS-LMS parameters. Deep trees are RECOMMENDED due to key lifetimes in IoT devices.
+The decision as to how deep the tree is, is a decision that affects authoring tools only.
+Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected.
+In order to support long lifetimes needed by IoT device, deep trees are RECOMMENDED.
+
 
 # Reporting Profiles
 
@@ -192,7 +195,7 @@ As a result of these mitigating circumstances, AES-CTR is an acceptable cipher f
 # IANA Considerations
 
 IANA is requested to create a page for COSE Algorithm Profiles within
-the category for Software Update for the Internet of Things (SUIT) 
+the category for Software Update for the Internet of Things (SUIT)
 
 IANA is also requested to create a registry for COSE Alforithm Profiles
 within this page. The initial content of the registry is:

@@ -44,12 +44,10 @@ author:
       email: akira.tsukamoto@gmail.com
 
 normative:
-  RFC8152:
   RFC8778:
   RFC9052: cose
   RFC9459: ctrcbc
   I-D.ietf-suit-manifest:
-  I-D.ietf-jose-fully-specified-algorithms:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
@@ -58,7 +56,6 @@ informative:
     author:
     date: 2022
     target: https://www.iana.org/assignments/cose/cose.xhtml
-  RFC8890:
 
 --- abstract
 
@@ -96,6 +93,8 @@ The algorithms that form a part of the profiles defined in this document are gro
 * Authentication Algorithms
 * Key Exchange Algorithms (OPTIONAL)
 * Encryption Algorithms (OPTIONAL)
+
+Algorithm profiles are defined using COSE algorithm identifiers (see {{IANA-COSE}}).
 
 # Profiles
 
@@ -156,7 +155,7 @@ Recognized profiles are defined below.
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
 
-The decision as to how deep the tree is, is a decision that affects authoring tools only.
+The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
 Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected.
 In order to support long lifetimes needed by IoT device, deep trees are RECOMMENDED.
 
@@ -197,7 +196,7 @@ As a result of these mitigating circumstances, AES-CTR is an acceptable cipher f
 IANA is requested to create a page for COSE Algorithm Profiles within
 the category for Software Update for the Internet of Things (SUIT)
 
-IANA is also requested to create a registry for COSE Alforithm Profiles
+IANA is also requested to create a registry for COSE Algorithm Profiles
 within this page. The initial content of the registry is:
 
 | Profile | Status | Digest | Auth | Key Exchange | Encryption | Descriptor Array | Reference
@@ -206,7 +205,7 @@ within this page. The initial content of the registry is:
 | suit-sha256-esp256-ecdh-a128ctr    | MANDATORY | -16 | -7  | -29 | -65534 | \[-16,  -7, -29, -65534\] | {{suit-sha256-esp256-ecdh-a128ctr}}
 | suit-sha256-eddsa-ecdh-a128ctr     | MANDATORY | -16 | -8  | -29 | -65534 | \[-16,  -8, -29, -65534\] | {{suit-sha256-eddsa-ecdh-a128ctr}}
 | suit-sha256-esp256-ecdh-a128gcm    | MANDATORY | -16 | -7  | -29 | 1      | \[-16,  -7, -29,      1\] | {{suit-sha256-esp256-ecdh-a128gcm}}
-| suit-sha256-eddsa-ecdh-chacha-poly | MANDATORY | -16 | -8  | -29 | 24     | \[-16,  -8, -29,     24\] | {{suit-sha256-eddsa-ecdh-chacha-poly}}
+| suit-sha256-ed25519-ecdh-chacha-poly | MANDATORY | -16 | -8  | -29 | 24     | \[-16,  -8, -29,     24\] | {{suit-sha256-ed25519-ecdh-chacha-poly}}
 | suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 
 New entries to this registry require Standards Action.

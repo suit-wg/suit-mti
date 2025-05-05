@@ -59,7 +59,8 @@ informative:
 
 --- abstract
 
-This document specifies cryptographic algorithm profiles to be used with the SUIT manifest (see draft-ietf-suit-manifest).  These are the mandatory-to-implement algorithms to ensure interoperability.
+This document specifies cryptographic algorithm profiles to be used with the Software Updates for Internet of Things (suit) manifest.
+These profiles define mandatory-to-implement algorithms to ensure interoperability.
 
 --- middle
 
@@ -80,8 +81,8 @@ Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDE
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
-This draft 'makes use of AES-CTR with a digest algorithm in COSE as specified in ({{-ctrcbc}}). AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the preferred encryption algorithms.
-Authenticated Encryption with Additional Data (AEAD) is preferred over un-authenticated encryption and an AEAD profile SHOULD be selected wherever possible. See Security Considerations in this draft ({{aes-ctr-payloads}}) and in {{-ctrcbc}} (Section 8) for additional details on the considerations for the use of AES-CTR.
+This specification uses AES-CTR with a digest algorithm, as defined in ({{-ctrcbc}}), to support firmware updates on constrained IoT devices. These devices typically rely on flash memory, which requires the ability to receive and decrypt blocks out of order.
+For more details about this use case, see {{aes-ctr-payloads}}.
 
 Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
 
@@ -155,10 +156,9 @@ Recognized profiles are defined below.
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
 
-The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
-Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected.
-In order to support long lifetimes needed by IoT device, deep trees are RECOMMENDED.
-
+A note regarding the use of HSS-LMS: The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
+Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected. In order to support long lifetimes
+needed by IoT device, deep trees are RECOMMENDED.
 
 # Reporting Profiles
 
@@ -183,11 +183,13 @@ Due to these factors, payload encryption serves to limit the pool of attackers t
 
 ## Use of AES-CTR in payload encryption {#aes-ctr-payloads}
 
-AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this draft due to the following mitigating circumstances:
+AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this specification due to the following mitigating circumstances:
 
 * Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.
 * Chosen plaintext attacks are extremely difficult to achieve, since the payloads are typically constructed in a relatively secure environment--the developer's computer or build infrastructure--and should be signed in an air-gapped or similarly protected environment. In short, the plaintext is authenticated prior to encryption.
-* Content Encryption Keys must be used to encrypt only once. See {{I-D.ietf-suit-firmware-encryption}}.
+* Content Encryption Keys must be used to encrypt only once.
+
+See {{I-D.ietf-suit-firmware-encryption}} for additional background information.
 
 As a result of these mitigating circumstances, AES-CTR is an acceptable cipher for typical software/firmware delivery scenarios.
 

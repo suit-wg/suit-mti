@@ -81,10 +81,9 @@ Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDE
 
 Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
 
-This specification uses AES-CTR with a digest algorithm, as defined in ({{-ctrcbc}}), to support firmware updates on constrained IoT devices. These devices typically rely on flash memory, which requires the ability to receive and decrypt blocks out of order.
-For more details about this use case, see {{aes-ctr-payloads}}.
+This specification makes use of AES-CTR with a digest algorithm in COSE as specified in ({{-ctrcbc}}). AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the preferred encryption algorithms.
 
-Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
+For more details about the constrained node use case, see {{aes-ctr-payloads}}. Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
 
 # Algorithms
 

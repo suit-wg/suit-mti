@@ -118,12 +118,12 @@ Recognized profiles are defined below.
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128CTR | -65534 |
 
-## Current Constrained Asymmetric MTI Profile 2: suit-sha256-eddsa-ecdh-a128ctr {#suit-sha256-eddsa-ecdh-a128ctr}
+## Current Constrained Asymmetric MTI Profile 2: suit-sha256-ed25519-ecdh-a128ctr {#suit-sha256-ed25519-ecdh-a128ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | Ed25519 | -50 |
+| Authentication | Ed25519 | -19 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | A128CTR | -65534 |
 
@@ -141,7 +141,7 @@ Recognized profiles are defined below.
 | Algorithm Type | Algorithm | COSE Key |
 |============|
 | Digest | SHA-256 | -16 |
-| Authentication | Ed25519 | -50 |
+| Authentication | Ed25519 | -19 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | ChaCha20/Poly1305 | 24 |
 
@@ -204,9 +204,9 @@ within this page. The initial content of the registry is:
 |====|
 | suit-sha256-hmac-a128kw-a128ctr    | MANDATORY | -16 | 5   | -3  | -65534 | \[-16,   5,  -3, -65534\] | {{suit-sha256-hmac-a128kw-a128ctr}}
 | suit-sha256-esp256-ecdh-a128ctr    | MANDATORY | -16 | -7  | -29 | -65534 | \[-16,  -7, -29, -65534\] | {{suit-sha256-esp256-ecdh-a128ctr}}
-| suit-sha256-eddsa-ecdh-a128ctr     | MANDATORY | -16 | -8  | -29 | -65534 | \[-16,  -8, -29, -65534\] | {{suit-sha256-eddsa-ecdh-a128ctr}}
+| suit-sha256-ed25519-ecdh-a128ctr     | MANDATORY | -16 | -19  | -29 | -65534 | \[-16,  -19, -29, -65534\] | {{suit-sha256-ed25519-ecdh-a128ctr}}
 | suit-sha256-esp256-ecdh-a128gcm    | MANDATORY | -16 | -7  | -29 | 1      | \[-16,  -7, -29,      1\] | {{suit-sha256-esp256-ecdh-a128gcm}}
-| suit-sha256-ed25519-ecdh-chacha-poly | MANDATORY | -16 | -8  | -29 | 24     | \[-16,  -8, -29,     24\] | {{suit-sha256-ed25519-ecdh-chacha-poly}}
+| suit-sha256-ed25519-ecdh-chacha-poly | MANDATORY | -16 | -19  | -29 | 24     | \[-16,  -19, -29,     24\] | {{suit-sha256-ed25519-ecdh-chacha-poly}}
 | suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 
 New entries to this registry require Standards Action.

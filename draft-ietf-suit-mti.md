@@ -203,9 +203,9 @@ within this page. The initial content of the registry is:
 | Profile | Status | Digest | Auth | Key Exchange | Encryption | Descriptor Array | Reference
 |====|
 | suit-sha256-hmac-a128kw-a128ctr    | MANDATORY | -16 | 5   | -3  | -65534 | \[-16,   5,  -3, -65534\] | {{suit-sha256-hmac-a128kw-a128ctr}}
-| suit-sha256-esp256-ecdh-a128ctr    | MANDATORY | -16 | -7  | -29 | -65534 | \[-16,  -7, -29, -65534\] | {{suit-sha256-esp256-ecdh-a128ctr}}
+| suit-sha256-esp256-ecdh-a128ctr    | MANDATORY | -16 | -9  | -29 | -65534 | \[-16,  -9, -29, -65534\] | {{suit-sha256-esp256-ecdh-a128ctr}}
 | suit-sha256-ed25519-ecdh-a128ctr     | MANDATORY | -16 | -19  | -29 | -65534 | \[-16,  -19, -29, -65534\] | {{suit-sha256-ed25519-ecdh-a128ctr}}
-| suit-sha256-esp256-ecdh-a128gcm    | MANDATORY | -16 | -7  | -29 | 1      | \[-16,  -7, -29,      1\] | {{suit-sha256-esp256-ecdh-a128gcm}}
+| suit-sha256-esp256-ecdh-a128gcm    | MANDATORY | -16 | -9  | -29 | 1      | \[-16,  -9, -29,      1\] | {{suit-sha256-esp256-ecdh-a128gcm}}
 | suit-sha256-ed25519-ecdh-chacha-poly | MANDATORY | -16 | -19  | -29 | 24     | \[-16,  -19, -29,     24\] | {{suit-sha256-ed25519-ecdh-chacha-poly}}
 | suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
 

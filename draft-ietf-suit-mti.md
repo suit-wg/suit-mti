@@ -1,6 +1,6 @@
 ---
-title: Mandatory-to-Implement Algorithms for Authors and Recipients of Software Update for the Internet of Things manifests
-abbrev: MTI SUIT Algorithms
+title: Cryptographic Algorithm Recommendations for Software Updates of Internet of Things Devices
+abbrev: SUIT Algorithm Recommendations
 docname: draft-ietf-suit-mti
 category: std
 
@@ -51,6 +51,9 @@ normative:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
+  RFC9052:
+  RFC9053:
+  RFC9019:
   IANA-COSE:
     title: "CBOR Object Signing and Encryption (COSE)"
     author:
@@ -66,39 +69,46 @@ These profiles define mandatory-to-implement algorithms to ensure interoperabili
 
 #  Introduction
 
-This document specifies algorithm profiles for SUIT manifest parsers and authors to ensure better interoperability. These profiles apply specifically to a constrained node software update use case. Mandatory algorithms may change over time due to an evolving threat landscape. Algorithms are grouped into algorithm profiles to account for this. Profiles may be deprecated over time. SUIT will define five choices of Mandatory To Implement (MTI) profile specifically for constrained node software update. These profiles are:
+This document defines algorithm profiles for SUIT manifest parsers and authors to promote interoperability in constrained node software update scenarios. These profiles specify sets of mandatory-to-implement (MTI) algorithms tailored to the evolving security landscape, acknowledging that cryptographic requirements may change over time. To accommodate this, algorithms are grouped into profiles, which may be updated or deprecated as needed.
 
-* One Symmetric MTI profile
-* Two "Current" Constrained Asymmetric MTI profiles
-* Two "Current" AEAD Asymmetric MTI profiles
-* One "Future" Constrained Asymmetric MTI profile
+This document defines the following MTI profiles for constrained environments:
 
-At least one MTI algorithm in each category MUST be FIPS qualified.
+* One symmetric MTI profile
+* Two "current" constrained asymmetric MTI profiles
+* Two "current" AEAD asymmetric MTI profiles
+* One "future" constrained asymmetric MTI profile
 
-Because SUIT presents an asymmetric communication profile, where manifest authors have unlimited resources and manifest recipients have constrained resources, the requirements for Recipients and Authors are different.
+The terms "current" and "future" distinguish between traditional cryptographic algorithms and those believed to be secure against both classical and quantum computer-based attacks, respectively.
 
-Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles. Recipients MAY choose not to implement an encryption algorithm if encrypted payloads will never be used.
+At least one algorithm in each category must be FIPS-validated.
 
-Authors MUST implement all MTI profiles. Authors MAY implement any number of other profiles.
+Due to the asymmetric nature of SUIT deployments—where manifest authors are typically resource-rich and recipients are resource-constrained—the cryptographic requirements differ for each role.
 
-This specification makes use of AES-CTR with a digest algorithm in COSE as specified in ({{-ctrcbc}}). AES-CTR is used because it enables out-of-order reception and decryption of blocks, which is necessary for some constrained node use cases. Out-of-order reception with on-the-fly decryption is not available in the preferred encryption algorithms.
+This specification uses AES-CTR in combination with a digest algorithm, as defined in {{-ctrcbc}}, to support use cases that require out-of-order block reception and decryption-capabilities not offered by AEAD algorithms. For further discussion of these constrained use cases, see {{aes-ctr-payloads}}. Other SUIT use cases (see {{I-D.ietf-suit-manifest}}) may define different profiles.
 
-For more details about the constrained node use case, see {{aes-ctr-payloads}}. Other use-cases of the SUIT Manifest ({{I-D.ietf-suit-manifest}}) MAY define their own MTI algorithms.
+# Conventions and Definitions
 
-# Algorithms
+{::boilerplate bcp14-tagged}
 
-The algorithms that form a part of the profiles defined in this document are grouped into:
-
-* Digest Algorithms
-* Authentication Algorithms
-* Key Exchange Algorithms (OPTIONAL)
-* Encryption Algorithms (OPTIONAL)
-
-Algorithm profiles are defined using COSE algorithm identifiers (see {{IANA-COSE}}).
+The abbreviation SUIT stands for Software Updates for the Internet of Things and specifically addresses the requirements of constrained devices and networks, as described in {{RFC9019}}.
 
 # Profiles
 
-Recognized profiles are defined below.
+Each profile consist of algorithms from the following categories:
+
+* Digest Algorithms
+* Authentication Algorithms
+* Key Exchange Algorithms (optional)
+* Encryption Algorithms (optional)
+
+Each profile references specific algorithm identifiers, as defined in {{IANA-COSE}}.
+Since these algorithm identifiers are used in the context of the IETF SUIT manifest {{I-D.ietf-suit-manifest}}, they are represented using CBOR Object Signing and Encryption (COSE) structures as defined in {{RFC9052}} and {{RFC9053}}.
+
+The use of the profiles by authors and recipients is based on the following assumptions:
+
+- Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the "Future" Asymmetric MTI profile. Recipients MAY implement any number of other profiles not defined in this document. Recipients MAY choose not to implement encryption and the corresponding key exchange algorithms if they do not intend to support encrypted payloads.
+
+- Authors MUST implement all MTI profiles. Authors MAY implement any number of additional profiles.
 
 ## Symmetric MTI profile: suit-sha256-hmac-a128kw-a128ctr {#suit-sha256-hmac-a128kw-a128ctr}
 
@@ -145,8 +155,7 @@ Recognized profiles are defined below.
 | Key Exchange | ECDH-ES + A128KW | -29 |
 | Encryption | ChaCha20/Poly1305 | 24 |
 
-
-## Future Constrained Asymmetric MTI Profile 1: suit-sha256-hsslms-a256kw-a256ctr {#suit-sha256-hsslms-a256kw-a256ctr}
+## Future Constrained Asymmetric MTI Profile: suit-sha256-hsslms-a256kw-a256ctr {#suit-sha256-hsslms-a256kw-a256ctr}
 
 | Algorithm Type | Algorithm | COSE Key |
 |============|
@@ -156,8 +165,7 @@ Recognized profiles are defined below.
 | Encryption | A256CTR | -65532 |
 
 A note regarding the use of HSS-LMS: The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
-Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected. In order to support long lifetimes
-needed by IoT device, deep trees are RECOMMENDED.
+Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected. To support the long lifetimes required by IoT devices, it is RECOMMENDED to use trees with greater height (see Section 2.2 of {{RFC8778}}).
 
 # Reporting Profiles
 
@@ -167,7 +175,7 @@ When using Manifest Recipients Response communication, particularly data structu
 
 Payload encryption is often used to protect Intellectual Property (IP) and Personally Identifying Information (PII) in transit. The primary function of payload in SUIT is to act as a defense against passive IP and PII snooping. By encrypting payloads, confidential IP and PII can be protected during distribution. However, payload encryption of firmware or software updates of a commodity device is not a cybersecurity defense against targetted attacks on that device.
 
-## Payload encryption as a cybersecurity defense
+## Payload Encryption as Part of a Defense-in-Depth Strategy
 
 To define the purpose of payload encryption as a defensive cybersecurity tool, it is important to define the capabilities of modern threat actors. A variety of capabilities are possible:
 
@@ -180,7 +188,7 @@ Given this range of capabilities, it is important to understand which capabiliti
 
 Due to these factors, payload encryption serves to limit the pool of attackers to those who have the technical capability to extract code from physical devices and those who perform code-free attacks.
 
-## Use of AES-CTR in payload encryption {#aes-ctr-payloads}
+## Use of AES-CTR in Payload Encryption {#aes-ctr-payloads}
 
 AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this specification due to the following mitigating circumstances:
 
@@ -219,7 +227,7 @@ When new algorithms are added by subsequent documents, the device and authoring 
 
 --- back
 
-# A. Full CDDL {#full-cddl}
+# Full CDDL {#full-cddl}
 
 The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in protocols that share a ciphersuite with SUIT.
 
@@ -228,3 +236,7 @@ To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE
 ~~~ CDDL
 {::include draft-ietf-suit-mti.cddl}
 ~~~
+
+# Acknowledgments
+
+We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Mike Jones, Henk Birkholz, and Hannes Tschofenig for their review comments.

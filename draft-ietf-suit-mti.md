@@ -51,7 +51,6 @@ normative:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
-  RFC9052:
   RFC9053:
   RFC9019:
   IANA-COSE:

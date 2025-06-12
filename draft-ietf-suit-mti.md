@@ -51,6 +51,7 @@ normative:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
+  I-D.ietf-suit-report:
   RFC9053:
   RFC9019:
   IANA-COSE:
@@ -168,7 +169,8 @@ Verification is not affected by the choice of the "W" parameter, but the size of
 
 # Reporting Profiles
 
-When using Manifest Recipients Response communication, particularly data structures that are designed for reporting of update capabilities, status, progress, or success, the same profile as the is used on the SUIT manifest SHOULD be used. There are cases where this is not possible, such as suit-sha256-hsslms-a256kw-a256ctr. In this case, the closest equivalent profile SHOULD be used, for example suit-sha256-esp256-ecdh-a128ctr.
+When using SUIT reports {{I-D.ietf-suit-report}} - particularly those data structures intended to convey update capabilities, status, progress, or success - the same algorithm profile as used in the corresponding SUIT manifest SHOULD be applied.
+In cases where this is not feasible, such as when using the profile suit-sha256-hsslms-a256kw-a256ctr, the closest functionally equivalent profile SHOULD be used instead, for example, suit-sha256-esp256-ecdh-a128ctr.
 
 # Security Considerations {#security}
 

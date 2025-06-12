@@ -170,7 +170,8 @@ Verification is not affected by the choice of the "W" parameter, but the size of
 # Reporting Profiles
 
 When using SUIT reports {{I-D.ietf-suit-report}} - particularly those data structures intended to convey update capabilities, status, progress, or success - the same algorithm profile as used in the corresponding SUIT manifest SHOULD be applied.
-In cases where this is not feasible, such as when using the profile suit-sha256-hsslms-a256kw-a256ctr, the closest functionally equivalent profile SHOULD be used instead, for example, suit-sha256-esp256-ecdh-a128ctr.
+In cases where this is not feasible, such as when using the profile suit-sha256-hsslms-a256kw-a256ctr, an algorithm profile with similar security strength SHOULD be used instead, for example, suit-sha256-esp256-ecdh-a128ctr. There may be cases
+where switching to a different algorithm profile is not possible and where SUIT report functionality has to be disabled.
 
 # Security Considerations {#security}
 

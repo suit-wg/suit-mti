@@ -190,7 +190,6 @@ Due to these factors, payload encryption serves to limit the pool of attackers t
 ## Use of AES-CTR in Payload Encryption {#aes-ctr-payloads}
 
 AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. See {{I-D.ietf-suit-firmware-encryption}} for additional background information.
-As a result of these mitigating circumstances, AES-CTR is an acceptable cipher for typical software/firmware delivery scenarios.
 
 # IANA Considerations
 

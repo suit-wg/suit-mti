@@ -189,14 +189,7 @@ Due to these factors, payload encryption serves to limit the pool of attackers t
 
 ## Use of AES-CTR in Payload Encryption {#aes-ctr-payloads}
 
-AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. A non-AEAD encryption mode is specified in this specification due to the following mitigating circumstances:
-
-* Out-of-order decryption must be supported. Therefore, we must use a stream cipher that supports random access.
-* Chosen plaintext attacks are extremely difficult to achieve, since the payloads are typically constructed in a relatively secure environment--the developer's computer or build infrastructure--and should be signed in an air-gapped or similarly protected environment. In short, the plaintext is authenticated prior to encryption.
-* Content Encryption Keys must be used to encrypt only once.
-
-See {{I-D.ietf-suit-firmware-encryption}} for additional background information.
-
+AES-CTR mode with a digest is specified, see {{-ctrcbc}}. All of the AES-CTR security considerations in {{-ctrcbc}} apply. See {{I-D.ietf-suit-firmware-encryption}} for additional background information.
 As a result of these mitigating circumstances, AES-CTR is an acceptable cipher for typical software/firmware delivery scenarios.
 
 # IANA Considerations

@@ -34,7 +34,9 @@ author:
       email: brendan.moran.ietf@gmail.com
  -
       ins: Ø. Rønningstad
+      asciiInitials: O. Ronningstad
       name: Øyvind Rønningstad
+      asciiFullname: Oyvind Ronningstad
       organization: Nordic Semiconductor
       email: oyvind.ronningstad@gmail.com
  -
@@ -241,4 +243,5 @@ To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE
 
 # Acknowledgments
 
-We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Mike Jones, Henk Birkholz, Linda Dunbar and Hannes Tschofenig for their review comments.
+
+We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, Linda Dunbar and Hannes Tschofenig for their review comments.

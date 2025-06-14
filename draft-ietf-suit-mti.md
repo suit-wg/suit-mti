@@ -238,4 +238,4 @@ To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE
 
 # Acknowledgments
 
-We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Mike Jones, Henk Birkholz, and Hannes Tschofenig for their review comments.
+We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, and Hannes Tschofenig for their review comments.

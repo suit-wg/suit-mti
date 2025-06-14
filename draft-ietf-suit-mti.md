@@ -34,7 +34,9 @@ author:
       email: brendan.moran.ietf@gmail.com
  -
       ins: Ø. Rønningstad
+      asciiInitials: O. Ronningstad
       name: Øyvind Rønningstad
+      asciiFullname: Oyvind Ronningstad
       organization: Nordic Semiconductor
       email: oyvind.ronningstad@gmail.com
  -

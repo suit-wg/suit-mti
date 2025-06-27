@@ -64,7 +64,7 @@ informative:
 
 --- abstract
 
-This document specifies cryptographic algorithm profiles to be used with the Software Updates for Internet of Things (suit) manifest.
+This document specifies cryptographic algorithm profiles to be used with the Software Updates for Internet of Things (SUIT) manifest.
 These profiles define mandatory-to-implement algorithms to ensure interoperability.
 
 --- middle
@@ -77,12 +77,12 @@ This document defines the following MTI profiles for constrained environments:
 
 * One symmetric MTI profile
 * Two "current" constrained asymmetric MTI profiles
-* Two "current" AEAD asymmetric MTI profiles
+* Two "current" Authenticated Encryption with Associated Data (AEAD) asymmetric MTI profiles
 * One "future" constrained asymmetric MTI profile
 
 The terms "current" and "future" distinguish between traditional cryptographic algorithms and those believed to be secure against both classical and quantum computer-based attacks, respectively.
 
-At least one algorithm in each category must be FIPS-validated.
+At least one algorithm in each category must be Federal Information Processing Standards (FIPS)-validated.
 
 Due to the asymmetric nature of SUIT deployments—where manifest authors are typically resource-rich and recipients are resource-constrained—the cryptographic requirements differ for each role.
 
@@ -93,6 +93,21 @@ This specification uses AES-CTR in combination with a digest algorithm, as defin
 {::boilerplate bcp14-tagged}
 
 The abbreviation SUIT stands for Software Updates for the Internet of Things and specifically addresses the requirements of constrained devices and networks, as described in {{RFC9019}}.
+
+This specification uses the following abbreviations:
+
+- Advanced Encryption Standard (AES)
+- AES Counter (AES-CTR) Mode
+- AES Key Wrap (AES-KW)
+- Authenticated Encryption with Associated Data (AEAD)
+- Concise Binary Object Representation (CBOR)
+- CBOR Object Signing and Encryption (COSE)
+- Concise Data Definition Language (CDDL)
+- Elliptic Curve Diffie-Hellman Ephemeral-Static (ECDH-ES)  
+- Federal Information Processing Standards (FIPS)
+- Hash-based Message Authentication Code (HMAC)
+- Hierarchical Signature System - Leighton-Micali Signature (HSS-LMS)
+- Software Updates for Internet of Things (SUIT)
 
 # Profiles
 
@@ -166,7 +181,7 @@ The use of the profiles by authors and recipients is based on the following assu
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
 
-A note regarding the use of HSS-LMS: The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
+A note regarding the use of the Hierarchical Signature System - Leighton-Micali Signature (HSS-LMS): The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
 Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected. To support the long lifetimes required by IoT devices, it is RECOMMENDED to use trees with greater height (see Section 2.2 of {{RFC8778}}).
 
 # Reporting Profiles
@@ -236,4 +251,4 @@ To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE
 # Acknowledgments
 
 
-We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, Linda Dunbar and Hannes Tschofenig for their review comments.
+We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, Linda Dunbar, Lorenzo Corneo and Hannes Tschofenig for their review comments.

@@ -53,7 +53,6 @@ normative:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
-  I-D.ietf-suit-report:
   RFC9053:
   RFC9019:
   IANA-COSE:
@@ -71,18 +70,26 @@ These profiles define mandatory-to-implement algorithms to ensure interoperabili
 
 #  Introduction
 
-This document defines algorithm profiles for SUIT manifest parsers and authors to promote interoperability in constrained node software update scenarios. These profiles specify sets of mandatory-to-implement (MTI) algorithms tailored to the evolving security landscape, acknowledging that cryptographic requirements may change over time. To accommodate this, algorithms are grouped into profiles, which may be updated or deprecated as needed.
+This document defines algorithm profiles intended for SUIT manifest parsers and authors, with the goal of promoting interoperability
+in software update scenarios for constrained nodes. These profiles specify sets of algorithms that are tailored to the evolving
+security landscape, recognizing that cryptographic requirements may change over time. 
 
-This document defines the following MTI profiles for constrained environments:
+The following profiles are defined:
 
-* One symmetric profile
-* Two constrained asymmetric profiles
-* Two asymmetric profiles utilizing Authenticated Encryption with Associated Data (AEAD) ciphers
-* One constrained asymmetric profile utilizing a hash-based signature scheme
+* One profile designed for constrained devices that support only symmetric key cryptography
+* Two profiles for constrained devices capable of using asymmetric key cryptography
+* Two profiles that employ Authenticated Encryption with Associated Data (AEAD) ciphers
+* One constrained asymmetric profile that uses a hash-based signature scheme
 
-Due to the asymmetric nature of SUIT deployments (where manifest authors are typically resource-rich and recipients are resource-constrained) the cryptographic requirements differ for each role.
+Due to the asymmetric nature of SUIT deployments - where manifest authors typically operate in
+resource-rich environments while recipients are resource-constrained - the cryptographic
+requirements differ between these two roles.
 
-This specification uses AES-CTR in combination with a digest algorithm, as defined in {{-ctrcbc}}, to support use cases that require out-of-order block reception and decryption-capabilities not offered by AEAD algorithms. For further discussion of these constrained use cases, see {{aes-ctr-payloads}}. Other SUIT use cases (see {{I-D.ietf-suit-manifest}}) may define different profiles.
+This specification uses AES-CTR in combination with a digest algorithm, as defined in {{-ctrcbc}},
+to support use cases that require out-of-order block reception and decryption-capabilities not
+offered by AEAD algorithms. For further discussion of these constrained use cases, see
+{{aes-ctr-payloads}}. Other SUIT use cases (see {{I-D.ietf-suit-manifest}}) may define different
+profiles.
 
 # Conventions and Definitions
 
@@ -191,12 +198,6 @@ Verification is not affected by the choice of the "W" parameter, but the size of
 | Authentication | HSS/LMS | -46 |
 | Key Exchange | A256KW | -5 |
 | Encryption | A256CTR | -65532 |
-
-# Reporting Profiles
-
-When using SUIT reports {{I-D.ietf-suit-report}} - particularly those data structures intended to convey update capabilities, status, progress, or success - the same algorithm profile as used in the corresponding SUIT manifest SHOULD be applied.
-In cases where this is not feasible, such as when using the profile suit-sha256-hsslms-a256kw-a256ctr, an algorithm profile with similar security strength SHOULD be used instead, for example, suit-sha256-esp256-ecdh-a128ctr. There may be cases
-where switching to a different algorithm profile is not possible and where SUIT report functionality has to be disabled.
 
 # Security Considerations {#security}
 

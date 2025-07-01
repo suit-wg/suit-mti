@@ -1,6 +1,5 @@
 ---
-title: Cryptographic Algorithm Recommendations for Software Updates of Internet of Things Devices
-abbrev: SUIT Algorithm Recommendations
+title: Cryptographic Algorithms for Internet of Things Devices
 docname: draft-ietf-suit-mti
 category: std
 
@@ -55,6 +54,7 @@ informative:
   I-D.ietf-suit-firmware-encryption:
   RFC9053:
   RFC9019:
+  RFC6973:
   IANA-COSE:
     title: "CBOR Object Signing and Encryption (COSE)"
     author:
@@ -63,16 +63,28 @@ informative:
 
 --- abstract
 
-This document specifies cryptographic algorithm profiles to be used with the Software Updates for Internet of Things (SUIT) manifest.
-These profiles define mandatory-to-implement algorithms to ensure interoperability.
+This document defines cryptographic algorithm profiles for use with the Software Updates for Internet
+of Things (SUIT) manifest. These profiles specify sets of algorithms to promote interoperability across
+implementations.
+
+The SUIT manifest, as defined in RFC 9124, provides a flexible and extensible format for describing how
+firmware and software updates are to be fetched, verified, decrypted, and installed on resource-constrained
+devices. To ensure the security of these update processes, the manifest relies on cryptographic algorithms
+for functions such as digital signature verification, integrity checking, and confidentiality.
+
+Given the diversity of IoT deployments and the evolving cryptographic landscape, algorithm agility is
+essential. This document groups algorithms into named profiles to accommodate varying levels of device
+capabilities and security requirements. These profiles support the use cases laid out in the SUIT architecture,
+published with RFC 9019.
 
 --- middle
 
 #  Introduction
 
-This document defines algorithm profiles intended for SUIT manifest parsers and authors, with the goal of promoting interoperability
-in software update scenarios for constrained nodes. These profiles specify sets of algorithms that are tailored to the evolving
-security landscape, recognizing that cryptographic requirements may change over time. 
+This document defines algorithm profiles intended for authors of SUIT manifests and their recipients,
+with the goal of promoting interoperability in software update scenarios for constrained nodes. These
+profiles specify sets of algorithms that are tailored to the evolving security landscape, recognizing
+that cryptographic requirements may change over time. 
 
 The following profiles are defined:
 
@@ -126,7 +138,7 @@ Since these algorithm identifiers are used in the context of the IETF SUIT manif
 
 The use of the profiles by authors and recipients is based on the following assumptions:
 
-- Recipients MAY choose which MTI profile they wish to implement. It is RECOMMENDED that they implement the `suit-sha256-hsslms-a256kw-a256ctr` profile. Recipients MAY implement any number of other profiles not defined in this document. Recipients MAY choose not to implement encryption and the corresponding key exchange algorithms if they do not intend to support encrypted payloads.
+- Recipients MAY choose which profile they wish to implement. It is RECOMMENDED that they implement the `suit-sha256-hsslms-a256kw-a256ctr` profile. Recipients MAY implement any number of other profiles not defined in this document. Recipients MAY choose not to implement encryption and the corresponding key exchange algorithms if they do not intend to support encrypted payloads.
 
 - Authors MUST implement all profiles with a status set to 'MANDATORY' in {{iana}}. Authors MAY implement any number of additional profiles.
 
@@ -201,7 +213,12 @@ Verification is not affected by the choice of the "W" parameter, but the size of
 
 # Security Considerations {#security}
 
-Payload encryption is used to protect machine learning models, specifical algorithms and Personally Identifying Information (PII) in transit. The primary function of payload in SUIT is to act as a defense against snooping. By encrypting payloads, confidential content can be protected during distribution. However, payload encryption of firmware or software updates of a commodity device is not a cybersecurity defense against targetted attacks on that device.
+Payload encryption is used to protect sensitive content such as machine learning models, proprietary algorithms, and personal data {{RFC6973}}.
+In the context of SUIT, the primary purpose of payload encryption is to defend against unauthorized observation during distribution. By encrypting
+the payload, confidential information can be safeguarded from eavesdropping.
+
+However, encrypting firmware or software update payloads on commodity devices does not constitute an effective cybersecurity defense against
+targeted attacks. Once an attacker gains access to the device, they may still be able to extract the plaintext payload.
 
 ## Payload Encryption as Part of a Defense-in-Depth Strategy
 
@@ -298,24 +315,27 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 While most profile attributes are self-explanatory, the status field warrants a brief explanation.
 This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL.
 
-- MANDATORY indicates that the profile is mandatory to implement (MTI) for manifest authors.
+- MANDATORY indicates that the profile is mandatory to implement for manifest authors.
 - NOT RECOMMENDED means that the profile should generally be avoided in new implementations.
-- OPTIONAL suggests that support for the profile is permitted but not required; it is not part of the MTI set.
+- OPTIONAL suggests that support for the profile is permitted but not required.
 
 Adding new profiles or updating the status of existing profiles requires Standards Action.
 
 As time progresses, algorithm profiles may loose their MANDATORY status. Then, their status will become
-either OPTIONAL or NOT RECOMMENDED for new implementations. However, as it may be impossible to update
-the SUIT manifest processor in the field, support for all relevant algorithms will almost always be
-required by authoring tools.
+either OPTIONAL or NOT RECOMMENDED for new implementations. Since it may be impossible to update
+certain parts of the IoT device firmware in the field, such as first stage bootloaders, support for
+all relevant algorithms will almost always be required by authoring tools.
 
 --- back
 
 # Full CDDL {#full-cddl}
 
-The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in protocols that share a ciphersuite with SUIT.
+The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages
+are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in
+protocols that share a ciphersuite with SUIT.
 
-To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in {{-cose, Section 1.4}}.
+To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be
+obtained by following the directions in {{-cose, Section 1.4}}.
 
 ~~~ CDDL
 {::include-fold draft-ietf-suit-mti.cddl}
@@ -323,4 +343,6 @@ To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE
 
 # Acknowledgments
 
-We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, Mohamed Boucadair, Linda Dunbar, Jouni Korhonen, Lorenzo Corneo and Hannes Tschofenig for their review comments.
+We would like to specifically thank Henk Birkholz, Mohamed Boucadair, Deb Cooley, Lorenzo Corneo,
+Linda Dunbar, Russ Housley, Michael B. Jones, Jouni Korhonen, Magnus Nyström, Michael Richardson,
+and Hannes Tschofenig for their review comments.

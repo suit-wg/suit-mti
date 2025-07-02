@@ -55,6 +55,7 @@ informative:
   RFC9053:
   RFC9019:
   RFC6973:
+  I-D.ietf-teep-protocol:
   IANA-COSE:
     title: "CBOR Object Signing and Encryption (COSE)"
     author:
@@ -249,38 +250,39 @@ While this document focuses on the cryptographic aspects of manifest processing,
 
 ## Profile Support Discovery
 
-To enable interoperability of the described profiles, it is important for an author to determine which profiles are supported by a device. Furthermore, it is also important for the author and the distribution system (see {{Section 3 of I-D.ietf-suit-firmware-encryption}}, to know whether firmware for a particular device or family of devices need to be encrypted and what key distribution mechanism shall be used.  This can be achieved through:
+To enable interoperability of the described profiles, it is important for a manifest author to determine which profiles are supported by a device. Furthermore, it is also important for the author and the distribution system (see {{Section 3 of I-D.ietf-suit-firmware-encryption}}) to know whether firmware for a particular device or family of devices needs to be encrypted, and which key distribution mechanism shall be used. This information can be obtained through:
 
 - Manual configuration.
-- Device management systems, as described in {{RFC9019}}, which typically maintain metadata about device capabilities and their lifecycle status. These systems may use proprietary or standardized management protocols to expose supported features. LwM2M {{LwM2M}} is one such standardized protocol.
+- Device management systems, as described in {{RFC9019}}, which typically maintain metadata about device capabilities and their lifecycle status. These systems may use proprietary or standardized management protocols to expose supported features. LwM2M {{LwM2M}} is one such standardized protocol. The Trusted Execution Environment Provisioning (TEEP) protocol {{I-D.ietf-teep-protocol}} is another option.
 - Capability reporting mechanisms, such as those described in {{I-D.ietf-suit-report}}, which define structures that allow a device to communicate supported SUIT features and cryptographic capabilities to a management or attestation entity.
 
 ## Profile Selection and Control
 
-When a device supports multiple algorithm profiles, it is expected that the SUIT manifest author selects an appropriate profile based on the intended recipient(s). The manifest itself indicates which algorithms are used; devices are expected to validate manifests using the supported algorithms.
+When a device supports multiple algorithm profiles, it is expected that the SUIT manifest author selects an appropriate profile based on the intended recipient(s). The manifest itself indicates which algorithms are used; devices are expected to validate manifests using supported algorithms.
 
-Devices do not autonomously choose which profile to apply; rather, they either accept or reject a manifest based on the algorithm profile used. There is no protocol-level negotiation of profiles at SUIT manifest processing time. Any dynamic profile selection or configuration is expected to occur out-of-band, e.g., via device management.
+Devices do not autonomously choose which profile to apply; rather, they either accept or reject a manifest based on the algorithm profile it uses. There is no protocol-level negotiation of profiles at SUIT manifest processing time. Any dynamic profile selection or configuration is expected to occur as part of other protocols, for example, through device management.
 
 ## Profile Provisioning and Constraints
 
 Provisioning for a given profile may include:
 
-- Installation of trust anchors of acceptable signers.
+- Installation of trust anchors for acceptable signers.
+- Distribution of keys used by the content key distribution mechanism (see {{Section 4 of I-D.ietf-suit-firmware-encryption}}).
 - Availability of specific cryptographic libraries or hardware support (e.g., for post-quantum algorithms or AEAD ciphers).
-- Allocation of sufficient storage or compute resources to process manifests using the selected profile.
+- Evaluation of the required storage and processing resources for the selected profile.
 - Support for manifest processing capabilities.
 
 There may be conditions under which switching to a different algorithm profile is not feasible, such as:
 
 - Lack of hardware support (e.g., no crypto acceleration).
-- Resource limitations on memory-constrained devices (e.g., not enough flash or RAM).
-- Deployment policy constraints or compliance requirements.
+- Resource limitations on memory-constrained devices (e.g., insufficient flash or RAM).
+- Deployment policy constraints or regulatory compliance requirements.
 
 In such cases, a device management or update orchestration system should take these constraints into account when constructing and distributing manifests.
 
 ## Logging and Reporting
 
-Implementations MAY log failures to process a manifest due to unsupported algorithm profiles or unavailable cryptographic functionality. When supported, such events SHOULD be exposed through secure reporting mechanisms, such as those described in {{I-D.ietf-suit-report}}, allowing operators to diagnose update failures or misconfigurations.
+Implementations MAY log failures to process a manifest due to unsupported algorithm profiles or unavailable cryptographic functionality. When supported, such events SHOULD be reported using secure mechanisms, such as those described in {{I-D.ietf-suit-report}}, to assist operators in diagnosing update failures or misconfigurations.
 
 # IANA Considerations {#iana}
 

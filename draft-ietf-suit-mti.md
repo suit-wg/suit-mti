@@ -82,7 +82,7 @@ for functions such as digital signature verification, integrity checking, and co
 Given the diversity of IoT deployments and the evolving cryptographic landscape, algorithm agility is
 essential. This document groups algorithms into named profiles to accommodate varying levels of device
 capabilities and security requirements. These profiles support the use cases laid out in the SUIT architecture,
-published with RFC 9019.
+published in "A Firmware Update Architecture for Internet of Things" (RFC 9019).
 
 --- middle
 

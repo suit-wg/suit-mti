@@ -365,6 +365,7 @@ This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL
 - MANDATORY indicates that the profile is mandatory to implement for manifest authors.
 - NOT RECOMMENDED means that the profile should generally be avoided in new implementations.
 - OPTIONAL suggests that support for the profile is permitted but not required.
+IANA is requested to add a note that mirrors these status values to the registry.
 
 Adding new profiles or updating the status of existing profiles requires Standards Action.
 

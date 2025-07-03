@@ -370,7 +370,7 @@ IANA is requested to add a note that mirrors these status values to the registry
 Adding new profiles or updating the status of existing profiles requires Standards Action ({{Section 4.9 of !RFC8126}}).
 
 As time progresses, algorithm profiles may loose their MANDATORY status. Then, their status will become
-either OPTIONAL or NOT RECOMMENDED for new implementations. Since it may be impossible to update
+either OPTIONAL or NOT RECOMMENDED for new implementations. Likewise, a profile may be transitioned from OPTIONAL to NOT RECOMMENDED. Since it may be impossible to update
 certain parts of the IoT device firmware in the field, such as first stage bootloaders, support for
 all relevant algorithms will almost always be required by authoring tools.
 

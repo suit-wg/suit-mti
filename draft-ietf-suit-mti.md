@@ -1,5 +1,5 @@
 ---
-title: Cryptographic Algorithms for Internet of Things Devices
+title: Cryptographic Algorithms for Internet of Things (IoT) Devices
 docname: draft-ietf-suit-mti
 category: std
 

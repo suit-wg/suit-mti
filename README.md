@@ -47,12 +47,8 @@ Regenerate xml, txt and html with `make` command.
 Commit and push to GitHub the changes on all files listed below.
 ```
 draft-ietf-suit-mti.md
-draft-ietf-suit-mti.xml
-draft-ietf-suit-mti.txt
-draft-ietf-suit-mti.html
+draft-ietf-suit-mti.cddl
 ```
-
-This way a person who would like to see the latest current draft will be able to see them in txt and html file format on GitHub.
 
 ## Submitting draft
 

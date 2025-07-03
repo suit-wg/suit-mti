@@ -92,8 +92,6 @@ This specification uses AES-CTR in combination with a digest algorithm, as defin
 
 {::boilerplate bcp14-tagged}
 
-The abbreviation SUIT stands for Software Updates for the Internet of Things and specifically addresses the requirements of constrained devices and networks, as described in {{RFC9019}}.
-
 This specification uses the following abbreviations:
 
 - Advanced Encryption Standard (AES)
@@ -108,6 +106,8 @@ This specification uses the following abbreviations:
 - Hash-based Message Authentication Code (HMAC)
 - Hierarchical Signature System - Leighton-Micali Signature (HSS-LMS)
 - Software Updates for Internet of Things (SUIT)
+
+SUIT specifically addresses the requirements of constrained devices and networks, as described in {{RFC9019}}.
 
 # Profiles
 
@@ -219,14 +219,71 @@ the category for Software Update for the Internet of Things (SUIT)
 IANA is also requested to create a registry for COSE Algorithm Profiles
 within this page. The initial content of the registry is:
 
-| Profile | Status | Digest | Auth | Key Exchange | Encryption | Descriptor Array | Reference
-|====|
-| suit-sha256-hmac-a128kw-a128ctr    | MANDATORY | -16 | 5   | -3  | -65534 | \[-16,   5,  -3, -65534\] | {{suit-sha256-hmac-a128kw-a128ctr}}
-| suit-sha256-esp256-ecdh-a128ctr    | MANDATORY | -16 | -9  | -29 | -65534 | \[-16,  -9, -29, -65534\] | {{suit-sha256-esp256-ecdh-a128ctr}}
-| suit-sha256-ed25519-ecdh-a128ctr     | MANDATORY | -16 | -19  | -29 | -65534 | \[-16,  -19, -29, -65534\] | {{suit-sha256-ed25519-ecdh-a128ctr}}
-| suit-sha256-esp256-ecdh-a128gcm    | MANDATORY | -16 | -9  | -29 | 1      | \[-16,  -9, -29,      1\] | {{suit-sha256-esp256-ecdh-a128gcm}}
-| suit-sha256-ed25519-ecdh-chacha-poly | MANDATORY | -16 | -19  | -29 | 24     | \[-16,  -19, -29,     24\] | {{suit-sha256-ed25519-ecdh-chacha-poly}}
-| suit-sha256-hsslms-a256kw-a256ctr  | MANDATORY | -16 | -46 | -5  | -65532 | \[-16, -46,  -5, -65532\] | {{suit-sha256-hsslms-a256kw-a256ctr}}
+## Profile: `suit-sha256-hmac-a128kw-a128ctr`
+
+- Profile: `suit-sha256-hmac-a128kw-a128ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: 5  
+- Key Exchange: -3  
+- Encryption: -65534  
+- Descriptor Array: `[-16, 5, -3, -65534]`  
+- Reference: Section 3.1
+
+## Profile: `suit-sha256-esp256-ecdh-a128ctr`
+
+- Profile: `suit-sha256-esp256-ecdh-a128ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -9  
+- Key Exchange: -29  
+- Encryption: -65534  
+- Descriptor Array: `[-16, -9, -29, -65534]`  
+- Reference: Section 3.2
+
+## Profile: `suit-sha256-ed25519-ecdh-a128ctr`
+
+- Profile: `suit-sha256-ed25519-ecdh-a128ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -19  
+- Key Exchange: -29  
+- Encryption: -65534  
+- Descriptor Array: `[-16, -19, -29, -65534]`  
+- Reference: Section 3.3
+
+## Profile: `suit-sha256-esp256-ecdh-a128gcm`
+
+- Profile: `suit-sha256-esp256-ecdh-a128gcm`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -9  
+- Key Exchange: -29  
+- Encryption: 1  
+- Descriptor Array: `[-16, -9, -29, 1]`  
+- Reference: Section 3.4
+
+## Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
+
+- Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -19  
+- Key Exchange: -29  
+- Encryption: 24  
+- Descriptor Array: `[-16, -19, -29, 24]`  
+- Reference: Section 3.5
+
+## Profile: `suit-sha256-hsslms-a256kw-a256ctr`
+
+- Profile: `suit-sha256-hsslms-a256kw-a256ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -46  
+- Key Exchange: -5  
+- Encryption: -65532  
+- Descriptor Array: `[-16, -46, -5, -65532]`  
+- Reference: Section 3.6
 
 New entries to this registry require Standards Action.
 
@@ -245,10 +302,9 @@ The following CDDL creates a subset of COSE for use with SUIT. Both tagged and u
 To be valid, the following CDDL MUST have the COSE CDDL appended to it. The COSE CDDL can be obtained by following the directions in {{-cose, Section 1.4}}.
 
 ~~~ CDDL
-{::include draft-ietf-suit-mti.cddl}
+{::include-fold draft-ietf-suit-mti.cddl}
 ~~~
 
 # Acknowledgments
 
-
-We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, Linda Dunbar, Lorenzo Corneo and Hannes Tschofenig for their review comments.
+We would like to specifically thank Magnus Nyström, Deb Cooley, Michael Richardson, Russ Housley, Michael B. Jones, Henk Birkholz, Linda Dunbar, Jouni Korhonen, Lorenzo Corneo and Hannes Tschofenig for their review comments.

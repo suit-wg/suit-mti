@@ -88,7 +88,7 @@ published in "A Firmware Update Architecture for Internet of Things" (RFC 9019).
 
 #  Introduction
 
-This document defines algorithm profiles intended for authors of SUIT manifests and their recipients,
+This document defines algorithm profiles intended for authors of Software Updates of Internet of Things (SUIT) manifests and their recipients,
 with the goal of promoting interoperability in software update scenarios for constrained nodes. These
 profiles specify sets of algorithms that are tailored to the evolving security landscape, recognizing
 that cryptographic requirements may change over time. 

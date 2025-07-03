@@ -378,7 +378,7 @@ all relevant algorithms will almost always be required by authoring tools.
 
 # Full CDDL {#full-cddl}
 
-The following CDDL creates a subset of COSE for use with SUIT. Both tagged and untagged messages
+The following CDDL snippet {{!RFC8610}} creates a subset of COSE for use with SUIT. Both tagged and untagged messages
 are defined. SUIT only uses tagged COSE messages, but untagged messages are also defined for use in
 protocols that share a ciphersuite with SUIT.
 

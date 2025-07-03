@@ -129,6 +129,7 @@ This specification uses the following abbreviations:
 - Software Updates for Internet of Things (SUIT)
 
 SUIT specifically addresses the requirements of constrained devices and networks, as described in {{RFC9019}}.
+
 The terms "Author", "Recipient", and "Manifest" are defined in {{I-D.ietf-suit-manifest}}. 
 
 # Profiles
@@ -258,7 +259,73 @@ To enable interoperability of the described profiles, it is important for a mani
 
 ## Profile Selection and Control
 
-When a device supports multiple algorithm profiles, it is expected that the SUIT manifest author selects an appropriate profile based on the intended recipient(s). The manifest itself indicates which algorithms are used; devices are expected to validate manifests using supported algorithms.
+When a device supports multiple algorithm profiles, it is expected that the SUIT manifest author indicates the appropriate profile based on the intended recipient(s) and other policies. The manifest itself indicates which algorithms are used; devices are expected to validate manifests using supported algorithms.
+
+## Profile: `suit-sha256-hmac-a128kw-a128ctr`
+
+- Profile: `suit-sha256-hmac-a128kw-a128ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: 5  
+- Key Exchange: -3  
+- Encryption: -65534  
+- Descriptor Array: `[-16, 5, -3, -65534]`  
+- Reference: Section 3.1
+
+## Profile: `suit-sha256-esp256-ecdh-a128ctr`
+
+- Profile: `suit-sha256-esp256-ecdh-a128ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -9  
+- Key Exchange: -29  
+- Encryption: -65534  
+- Descriptor Array: `[-16, -9, -29, -65534]`  
+- Reference: Section 3.2
+
+## Profile: `suit-sha256-ed25519-ecdh-a128ctr`
+
+- Profile: `suit-sha256-ed25519-ecdh-a128ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -19  
+- Key Exchange: -29  
+- Encryption: -65534  
+- Descriptor Array: `[-16, -19, -29, -65534]`  
+- Reference: Section 3.3
+
+## Profile: `suit-sha256-esp256-ecdh-a128gcm`
+
+- Profile: `suit-sha256-esp256-ecdh-a128gcm`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -9  
+- Key Exchange: -29  
+- Encryption: 1  
+- Descriptor Array: `[-16, -9, -29, 1]`  
+- Reference: Section 3.4
+
+## Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
+
+- Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -19  
+- Key Exchange: -29  
+- Encryption: 24  
+- Descriptor Array: `[-16, -19, -29, 24]`  
+- Reference: Section 3.5
+
+## Profile: `suit-sha256-hsslms-a256kw-a256ctr`
+
+- Profile: `suit-sha256-hsslms-a256kw-a256ctr`
+- Status: MANDATORY  
+- Digest: -16  
+- Auth: -46  
+- Key Exchange: -5  
+- Encryption: -65532  
+- Descriptor Array: `[-16, -46, -5, -65532]`  
+- Reference: Section 3.6
 
 Devices do not autonomously choose which profile to apply; rather, they either accept or reject a manifest based on the algorithm profile it uses. There is no protocol-level negotiation of profiles at SUIT manifest processing time. Any dynamic profile selection or configuration is expected to occur as part of other protocols, for example, through device management.
 

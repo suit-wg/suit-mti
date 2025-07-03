@@ -74,7 +74,7 @@ This document defines cryptographic algorithm profiles for use with the Software
 of Things (SUIT) manifest. These profiles specify sets of algorithms to promote interoperability across
 implementations.
 
-The SUIT manifest, as defined in RFC 9124, provides a flexible and extensible format for describing how
+The SUIT manifest, as defined in "A Manifest Information Model for Firmware Updates in Internet of Things (IoT) Devices" (RFC 9124), provides a flexible and extensible format for describing how
 firmware and software updates are to be fetched, verified, decrypted, and installed on resource-constrained
 devices. To ensure the security of these update processes, the manifest relies on cryptographic algorithms
 for functions such as digital signature verification, integrity checking, and confidentiality.

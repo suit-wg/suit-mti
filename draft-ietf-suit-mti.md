@@ -52,6 +52,7 @@ normative:
 
 informative:
   I-D.ietf-suit-firmware-encryption:
+  I-D.ietf-suit-report:
   RFC9053:
   RFC9019:
   RFC6973:

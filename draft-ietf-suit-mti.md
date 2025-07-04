@@ -106,7 +106,7 @@ requirements differ between these two roles.
 
 This specification uses AES-CTR in combination with a digest algorithm, as defined in {{-ctrcbc}},
 to support use cases that require out-of-order block reception and decryption-capabilities not
-offered by AEAD algorithms. For further discussion of these constrained use cases, see
+offered by AEAD algorithms. For further discussion of these constrained use cases, refer to
 {{aes-ctr-payloads}}. Other SUIT use cases (see {{I-D.ietf-suit-manifest}}) may define different
 profiles.
 
@@ -134,7 +134,7 @@ The terms "Author", "Recipient", and "Manifest" are defined in {{I-D.ietf-suit-m
 
 # Profiles
 
-Each profile consist of algorithms from the following categories:
+Each profile consists of algorithms from the following categories:
 
 * Digest Algorithms
 * Authentication Algorithms
@@ -146,16 +146,17 @@ Since these algorithm identifiers are used in the context of the IETF SUIT manif
 
 The use of the profiles by authors and recipients is based on the following assumptions:
 
-- Recipients MAY choose which profile they wish to implement. It is RECOMMENDED that they implement the `suit-sha256-hsslms-a256kw-a256ctr` profile. Recipients MAY implement any number of other profiles not defined in this document. Recipients MAY choose not to implement encryption and the corresponding key exchange algorithms if they do not intend to support encrypted payloads.
+- Recipients MAY choose which profile they wish to implement. It is RECOMMENDED that they implement the `suit-sha256-hsslms-a256kw-a256ctr` profile ({{suit-sha256-hsslms-a256kw-a256ctr}}). Recipients MAY implement any number of other profiles not defined in this document. Recipients MAY choose not to implement encryption and the corresponding key exchange algorithms if they do not intend to support encrypted payloads.
 
 - Authors MUST implement all profiles with a status set to 'MANDATORY' in {{iana}}. Authors MAY implement any number of additional profiles.
 
-## Profile `suit-sha256-hmac-a128kw-a128ctr` {#suit-sha256-hmac-a128kw-a128ctr}
+
+## Profile `suit-sha256-hmac-a128kw-a128ctr` {#suit-sha256-hmac-a128kw-a128ctr}
 
 This profile only offers support for symmetric cryptographic algorithms. 
 
 | Algorithm Type | Algorithm | COSE Key |
-|============|
+|================|===========|==========|
 | Digest | SHA-256 | -16 |
 | Authentication | HMAC-256 | 5 |
 | Key Exchange | A128KW Key Wrap | -3 |
@@ -166,7 +167,7 @@ This profile only offers support for symmetric cryptographic algorithms.
 This profile supports asymmetric algorithms for use with constrained devices. 
 
 | Algorithm Type | Algorithm | COSE Key |
-|============|
+|================|===========|==========|
 | Digest | SHA-256 | -16 |
 | Authentication | ESP256 | -9 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
@@ -177,7 +178,7 @@ This profile supports asymmetric algorithms for use with constrained devices.
 This profile supports an alternative choice of asymmetric algorithms for use with constrained devices. 
 
 | Algorithm Type | Algorithm | COSE Key |
-|============|
+|================|===========|==========|
 | Digest | SHA-256 | -16 |
 | Authentication | Ed25519 | -19 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
@@ -188,7 +189,7 @@ This profile supports an alternative choice of asymmetric algorithms for use wit
 This profile supports asymmetric algorithms in combination with AEAD algorithms.
 
 | Algorithm Type | Algorithm | COSE Key |
-|============|
+|================|===========|==========|
 | Digest | SHA-256 | -16 |
 | Authentication | ESP256 | -9 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
@@ -199,7 +200,7 @@ This profile supports asymmetric algorithms in combination with AEAD algorithms.
 This profile also supports asymmetric algorithms with AEAD algorithms but offers an alternative to `suit-sha256-esp256-ecdh-a128gcm`.
 
 | Algorithm Type | Algorithm | COSE Key |
-|============|
+|================|===========|==========|
 | Digest | SHA-256 | -16 |
 | Authentication | Ed25519 | -19 |
 | Key Exchange | ECDH-ES + A128KW | -29 |
@@ -207,13 +208,13 @@ This profile also supports asymmetric algorithms with AEAD algorithms but offers
 
 ## Profile `suit-sha256-hsslms-a256kw-a256ctr` {#suit-sha256-hsslms-a256kw-a256ctr}
 
-This profile utilzes a stateful hash-based signature algorithm, namely the Hierarchical Signature System / Leighton-Micali Signature (HSS/LMS), as a unique alternative to the  profiles listed above.
+This profile utilizes a stateful hash-based signature algorithm, namely the Hierarchical Signature System / Leighton-Micali Signature (HSS/LMS), as a unique alternative to the  profiles listed above.
 
 A note regarding the use of the HSS/LMS: The decision as to how deep the tree is, is a decision that affects authoring tools only (see {{RFC8778}}).
-Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected. To support the long lifetimes required by IoT devices, it is RECOMMENDED to use trees with greater height (see Section 2.2 of {{RFC8778}}).
+Verification is not affected by the choice of the "W" parameter, but the size of the signature is affected. To support the long lifetimes required by IoT devices, it is RECOMMENDED to use trees with greater height (see {{Section 2.2 of RFC8778}}).
 
 | Algorithm Type | Algorithm | COSE Key |
-|============|
+|================|===========|==========|
 | Digest | SHA-256 | -16 |
 | Authentication | HSS/LMS | -46 |
 | Key Exchange | A256KW | -5 |
@@ -225,8 +226,8 @@ Payload encryption is used to protect sensitive content such as machine learning
 In the context of SUIT, the primary purpose of payload encryption is to defend against unauthorized observation during distribution. By encrypting
 the payload, confidential information can be safeguarded from eavesdropping.
 
-However, encrypting firmware or software update payloads on commodity devices does not constitute an effective cybersecurity defense against
-targeted attacks. Once an attacker gains access to the device, they may still be able to extract the plaintext payload.
+However, encrypting firmware or software update payloads on commodity devices do not constitute an effective cybersecurity defense against
+targeted attacks. Once an attacker gains access to a device, they may still be able to extract the plaintext payload.
 
 ## Payload Encryption as Part of a Defense-in-Depth Strategy
 
@@ -261,72 +262,6 @@ To enable interoperability of the described profiles, it is important for a mani
 
 When a device supports multiple algorithm profiles, it is expected that the SUIT manifest author indicates the appropriate profile based on the intended recipient(s) and other policies. The manifest itself indicates which algorithms are used; devices are expected to validate manifests using supported algorithms.
 
-## Profile: `suit-sha256-hmac-a128kw-a128ctr`
-
-- Profile: `suit-sha256-hmac-a128kw-a128ctr`
-- Status: MANDATORY  
-- Digest: -16  
-- Auth: 5  
-- Key Exchange: -3  
-- Encryption: -65534  
-- Descriptor Array: `[-16, 5, -3, -65534]`  
-- Reference: Section 3.1
-
-## Profile: `suit-sha256-esp256-ecdh-a128ctr`
-
-- Profile: `suit-sha256-esp256-ecdh-a128ctr`
-- Status: MANDATORY  
-- Digest: -16  
-- Auth: -9  
-- Key Exchange: -29  
-- Encryption: -65534  
-- Descriptor Array: `[-16, -9, -29, -65534]`  
-- Reference: Section 3.2
-
-## Profile: `suit-sha256-ed25519-ecdh-a128ctr`
-
-- Profile: `suit-sha256-ed25519-ecdh-a128ctr`
-- Status: MANDATORY  
-- Digest: -16  
-- Auth: -19  
-- Key Exchange: -29  
-- Encryption: -65534  
-- Descriptor Array: `[-16, -19, -29, -65534]`  
-- Reference: Section 3.3
-
-## Profile: `suit-sha256-esp256-ecdh-a128gcm`
-
-- Profile: `suit-sha256-esp256-ecdh-a128gcm`
-- Status: MANDATORY  
-- Digest: -16  
-- Auth: -9  
-- Key Exchange: -29  
-- Encryption: 1  
-- Descriptor Array: `[-16, -9, -29, 1]`  
-- Reference: Section 3.4
-
-## Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
-
-- Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
-- Status: MANDATORY  
-- Digest: -16  
-- Auth: -19  
-- Key Exchange: -29  
-- Encryption: 24  
-- Descriptor Array: `[-16, -19, -29, 24]`  
-- Reference: Section 3.5
-
-## Profile: `suit-sha256-hsslms-a256kw-a256ctr`
-
-- Profile: `suit-sha256-hsslms-a256kw-a256ctr`
-- Status: MANDATORY  
-- Digest: -16  
-- Auth: -46  
-- Key Exchange: -5  
-- Encryption: -65532  
-- Descriptor Array: `[-16, -46, -5, -65532]`  
-- Reference: Section 3.6
-
 Devices do not autonomously choose which profile to apply; rather, they either accept or reject a manifest based on the algorithm profile it uses. There is no protocol-level negotiation of profiles at SUIT manifest processing time. Any dynamic profile selection or configuration is expected to occur as part of other protocols, for example, through device management.
 
 ## Profile Provisioning and Constraints
@@ -354,9 +289,9 @@ Implementations MAY log failures to process a manifest due to unsupported algori
 # IANA Considerations {#iana}
 
 IANA is requested to create a page for "COSE SUIT Algorithm Profiles" within
-the category for Software Update for the Internet of Things (SUIT). IANA
+the "Software Update for the Internet of Things (SUIT)" registry group. IANA
 is also requested to create a registry for "COSE SUIT Algorithm Profiles"
-within this page.
+within that registry group.
 
 The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 
@@ -368,8 +303,8 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Auth: 5  
 - Key Exchange: -3  
 - Encryption: -65534  
-- Descriptor Array: `[-16, 5, -3, -65534]`  
-- Reference: Section 3.1
+- Descriptor Array: `[-16, 5, -3, -65534]`
+- Reference: Section 3.1 of THIS_DOCUMENT
 
 ## Profile: `suit-sha256-esp256-ecdh-a128ctr`
 
@@ -379,8 +314,8 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Auth: -9  
 - Key Exchange: -29  
 - Encryption: -65534  
-- Descriptor Array: `[-16, -9, -29, -65534]`  
-- Reference: Section 3.2
+- Descriptor Array: `[-16, -9, -29, -65534]`
+- Reference: Section 3.2 of THIS_DOCUMENT
 
 ## Profile: `suit-sha256-ed25519-ecdh-a128ctr`
 
@@ -391,7 +326,7 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Key Exchange: -29  
 - Encryption: -65534  
 - Descriptor Array: `[-16, -19, -29, -65534]`  
-- Reference: Section 3.3
+- Reference: Section 3.3 of THIS_DOCUMENT
 
 ## Profile: `suit-sha256-esp256-ecdh-a128gcm`
 
@@ -402,7 +337,7 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Key Exchange: -29  
 - Encryption: 1  
 - Descriptor Array: `[-16, -9, -29, 1]`  
-- Reference: Section 3.4
+- Reference: Section 3.4 of THIS_DOCUMENT
 
 ## Profile: `suit-sha256-ed25519-ecdh-chacha-poly`
 
@@ -413,7 +348,7 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Key Exchange: -29  
 - Encryption: 24  
 - Descriptor Array: `[-16, -19, -29, 24]`  
-- Reference: Section 3.5
+- Reference: Section 3.5 of THIS_DOCUMENT
 
 ## Profile: `suit-sha256-hsslms-a256kw-a256ctr`
 
@@ -424,7 +359,7 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Key Exchange: -5  
 - Encryption: -65532  
 - Descriptor Array: `[-16, -46, -5, -65532]`  
-- Reference: Section 3.6
+- Reference: Section 3.6 of THIS_DOCUMENT
 
 While most profile attributes are self-explanatory, the status field warrants a brief explanation.
 This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL.
@@ -432,6 +367,7 @@ This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL
 - MANDATORY indicates that the profile is mandatory to implement for manifest authors.
 - NOT RECOMMENDED means that the profile should generally be avoided in new implementations.
 - OPTIONAL suggests that support for the profile is permitted but not required.
+
 IANA is requested to add a note that mirrors these status values to the registry.
 
 Adding new profiles or updating the status of existing profiles requires Standards Action ({{Section 4.9 of !RFC8126}}).

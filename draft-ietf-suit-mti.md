@@ -294,6 +294,22 @@ the "Software Update for the Internet of Things (SUIT)" registry group. IANA
 is also requested to create a registry for "COSE SUIT Algorithm Profiles"
 within that registry group.
 
+While most profile attributes are self-explanatory, the status field warrants a brief explanation.
+This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL.
+
+- MANDATORY indicates that the profile is mandatory to implement for manifest authors.
+- NOT RECOMMENDED means that the profile should generally be avoided in new implementations.
+- OPTIONAL suggests that support for the profile is permitted but not required.
+
+IANA is requested to add a note that mirrors these status values to the registry.
+
+Adding new profiles or updating the status of existing profiles requires Standards Action ({{Section 4.9 of !RFC8126}}).
+
+As time progresses, algorithm profiles may loose their MANDATORY status. Then, their status will become
+either OPTIONAL or NOT RECOMMENDED for new implementations. Likewise, a profile may be transitioned from OPTIONAL to NOT RECOMMENDED. Since it may be impossible to update
+certain parts of the IoT device firmware in the field, such as first stage bootloaders, support for
+all relevant algorithms will almost always be required by authoring tools.
+
 The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 
 ## Profile: `suit-sha256-hmac-a128kw-a128ctr`
@@ -361,22 +377,6 @@ The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 - Encryption: -65532  
 - Descriptor Array: `[-16, -46, -5, -65532]`  
 - Reference: Section 3.6 of THIS_DOCUMENT
-
-While most profile attributes are self-explanatory, the status field warrants a brief explanation.
-This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL.
-
-- MANDATORY indicates that the profile is mandatory to implement for manifest authors.
-- NOT RECOMMENDED means that the profile should generally be avoided in new implementations.
-- OPTIONAL suggests that support for the profile is permitted but not required.
-
-IANA is requested to add a note that mirrors these status values to the registry.
-
-Adding new profiles or updating the status of existing profiles requires Standards Action ({{Section 4.9 of !RFC8126}}).
-
-As time progresses, algorithm profiles may loose their MANDATORY status. Then, their status will become
-either OPTIONAL or NOT RECOMMENDED for new implementations. Likewise, a profile may be transitioned from OPTIONAL to NOT RECOMMENDED. Since it may be impossible to update
-certain parts of the IoT device firmware in the field, such as first stage bootloaders, support for
-all relevant algorithms will almost always be required by authoring tools.
 
 --- back
 

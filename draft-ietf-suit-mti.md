@@ -289,10 +289,7 @@ Implementations MAY log failures to process a manifest due to unsupported algori
 
 # IANA Considerations {#iana}
 
-IANA is requested to create a page for "COSE SUIT Algorithm Profiles" within
-the "Software Update for the Internet of Things (SUIT)" registry group. IANA
-is also requested to create a registry for "COSE SUIT Algorithm Profiles"
-within that registry group.
+IANA is requested to create a new "COSE SUIT Algorithm Profiles" registry, to be located within its own self-titled registry group. The registry will be listed in the "Software Update for the Internet of Things (SUIT)" category at https://www.iana.org/protocols.
 
 While most profile attributes are self-explanatory, the status field warrants a brief explanation.
 This field can take one of three values: MANDATORY, NOT RECOMMENDED, or OPTIONAL.

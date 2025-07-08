@@ -47,6 +47,7 @@ author:
 normative:
   RFC8778:
   RFC9052: cose
+  RFC9053: cose
   RFC9459: ctrcbc
   I-D.ietf-suit-manifest:
   IANA-COSE:
@@ -58,7 +59,6 @@ normative:
 informative:
   I-D.ietf-suit-firmware-encryption:
   I-D.ietf-suit-report:
-  RFC9053:
   RFC9019:
   RFC6973:
   I-D.ietf-teep-protocol:

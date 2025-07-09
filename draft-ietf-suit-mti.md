@@ -71,14 +71,14 @@ informative:
 
 --- abstract
 
-This document defines cryptographic algorithm profiles for use with the Software Updates for Internet
-of Things (SUIT) manifest. These profiles specify sets of algorithms to promote interoperability across
-implementations.
-
 The SUIT manifest, as defined in "A Manifest Information Model for Firmware Updates in Internet of Things (IoT) Devices" (RFC 9124), provides a flexible and extensible format for describing how
 firmware and software updates are to be fetched, verified, decrypted, and installed on resource-constrained
 devices. To ensure the security of these update processes, the manifest relies on cryptographic algorithms
 for functions such as digital signature verification, integrity checking, and confidentiality.
+
+This document defines cryptographic algorithm profiles for use with the Software Updates for Internet
+of Things (SUIT) manifest. These profiles specify sets of algorithms to promote interoperability across
+implementations.
 
 Given the diversity of IoT deployments and the evolving cryptographic landscape, algorithm agility is
 essential. This document groups algorithms into named profiles to accommodate varying levels of device
@@ -89,9 +89,8 @@ published in "A Firmware Update Architecture for Internet of Things" (RFC 9019).
 
 #  Introduction
 
-This document defines algorithm profiles intended for authors of Software Updates of Internet of Things (SUIT) manifests and their recipients,
-with the goal of promoting interoperability in software update scenarios for constrained nodes. These
-profiles specify sets of algorithms that are tailored to the evolving security landscape, recognizing
+This document defines algorithm profiles, in IANA registry ({{iana}}), intended for authors of Software Updates for Internet of Things (SUIT) manifests and their recipients, with the goal of promoting interoperability in software update scenarios for constrained nodes.
+These profiles specify sets of algorithms that are tailored to the evolving security landscape, recognizing
 that cryptographic requirements may change over time. 
 
 The following profiles are defined:
@@ -135,7 +134,7 @@ The terms "Author", "Recipient", and "Manifest" are defined in {{I-D.ietf-suit-m
 
 # Profiles
 
-Each profile consists of algorithms from the following categories:
+Each profile, in IANA registry ({{iana}}), consists of algorithms from the following categories:
 
 * Digest Algorithms
 * Authentication Algorithms

@@ -49,6 +49,11 @@ normative:
   RFC9052: cose
   RFC9459: ctrcbc
   I-D.ietf-suit-manifest:
+  IANA-COSE:
+    title: "CBOR Object Signing and Encryption (COSE)"
+    author:
+    date: 2022
+    target: https://www.iana.org/assignments/cose/cose.xhtml
 
 informative:
   I-D.ietf-suit-firmware-encryption:
@@ -57,11 +62,6 @@ informative:
   RFC9019:
   RFC6973:
   I-D.ietf-teep-protocol:
-  IANA-COSE:
-    title: "CBOR Object Signing and Encryption (COSE)"
-    author:
-    date: 2022
-    target: https://www.iana.org/assignments/cose/cose.xhtml
   LwM2M:
     target: "https://www.openmobilealliance.org/specifications/lwm2m"
     title: "OMA Lightweight M2M"

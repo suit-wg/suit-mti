@@ -302,10 +302,7 @@ IANA is requested to add a note that mirrors these status values to the registry
 
 Adding new profiles or updating the status of existing profiles requires Standards Action ({{Section 4.9 of !RFC8126}}).
 
-As time progresses, algorithm profiles may loose their MANDATORY status. Then, their status will become
-either OPTIONAL or NOT RECOMMENDED for new implementations. Likewise, a profile may be transitioned from OPTIONAL to NOT RECOMMENDED. Since it may be impossible to update
-certain parts of the IoT device firmware in the field, such as first stage bootloaders, support for
-all relevant algorithms will almost always be required by authoring tools.
+As time progresses, algorithm profiles may lose their MANDATORY status. When this occurs, their status may be changed to either OPTIONAL or NOT RECOMMENDED for new implementations. Similarly, a profile may be transitioned from OPTIONAL to NOT RECOMMENDED. However, profiles once marked as OPTIONAL or NOT RECOMMENDED MUST NOT be transitioned to MANDATORY status in future revisions. Since it may be impossible to update certain parts of IoT device firmware in the field, such as first-stage bootloaders, support for all relevant algorithms will almost always be required by authoring tools.
 
 The initial content of the "COSE SUIT Algorithm Profiles" registry is:
 
